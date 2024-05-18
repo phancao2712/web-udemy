@@ -36,7 +36,6 @@ class ModuleServiceProvider extends ServiceProvider
         if (File::exists($modulePath . "routes/routes.php")) {
             $this->loadRoutesFrom($modulePath . "routes/routes.php");
         }
-        // dd($modulePath . "routes/routes.php");
 
         // Khai báo migration
         if (File::exists($modulePath . "migrations")) {
