@@ -78,16 +78,16 @@ class Module extends Command
             }
 
             //routes
-            $routesFolder = base_path('modules/' . $name . '/routes');
+            $routesFolder = base_path('Modules/' . $name . '/routes');
 
             if (!File::exists($routesFolder)) {
                 File::makeDirectory($routesFolder, 0755, true, true);
 
                 //Tạo file web.php
-                $routesWebFile = base_path('modules/' . $name . '/routes/web.php');
+                $routesWebFile = base_path('Modules/' . $name . '/routes/web.php');
 
                 //Tạo file api.php
-                $routesApiFile = base_path('modules/' . $name . '/routes/api.php');
+                $routesApiFile = base_path('Modules/' . $name . '/routes/api.php');
 
                 $routeContent = File::get(app_path('Console/Commands/Templates/Route.txt'));
                 $routeContent = str_replace('{module}', strtolower($name), $routeContent);
@@ -102,33 +102,33 @@ class Module extends Command
             }
 
             //src
-            $srcFolder = base_path('modules/' . $name . '/src');
+            $srcFolder = base_path('Modules/' . $name . '/src');
 
             if (!File::exists($srcFolder)) {
                 File::makeDirectory($srcFolder, 0755, true, true);
 
                 //Commands
-                $commandsFolder = base_path('modules/' . $name . '/src/Commands');
+                $commandsFolder = base_path('Modules/' . $name . '/src/Commands');
 
                 if (!File::exists($commandsFolder)) {
                     File::makeDirectory($commandsFolder, 0755, true, true);
                 }
 
                 //Http
-                $httpFolder = base_path('modules/' . $name . '/src/Http');
+                $httpFolder = base_path('Modules/' . $name . '/src/Http');
 
                 if (!File::exists($httpFolder)) {
                     File::makeDirectory($httpFolder, 0755, true, true);
 
                     //Controllers
-                    $controllersFolder = base_path('modules/' . $name . '/src/Http/Controllers');
+                    $controllersFolder = base_path('Modules/' . $name . '/src/Http/Controllers');
 
                     if (!File::exists($controllersFolder)) {
                         File::makeDirectory($controllersFolder, 0755, true, true);
                     }
 
                     //Middlewares
-                    $middlewaresFolder = base_path('modules/' . $name . '/src/Http/Middlewares');
+                    $middlewaresFolder = base_path('Modules/' . $name . '/src/Http/Middlewares');
 
                     if (!File::exists($middlewaresFolder)) {
                         File::makeDirectory($middlewaresFolder, 0755, true, true);
@@ -136,20 +136,20 @@ class Module extends Command
                 }
 
                 //Models
-                $modelsFolder = base_path('modules/' . $name . '/src/Models');
+                $modelsFolder = base_path('Modules/' . $name . '/src/Models');
 
                 if (!File::exists($modelsFolder)) {
                     File::makeDirectory($modelsFolder, 0755, true, true);
                 }
 
                 //Repositories
-                $repositoriesFolder = base_path('modules/' . $name . '/src/Repositories');
+                $repositoriesFolder = base_path('Modules/' . $name . '/src/Repositories');
 
                 if (!File::exists($repositoriesFolder)) {
                     File::makeDirectory($repositoriesFolder, 0755, true, true);
 
                     //Module Repository
-                    $moduleRepositoryFile = base_path('modules/' . $name . '/src/Repositories/' . $name . 'Repository.php');
+                    $moduleRepositoryFile = base_path('Modules/' . $name . '/src/Repositories/' . $name . 'Repository.php');
 
                     if (!File::exists($moduleRepositoryFile)) {
                         $moduleRepositoryFileContent = file_get_contents(app_path('Console/Commands/Templates/ModuleRepository.txt'));
@@ -160,7 +160,7 @@ class Module extends Command
                     }
 
                     //Module Repository Interface
-                    $moduleRepositoryInterfaceFile = base_path('modules/' . $name . '/src/Repositories/' . $name . 'RepositoryInterface.php');
+                    $moduleRepositoryInterfaceFile = base_path('Modules/' . $name . '/src/Repositories/' . $name . 'RepositoryInterface.php');
 
                     if (!File::exists($moduleRepositoryInterfaceFile)) {
                         $moduleRepositoryInterfaceFileContent = file_get_contents(app_path('Console/Commands/Templates/ModuleRepositoryInterface.txt'));
