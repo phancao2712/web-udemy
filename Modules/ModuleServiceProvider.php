@@ -4,7 +4,10 @@ namespace Modules;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
-
+use Modules\Categories\src\Repositories\CategoriesRepository;
+use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
+use Modules\User\src\Repositories\UserRepository;
+use Modules\User\src\Repositories\UserRepositoryInterface;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,22 @@ class ModuleServiceProvider extends ServiceProvider
     private $commands = [
 
     ];
+
+    public function bindingRepository()
+    {
+
+        //User Repository
+        $this->app->singleton(
+            UserRepositoryInterface::class,
+            UserRepository::class
+        );
+
+        //Categories Repository
+        $this->app->singleton(
+            CategoriesRepositoryInterface::class,
+            CategoriesRepository::class
+        );
+    }
 
     public function boot()
     {
@@ -77,6 +96,8 @@ class ModuleServiceProvider extends ServiceProvider
 
         // Khai báo command
         $this->commands($this->commands);
+
+        $this->bindingRepository();
     }
 
     private function directory()

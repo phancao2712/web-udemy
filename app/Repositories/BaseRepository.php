@@ -15,6 +15,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function setModel()
     {
+
         $this->model = app()->make($this->getModel());
     }
 
@@ -22,7 +23,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function getAll($column = ['*'])
     {
-        return $this->model->select($column)->get();
+        return $this->model->select($column)->latest();
     }
 
     public function paginator($column = ['*'], $limit = 10) {

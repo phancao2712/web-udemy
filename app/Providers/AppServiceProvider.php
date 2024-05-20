@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Categories\src\Repositories\CategoriesRepository;
+use Modules\User\src\Repositories\UserRepository;
+use Modules\User\src\Repositories\UserRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -11,10 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(
-            \Modules\User\src\Repositories\UserRepositoryInterface::class,
-            \Modules\User\src\Repositories\UserRepository::class
-        );
+        
     }
 
     /**
