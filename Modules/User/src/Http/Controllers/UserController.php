@@ -3,8 +3,10 @@
 namespace Modules\User\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Modules\User\Requests\UserStoreRequest;
 use Modules\User\src\Repositories\UserRepositoryInterface;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -29,6 +31,39 @@ class UserController extends Controller
         ));
     }
 
+    public function data(){
+        $listUser = $this->userRepository->getAll(['name', 'email','group_id', 'created_at']);
+        return DataTables::of($listUser)
+        ->addColumn('edit', function($user) {
+            return '<a href="#" class="btn btn-warning">Sửa</a>';
+        })
+        ->addColumn('delete', function($user) {
+            return '<a href="#" class="btn btn-danger">Xóa</a>';
+        })
+        ->editColumn('created_at', function ($user) {
+            return Carbon::parse($user->created_at)->format('d/m/Y H:i:s');
+        })
+        ->rawColumns(['edit', 'delete'])
+        ->toJson();
+        ;
+        // $users = [];
+
+        // foreach ($listUser as $user) {
+        //     array_push($users, [
+        //         ...$user->toArray(),
+        //         'edit' => '<a class="btn btn-warning" href="">Sửa</a>',
+        //         'delete' => '<a class="btn btn-danger" href="">Xóa</a>',
+        //     ]);
+        // }
+
+        // return response()->json([
+        //     "draw" => 1,
+        //     "recordsTotal" => count($listUser),
+        //     "recordsFiltered" => count($listUser),
+        //     "data" => $users
+        // ]);
+    }
+
     public function store(UserStoreRequest $request) {
         $this->userRepository->create(
             [
@@ -38,6 +73,6 @@ class UserController extends Controller
                 'password' => $request->password,
             ]
         );
-        return to_route('admin.user.index')->with('success' , __('user::message.create_success'));
+        return to_route('admin.users.index')->with('success' , __('user::message.create_success'));
     }
 }

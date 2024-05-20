@@ -10,11 +10,12 @@ Route::group([
     'middleware' => 'web'
 ], function () {
     Route::group([
-        'prefix' => 'user',
-        'as' => 'user.'
+        'prefix' => 'users',
+        'as' => 'users.'
     ], function () {
         Route::get('/', 'UserController@index')->name('index');
         Route::get('/create', 'UserController@create')->name('create');
-        Route::post('/create', 'UserController@store')->name('store');
+        Route::post('/create', 'UserController@data')->name('store');
+        Route::get('/data', 'UserController@data')->name('data');
     });
 });

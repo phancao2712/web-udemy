@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 interface RepositoryInterface{
-    public function getAll();
+    public function getAll($column = ['*']);
 
     public function find($id);
 
@@ -12,4 +12,5 @@ interface RepositoryInterface{
 
     public function delete($id);
 
+    public function paginator($column = ['*'], $limit = 10);
 }
