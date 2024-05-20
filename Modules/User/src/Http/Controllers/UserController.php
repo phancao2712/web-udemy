@@ -41,7 +41,7 @@ class UserController extends Controller
                 return '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-warning">Sửa</a>';
             })
             ->addColumn('delete', function ($user) {
-                return '<a href="#" class="btn btn-danger">Xóa</a>';
+                return '<a href="' . route('admin.users.destroy', $user->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
             })
             ->editColumn('created_at', function ($user) {
                 return Carbon::parse($user->created_at)->format('d/m/Y H:i:s');
@@ -95,5 +95,15 @@ class UserController extends Controller
         } else {
             return to_route('admin.users.index')->with('error', __('user::message.update.fail'));
         }
+    }
+
+    public function destroy(string $id) {
+        $status = $this->userRepository->delete($id);
+        if($status){
+            return response(['message' =>  __('user::message.delete.success'), 500]);
+        } else {
+            return response(['message' =>  __('user::message.delete.fail'), 200]);
+        }
+
     }
 }

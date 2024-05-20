@@ -22,5 +22,9 @@ Route::group([
 
         Route::get('/edit/{id}', 'UserController@edit')->name('edit');
         Route::put('/update/{id}', 'UserController@update')->name('update');
+
+        Route::delete('/destroy/{id}', 'UserController@destroy')->name('destroy');
+
+
     });
 });
