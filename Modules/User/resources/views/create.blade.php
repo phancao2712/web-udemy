@@ -6,7 +6,7 @@
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tên</label>
                     <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                        placeholder="Tên...">
+                        placeholder="Tên..." value="{{ old('name') }}">
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -18,7 +18,7 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Email</label>
                     <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                        name="email" placeholder="Email...">
+                        name="email" placeholder="Email..." value="{{ old('email') }}">
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -34,6 +34,7 @@
                     <select name="group_id" id=""
                         class="form-control {{ $errors->has('group_id') ? 'is-invalid' : '' }}">
                         <option value="">Chọn nhóm</option>
+                        <option value="1">Admin</option>
                     </select>
                     @error('group_id')
                         <div class="invalid-feedback">

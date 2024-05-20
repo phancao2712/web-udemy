@@ -4,12 +4,15 @@ namespace Modules\User\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Modules\User\Requests\UserStoreRequest;
+use Modules\User\src\Repositories\UserRepositoryInterface;
 
 class UserController extends Controller
 {
+    protected $userRepository;
 
-    public function __construct()
+    public function __construct(UserRepositoryInterface $userRepository)
     {
+        $this->userRepository = $userRepository;
     }
 
     public function index(){
@@ -27,6 +30,14 @@ class UserController extends Controller
     }
 
     public function store(UserStoreRequest $request) {
-        
+        $this->userRepository->create(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'group_id' => $request->group_id,
+                'password' => $request->password,
+            ]
+        );
+        return to_route('admin.user.index')->with('success' , __('user::message.create_success'));
     }
 }

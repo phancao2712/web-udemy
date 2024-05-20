@@ -26,7 +26,7 @@ class UserStoreRequest extends FormRequest
             'email' => ['required','email','unique:users,email'],
             'group_id' => ['required','integer', function($attribute, $value, $fail) {
                 if($value === 0){
-                    $fail('Vui lòng chọn nhóm');
+                    $fail(__('user::validation.select'));
                 }
             }],
             'password' => ['required', 'min:6']
@@ -35,20 +35,20 @@ class UserStoreRequest extends FormRequest
 
     public function messages() {
         return [
-            'required' => ':attribute bắt buộc nhập',
-            'email' => ':attribute sai định dạng',
-            'unique' => ':attribute đã tồn tại',
-            'min' => ':attribute ít nhất :min kí tự',
-            'integer' => ':attribute bắt buộc là số'
+            'required' => __('user::validation.required'),
+            'email' => __('user::validation.email'),
+            'unique' => __('user::validation.unique'),
+            'min' => __('user::validation.min'),
+            'integer' => __('user::validation.integer')
         ];
     }
 
     public function attributes() {
         return [
-            'name' => 'Tên',
-            'email' => 'Email',
-            'group_id' => 'Nhóm',
-            'password' => 'Mật khẩu'
+            'name' => __('user::validation.attributes.name'),
+            'email' => __('user::validation.attributes.email'),
+            'group_id' => __('user::validation.attributes.group_id'),
+            'password' => __('user::validation.attributes.password')
         ];
     }
 }
