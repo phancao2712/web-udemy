@@ -3,6 +3,7 @@
 namespace Modules\User\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\User\Requests\UserStoreRequest;
 
 class UserController extends Controller
 {
@@ -23,5 +24,9 @@ class UserController extends Controller
         return view('user::create', compact(
             'titlePage'
         ));
+    }
+
+    public function store(UserStoreRequest $request) {
+        
     }
 }
