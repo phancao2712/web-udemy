@@ -21,19 +21,34 @@ class UserStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $id = $this->route()->id;
+
+        $rules = [
             'name' => ['required', 'max:255'],
-            'email' => ['required','email','unique:users,email'],
-            'group_id' => ['required','integer', function($attribute, $value, $fail) {
-                if($value === 0){
+            'email' => ['required', 'email', 'unique:users,email'],
+            'group_id' => ['required', 'integer', function ($attribute, $value, $fail) {
+                if ($value === 0) {
                     $fail(__('user::validation.select'));
                 }
             }],
             'password' => ['required', 'min:6']
         ];
+
+        if ($id) {
+            $rules['email'] = ['required', 'email', 'unique:users,email,'.$id];
+
+            if ($this->password) {
+                $rules['password'] = 'min:6';
+            } else {
+                unset($rules['password']);
+            }
+        }
+
+        return $rules;
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'required' => __('user::validation.required'),
             'email' => __('user::validation.email'),
@@ -43,7 +58,8 @@ class UserStoreRequest extends FormRequest
         ];
     }
 
-    public function attributes() {
+    public function attributes()
+    {
         return [
             'name' => __('user::validation.attributes.name'),
             'email' => __('user::validation.attributes.email'),

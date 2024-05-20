@@ -1,12 +1,13 @@
 @extends('layouts.backend')
 @section('content')
-    <form action="{{ route('admin.users.store') }}" method="POST">
+    <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+        @method('PUT')
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tên</label>
                     <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                        placeholder="Tên..." value="{{ old('name') }}">
+                        placeholder="Tên..." value="{{ old('name', $user?->name) }}">
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -18,7 +19,7 @@
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Email</label>
                     <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                        name="email" placeholder="Email..." value="{{ old('email') }}">
+                        name="email" placeholder="Email..." value="{{ old('email',$user?->email) }}">
                     @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
         <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Hủy</a>
         @csrf
     </form>

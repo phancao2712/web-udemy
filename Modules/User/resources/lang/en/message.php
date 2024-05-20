@@ -1,7 +1,9 @@
 <?php
 return [
-    'create_success' => 'Thêm thành công',
-    'create_fail' => 'Thêm thất bại'
+    'create.success' => 'Thêm thành công',
+    'create.fail' => 'Thêm thất bại',
+    'update.success' => 'Cập nhật thành công',
+    'update.fail' => 'Cập nhật thất bại',
 ];
 
 ?>

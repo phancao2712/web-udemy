@@ -14,8 +14,13 @@ Route::group([
         'as' => 'users.'
     ], function () {
         Route::get('/', 'UserController@index')->name('index');
+
         Route::get('/create', 'UserController@create')->name('create');
         Route::post('/create', 'UserController@data')->name('store');
+
         Route::get('/data', 'UserController@data')->name('data');
+
+        Route::get('/edit/{id}', 'UserController@edit')->name('edit');
+        Route::put('/update/{id}', 'UserController@update')->name('update');
     });
 });
