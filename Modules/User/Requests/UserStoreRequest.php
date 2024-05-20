@@ -54,7 +54,8 @@ class UserStoreRequest extends FormRequest
             'email' => __('user::validation.email'),
             'unique' => __('user::validation.unique'),
             'min' => __('user::validation.min'),
-            'integer' => __('user::validation.integer')
+            'integer' => __('user::validation.integer'),
+            'max' => __('user::validation.max')
         ];
     }
 

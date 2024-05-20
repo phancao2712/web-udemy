@@ -60,12 +60,7 @@ class UserController extends Controller
                 'password' => $request->password,
             ]
         );
-
-        if($status){
-            return to_route('admin.users.index')->with('success', __('user::message.create.success'));
-        } else {
-            return to_route('admin.users.index')->with('error', __('user::message.create.fail'));
-        }
+        return to_route('admin.users.index')->with('success', __('user::message.create.success'));
     }
 
     public function edit(string $id)
@@ -86,24 +81,17 @@ class UserController extends Controller
     public function update(UserStoreRequest $request, string $id)
     {
         $data = $request->except(['_token', 'password', '_method']);
-        if($request->password){
+        if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
         $status = $this->userRepository->update($id, $data);
-        if($status){
-            return to_route('admin.users.index')->with('success', __('user::message.update.success'));
-        } else {
-            return to_route('admin.users.index')->with('error', __('user::message.update.fail'));
-        }
+
+        return to_route('admin.users.index')->with('success', __('user::message.update.success'));
     }
 
-    public function destroy(string $id) {
+    public function destroy(string $id)
+    {
         $status = $this->userRepository->delete($id);
-        if($status){
-            return response(['message' =>  __('user::message.delete.success'), 500]);
-        } else {
-            return response(['message' =>  __('user::message.delete.fail'), 200]);
-        }
-
+        return response(['message' =>  __('user::message.delete.success'), 500]);
     }
 }
