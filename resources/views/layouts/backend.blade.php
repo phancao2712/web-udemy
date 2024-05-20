@@ -23,7 +23,7 @@
             <main>
                 <div class="container-fluid px-4">
                     @include('components.backend.page_title')
-
+                    @yield('content')
                 </div>
             </main>
             @include('components.backend.footer')
