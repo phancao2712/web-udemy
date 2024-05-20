@@ -13,5 +13,6 @@ Route::group([
         'as' => 'user.'
     ], function () {
         Route::get('/', 'UserController@index')->name('index');
+        Route::get('/create', 'UserController@create')->name('create');
     });
 });
