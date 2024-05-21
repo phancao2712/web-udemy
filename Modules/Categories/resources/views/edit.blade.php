@@ -6,7 +6,7 @@
             <div class="col-sm-6">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Tên</label>
-                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
+                    <input type="text" class="form-control title {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
                         placeholder="Tên..." value="{{ old('name', $category?->name) }}">
                     @error('name')
                         <div class="invalid-feedback">
@@ -18,7 +18,7 @@
             <div class="col-sm-6">
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Slug</label>
-                    <input type="text" class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}"
+                    <input type="text" class="form-control slug {{ $errors->has('slug') ? 'is-invalid' : '' }}"
                         name="slug" placeholder="Slug..." value="{{ old('slug', $category?->slug) }}">
                     @error('slug')
                         <div class="invalid-feedback">
