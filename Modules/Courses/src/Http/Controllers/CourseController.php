@@ -3,8 +3,8 @@
 namespace Modules\Courses\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Modules\Courses\src\Http\Requests\CourseStoreRequest;
 use Carbon\Carbon;
-// use Modules\User\Requests\UserStoreRequest;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 
 use Yajra\DataTables\Facades\DataTables;
@@ -51,18 +51,18 @@ class CourseController extends Controller
             ->toJson();
     }
 
-    // public function store(courseStoreRequest $request)
-    // {
-    //     $status = $this->courseRepository->create(
-    //         [
-    //             'name' => $request->name,
-    //             'email' => $request->email,
-    //             'group_id' => $request->group_id,
-    //             'password' => $request->password,
-    //         ]
-    //     );
-    //     return to_route('admin.courses.index')->with('success', __('course::message.create.success'));
-    // }
+    public function store(CourseStoreRequest $request)
+    {
+        // $status = $this->courseRepository->create(
+        //     [
+        //         'name' => $request->name,
+        //         'email' => $request->email,
+        //         'group_id' => $request->group_id,
+        //         'password' => $request->password,
+        //     ]
+        // );
+        // return to_route('admin.courses.index')->with('success', __('course::message.create.success'));
+    }
 
     public function edit(string $id)
     {

@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('content')
-    <form action="{{ route('admin.categories.store') }}" method="post">
+    <form action="{{ route('admin.courses.store') }}" method="post">
         @csrf
         <div class="row">
             <div class="col-6">

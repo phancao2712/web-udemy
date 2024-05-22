@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->text('detail')->nullable();
             $table->integer('teacher_id');
-            $table->string('thumnail')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->float('price')->default(0);
             $table->float('sale_price')->default(0);
             $table->string('code', 100)->nullable();

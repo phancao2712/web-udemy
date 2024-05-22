@@ -1,18 +1,25 @@
 <?php
+
 return [
-    'required' => ':attribute bắt buộc nhập',
-    'email' => ':attribute sai định dạng',
-    'unique' => ':attribute đã tồn tại',
-    'min' => ':attribute nhiều nhất :min kí tự',
-    'max' => ':attribute ít hơn :min kí tự',
-    'integer' => ':attribute bắt buộc là số',
-    'select' => 'Vui lòng chọn :attribute',
+    'required' => ':attribute bắt buộc phải nhập',
+    'min' => ':attribute phải từ :min ký tự',
+    'max' => ':attribute không được quá :max ký tự',
+    'integer' => ':attribute phải là số',
+    'select' => ':attribute bắt buộc phải chọn',
     'attributes' => [
         'name' => 'Tên',
-        'email' => 'Email',
-        'group_id' => 'Nhóm',
-        'password' => 'Mật khẩu'
+        'slug' => 'Slug',
+        'teacher_id' => 'Giảng viên',
+        'code' => 'Mã khóa học',
+        'thumbnail' => 'Ảnh đại diện',
+        'is_document' => 'Tài liệu đính kèm',
+        'supports' => 'Hỗ trợ',
+        'status' => "Trạng thái",
+        'detail' => 'Nội dung',
+        'categories' => "Chuyên mục"
     ]
 ];
+
+
 
 ?>

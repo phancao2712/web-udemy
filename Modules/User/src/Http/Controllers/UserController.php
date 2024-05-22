@@ -4,7 +4,7 @@ namespace Modules\User\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Modules\User\Requests\UserStoreRequest;
+use Modules\User\src\Http\Requests\UserStoreRequest;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 use Yajra\DataTables\Facades\DataTables;
 

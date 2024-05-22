@@ -5,7 +5,7 @@ namespace Modules\Categories\src\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Modules\Categories\Requests\CategoryRequest;
+use Modules\Categories\src\Http\Requests\CategoryRequest;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 
 use Yajra\DataTables\Facades\DataTables;
@@ -33,7 +33,7 @@ class CategoryController extends Controller
     {
         $titlePage = "Thêm danh mục";
 
-        $categories = $this->categoryRepository->getAll(['id','name','slug','parent_id']);
+        $categories = $this->categoryRepository->getAll(['id', 'name', 'slug', 'parent_id']);
 
         return view('categories::create', compact(
             'titlePage',
@@ -51,11 +51,12 @@ class CategoryController extends Controller
         return $listCategory;
     }
 
-    public function getDataTable($categories, $char='', &$result = []){
-        if($categories){
+    public function getDataTable($categories, $char = '', &$result = [])
+    {
+        if ($categories) {
             foreach ($categories as $key => $category) {
                 $row = $category;
-                $row['name'] = $char.$row['name'];
+                $row['name'] = $char . $row['name'];
                 $row['edit'] = '<a href="' . route('admin.categories.edit', $category['id']) . '" class="btn btn-warning">Sửa</a>';
                 $row['delete'] = '<a href="' . route('admin.categories.destroy', $category['id']) . '" class="btn btn-danger delete-btn">Xóa</a>';
                 $row['link'] = '<a href="" class="btn btn-primary">Xem</a>';
@@ -63,8 +64,8 @@ class CategoryController extends Controller
                 unset($row['sub_categories']);
                 unset($row['updated_at']);
                 $result[] = $row;
-                if(!empty($category['sub_categories'])){
-                    $this->getDataTable($category['sub_categories'], $char.'|-- ', $result);
+                if (!empty($category['sub_categories'])) {
+                    $this->getDataTable($category['sub_categories'], $char . '|-- ', $result);
                 }
             }
         }
@@ -88,7 +89,7 @@ class CategoryController extends Controller
     {
         $titlePage = 'Cập nhật Người dùng';;
         $category = $this->categoryRepository->find($id);
-        $categories = $this->categoryRepository->getAll(['id','name','slug','parent_id']);
+        $categories = $this->categoryRepository->getAll(['id', 'name', 'slug', 'parent_id']);
 
         if ($category) {
             return view('categories::edit', compact(
@@ -101,7 +102,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(CategoryRequest $request,string $id)
+    public function update(CategoryRequest $request, string $id)
     {
         $data = $request->except(['_token', 'password', '_method']);
         $status = $this->categoryRepository->update($id, $data);
