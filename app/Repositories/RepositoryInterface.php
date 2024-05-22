@@ -2,6 +2,8 @@
 namespace App\Repositories;
 
 interface RepositoryInterface{
+    public function getAllLatest($column = ['*']);
+    
     public function getAll($column = ['*']);
 
     public function find($id);

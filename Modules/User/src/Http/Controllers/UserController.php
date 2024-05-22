@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function data()
     {
-        $listUser = $this->userRepository->getAll(['id', 'name', 'email', 'group_id', 'created_at']);
+        $listUser = $this->userRepository->getAllLatest(['id', 'name', 'email', 'group_id', 'created_at']);
         return DataTables::of($listUser)
             ->addColumn('edit', function ($user) {
                 return '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-warning">Sửa</a>';

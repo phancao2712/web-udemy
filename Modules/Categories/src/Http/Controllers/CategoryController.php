@@ -22,6 +22,8 @@ class CategoryController extends Controller
     public function index()
     {
         $titlePage = "Danh sách danh mục";
+        $categories = $this->categoryRepository->getTreeCategories()->toArray();
+
         return view('categories::index', compact(
             'titlePage'
         ));
@@ -30,29 +32,43 @@ class CategoryController extends Controller
     public function create()
     {
         $titlePage = "Thêm danh mục";
+
+        $categories = $this->categoryRepository->getAll(['id','name','slug','parent_id']);
+
         return view('categories::create', compact(
-            'titlePage'
+            'titlePage',
+            'categories'
         ));
     }
 
     public function data()
     {
-        $listCategory = $this->categoryRepository->getAll(['id', 'name', 'slug', 'created_at']);
-        return DataTables::of($listCategory)
-            ->addColumn('edit', function ($category) {
-                return '<a href="' . route('admin.categories.edit', $category->id) . '" class="btn btn-warning">Sửa</a>';
-            })
-            ->addColumn('delete', function ($category) {
-                return '<a href="' . route('admin.categories.destroy', $category->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
-            })
-            ->addColumn('link', function ($category) {
-                return '<a href="" class="btn btn-primary">Xem</a>';
-            })
-            ->editColumn('created_at', function ($category) {
-                return Carbon::parse($category->created_at)->format('d/m/Y H:i:s');
-            })
-            ->rawColumns(['edit', 'delete', 'link'])
-            ->toJson();
+        $listCategory = $this->categoryRepository->getTreeCategories(['id', 'name', 'slug', 'created_at']);
+        $listCategory = DataTables::of($listCategory)->toArray();
+
+        $listCategory['data'] = $this->getDataTable($listCategory['data']);
+        return $listCategory;
+    }
+
+    public function getDataTable($categories, $char='', &$result = []){
+        if($categories){
+            foreach ($categories as $key => $category) {
+                $row = $category;
+                $row['name'] = $char.$row['name'];
+                $row['edit'] = '<a href="' . route('admin.categories.edit', $category['id']) . '" class="btn btn-warning">Sửa</a>';
+                $row['delete'] = '<a href="' . route('admin.categories.destroy', $category['id']) . '" class="btn btn-danger delete-btn">Xóa</a>';
+                $row['link'] = '<a href="" class="btn btn-primary">Xem</a>';
+                $row['created_at'] = Carbon::parse($category['created_at'])->format('d/m/Y H:i:s');
+                unset($row['sub_categories']);
+                unset($row['updated_at']);
+                $result[] = $row;
+                if(!empty($category['sub_categories'])){
+                    $this->getDataTable($category['sub_categories'], $char.'--', $result);
+                }
+            }
+        }
+
+        return $result;
     }
 
     public function store(CategoryRequest $request)
@@ -71,11 +87,13 @@ class CategoryController extends Controller
     {
         $titlePage = 'Cập nhật Người dùng';;
         $category = $this->categoryRepository->find($id);
+        $categories = $this->categoryRepository->getAll(['id','name','slug','parent_id']);
 
         if ($category) {
             return view('categories::edit', compact(
                 'titlePage',
-                'category'
+                'category',
+                'categories'
             ));
         } else {
             abort(404);

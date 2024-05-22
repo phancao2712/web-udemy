@@ -35,6 +35,7 @@
                     <select name="parent_id" id=""
                         class="form-control {{ $errors->has('parent_id') ? 'is-invalid' : '' }}">
                         <option value="0">Không</option>
+                        {{ getCategories($categories, old('parent_id', $category?->parent_id)) }}
                     </select>
                     @error('parent_id')
                         <div class="invalid-feedback">

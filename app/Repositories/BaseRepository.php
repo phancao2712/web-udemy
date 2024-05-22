@@ -21,10 +21,15 @@ abstract class BaseRepository implements RepositoryInterface
 
     abstract public function getModel();
 
-    public function getAll($column = ['*'])
+    public function getAllLatest($column = ['*'])
     {
         return $this->model->select($column)->latest();
     }
+
+    public function getAll($column = ['*']) {
+        return $this->model->select($column)->get();
+    }
+
 
     public function paginator($column = ['*'], $limit = 10) {
         return $this->model->select($column)->paginate($limit);
