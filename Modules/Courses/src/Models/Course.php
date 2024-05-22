@@ -11,8 +11,15 @@ class Course extends Model
 
     protected $fillable = [
         'name',
+        'slug',
+        'teacher_id',
+        'code',
         'price',
-        'status'
+        'sale_price',
+        'is_document',
+        'status',
+        'supports',
+        'detail',
+        'thumbnail',
     ];
-
 }
