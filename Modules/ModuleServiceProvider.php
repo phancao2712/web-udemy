@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
 use Modules\Categories\src\Repositories\CategoriesRepository;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
+use Modules\Courses\src\Repositories\CoursesRepository;
+use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 
@@ -33,6 +35,12 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             CategoriesRepositoryInterface::class,
             CategoriesRepository::class
+        );
+
+        //Courses Repository
+        $this->app->singleton(
+            CoursesRepositoryInterface::class,
+            CoursesRepository::class
         );
     }
 
