@@ -6,7 +6,6 @@ function getCategories($categories, $old, $parentId = 0, $char = '')
         foreach ($categories as $key => $category) {
             if ($category->parent_id == $parentId && $id != $category->id) {
                 echo '<option value="' . $category->id . '"';
-
                 if ($old == $category->id) {
                     echo 'selected';
                 }

@@ -44,6 +44,7 @@ class CategoryController extends Controller
     public function data()
     {
         $listCategory = $this->categoryRepository->getTreeCategories(['id', 'name', 'slug', 'created_at']);
+
         $listCategory = DataTables::of($listCategory)->toArray();
 
         $listCategory['data'] = $this->getDataTable($listCategory['data']);
@@ -63,7 +64,7 @@ class CategoryController extends Controller
                 unset($row['updated_at']);
                 $result[] = $row;
                 if(!empty($category['sub_categories'])){
-                    $this->getDataTable($category['sub_categories'], $char.'--', $result);
+                    $this->getDataTable($category['sub_categories'], $char.'|-- ', $result);
                 }
             }
         }

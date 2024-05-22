@@ -28,6 +28,7 @@
 <script>
     $(document).ready(function () {
     $("#datatable").DataTable({
+        pageLength: 2,
         autoWidth: false,
         processing: true,
         serverSide: true,
