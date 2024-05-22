@@ -54,9 +54,8 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="">Mã khóa học</label>
-                    <input type="text" name="code"
-                        class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Mã khóa học..."
-                        id="" value="{{ old('code') }}">
+                    <input type="text" name="code" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}"
+                        placeholder="Mã khóa học..." id="" value="{{ old('code') }}">
                     @error('code')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -138,7 +137,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="">Nội dung</label>
-                    <textarea name="detail" class="form-control ckeditor {{ $errors->has('detail') ? 'is-invalid' : '' }}"
+                    <textarea name="detail" id="" class="form-control ckeditor  {{ $errors->has('detail') ? 'is-invalid' : '' }}"
                         placeholder="Nội dung...">{{ old('detail') }}</textarea>
                     @error('detail')
                         <div class="invalid-feedback">
@@ -162,7 +161,7 @@
                 </div>
             </div>
 
-            {{-- <div class="col-12">
+            <div class="col-12">
                 <div class="mb-3">
                     <div class="row {{ $errors->has('thumbnail') ? 'align-items-center' : 'align-items-end' }}">
                         <div class="col-7">
@@ -192,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Lưu lại</button>
@@ -217,7 +216,7 @@
         .list-categories {
             max-height: 250px;
             overflow: auto;
-
         }
     </style>
 @endsection
+

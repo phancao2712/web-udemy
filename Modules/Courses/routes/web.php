@@ -26,3 +26,7 @@ Route::group([
         Route::delete('/destroy/{id}', 'CourseController@destroy')->name('destroy');
     });
 });
+
+Route::group(['prefix' => 'filemanager', 'middleware' => ['web']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
