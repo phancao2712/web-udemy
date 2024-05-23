@@ -103,7 +103,7 @@ class CourseController extends Controller
     {
         $titlePage = 'Cập nhật Khóa học';
         $course = $this->courseRepository->find($id);
-        $categories = $this->categoryRepository->getAll(['id','name', 'parent_id']);
+        $categories = $this->categoryRepository->getAll(['id','name','parent_id']);
         $categoryIds = $this->courseRepository->getCategoriesIds($course);
 
         if ($course) {
@@ -137,6 +137,8 @@ class CourseController extends Controller
 
     public function destroy(string $id)
     {
+        $course = $this->courseRepository->find($id);
+        $this->courseRepository->deleteCourseCategories($course);
         $status = $this->courseRepository->delete($id);
         return response(['message' =>  __('courses::message.delete.success'), 500]);
     }

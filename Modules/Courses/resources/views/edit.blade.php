@@ -153,7 +153,7 @@
                 <div class="mb-3">
                     <label for="">Chuyên mục</label>
                     <div class="list-categories">
-                        {{ getCategoriesCheckbox($categories, old('categories',$categoryIds)) }}
+                        {{ getCategoriesCheckbox($categories, old('categories', $categoryIds)) }}
                     </div>
                     @error('categories')
                         <div class="invalid-feedback d-block">
