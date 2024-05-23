@@ -7,20 +7,23 @@ use Modules\Courses\src\Http\Requests\CourseStoreRequest;
 use Carbon\Carbon;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
-
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 use Yajra\DataTables\Facades\DataTables;
 
 class CourseController extends Controller
 {
     protected $courseRepository;
     protected $categoryRepository;
+    protected $teacherRepository;
 
     public function __construct(
         CoursesRepositoryInterface $courseRepository,
         CategoriesRepositoryInterface $categoryRepository,
+        TeacherRepositoryInterface $teacherRepository,
     ) {
         $this->courseRepository = $courseRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->teacherRepository = $teacherRepository;
     }
 
     public function index()
@@ -35,9 +38,11 @@ class CourseController extends Controller
     {
         $titlePage = "Thêm khóa học";
         $categories = $this->categoryRepository->getAll(['id','name', 'parent_id']);
+        $teachers = $this->teacherRepository->getAll();['id','name'];
         return view('courses::create', compact(
             'titlePage',
             'categories',
+            'teachers'
         ));
     }
 
@@ -105,13 +110,15 @@ class CourseController extends Controller
         $course = $this->courseRepository->find($id);
         $categories = $this->categoryRepository->getAll(['id','name','parent_id']);
         $categoryIds = $this->courseRepository->getCategoriesIds($course);
+        $teachers = $this->teacherRepository->getAll();
 
         if ($course) {
             return view('courses::edit', compact(
                 'titlePage',
                 'course',
                 'categories',
-                'categoryIds'
+                'categoryIds',
+                'teachers'
             ));
         } else {
             abort(404);
@@ -138,8 +145,8 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         $course = $this->courseRepository->find($id);
-        $this->courseRepository->deleteCourseCategories($course);
-        $status = $this->courseRepository->delete($id);
+        // $this->courseRepository->deleteCourseCategories($course);
+        // $status = $this->courseRepository->delete($id);
         return response(['message' =>  __('courses::message.delete.success'), 500]);
     }
 }

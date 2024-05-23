@@ -37,13 +37,12 @@
                     <select name="teacher_id" id=""
                         class="form-select {{ $errors->has('teacher_id') ? 'is-invalid' : '' }}">
                         <option value="0">Chọn giảng viên</option>
-                        {{-- @if ($teacher)
-                            @foreach ($teacher as $item)
-                                <option value="{{ $item->id }}"
-                                    {{ old('teacher_id') == $item->id ? 'selected' : false }}>{{ $item->name }}</option>
+                        @if ($teachers)
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}" @selected(old('teacher_id', $course->id) == $teacher->id)>{{ $teacher->name }}
+                                </option>
                             @endforeach
-                        @endif --}}
-                        <option value="1">Phan Kao</option>
+                        @endif
                     </select>
                     @error('teacher_id')
                         <div class="invalid-feedback">
@@ -55,8 +54,9 @@
             <div class="col-6">
                 <div class="mb-3">
                     <label for="">Mã khóa học</label>
-                    <input type="text" name="code" class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}"
-                        placeholder="Mã khóa học..." id="" value="{{ old('code', $course?->code) }}">
+                    <input type="text" name="code"
+                        class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" placeholder="Mã khóa học..."
+                        id="" value="{{ old('code', $course?->code) }}">
                     @error('code')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -113,7 +113,7 @@
                     <select name="status" id=""
                         class="form-select {{ $errors->has('status') ? 'is-invalid' : '' }}">
                         <option value="0" @selected(old('status', $course?->status) == 0)>Chưa ra mắt</option>
-                        <option value="1"  @selected(old('status', $course?->status) == 1)>Đã ra mắt</option>
+                        <option value="1" @selected(old('status', $course?->status) == 1)>Đã ra mắt</option>
                     </select>
                     @error('status')
                         <div class="invalid-feedback">
@@ -170,7 +170,8 @@
                             <label for="">Ảnh đại diện</label>
                             <input type="text" name="thumbnail"
                                 class="form-control {{ $errors->has('thumbnail') ? 'is-invalid' : '' }}"
-                                placeholder="Ảnh đại diện..." id="thumbnail" value="{{ old('thumbnail',$course?->thumbnail) }}">
+                                placeholder="Ảnh đại diện..." id="thumbnail"
+                                value="{{ old('thumbnail', $course?->thumbnail) }}">
                             @error('thumbnail')
                                 <div class="invalid-feedback">
                                     {{ $message }}
