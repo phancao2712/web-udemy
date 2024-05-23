@@ -34,10 +34,10 @@ class CourseController extends Controller
     public function create()
     {
         $titlePage = "Thêm khóa học";
-        $categories = $this->categoryRepository->getAll();
+        $categories = $this->categoryRepository->getAll(['id','name', 'parent_id']);
         return view('courses::create', compact(
             'titlePage',
-            'categories'
+            'categories',
         ));
     }
 
@@ -75,7 +75,7 @@ class CourseController extends Controller
 
     public function store(CourseStoreRequest $request)
     {
-        $data = $request->except(['_token']);
+        $data = $request->except(['_token', 'categories']);
         if (!$data['price']) {
             $data['price'] = 0;
         }
@@ -83,7 +83,17 @@ class CourseController extends Controller
         if (!$data['sale_price']) {
             $data['sale_price'] = 0;
         }
-        $status = $this->courseRepository->create($data);
+        $course = $this->courseRepository->create($data);
+
+        $categories = [];
+
+        foreach ($request->categories as $category) {
+            $categories[$category] = [
+                'created_at' => Carbon::now()->format('Y-m-d H:m:i'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:m:i'),
+            ];
+        }
+        $courseCategories = $this->courseRepository->createCourseCategories($course, $request->categories);
         return to_route('admin.courses.index')->with('success', __('courses::message.create.success'));
     }
 

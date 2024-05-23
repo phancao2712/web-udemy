@@ -4,6 +4,7 @@ namespace Modules\Courses\src\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Categories\src\Models\Category;
 
 class Course extends Model
 {
@@ -21,5 +22,10 @@ class Course extends Model
         'supports',
         'detail',
         'thumbnail',
+        'categories'
     ];
+
+    public function categories(){
+        return $this->belongsToMany(Category::class,'course_categories');
+    }
 }
