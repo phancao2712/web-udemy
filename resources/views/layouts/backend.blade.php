@@ -19,7 +19,7 @@
     @include('components.backend.header')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            @include('components.backend.nav')
+            @include('components.backend.sidebar')
         </div>
         <div id="layoutSidenav_content">
             <main>

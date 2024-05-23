@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $titlePage = "Danh sách danh mục";
+        $titlePage = "Danh sách chuyên mục";
         $categories = $this->categoryRepository->getTreeCategories()->toArray();
 
         return view('categories::index', compact(
@@ -31,7 +31,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $titlePage = "Thêm danh mục";
+        $titlePage = "Thêm chuyên mục";
 
         $categories = $this->categoryRepository->getAll(['id', 'name', 'slug', 'parent_id']);
 
