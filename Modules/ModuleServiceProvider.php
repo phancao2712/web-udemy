@@ -8,6 +8,8 @@ use Modules\Categories\src\Repositories\CategoriesRepository;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 use Modules\Courses\src\Repositories\CoursesRepository;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
+use Modules\Teacher\src\Repositories\TeacherRepository;
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
 
@@ -41,6 +43,12 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             CoursesRepositoryInterface::class,
             CoursesRepository::class
+        );
+
+        //Teacher Repository
+        $this->app->singleton(
+            TeacherRepositoryInterface::class,
+            TeacherRepository::class
         );
     }
 
