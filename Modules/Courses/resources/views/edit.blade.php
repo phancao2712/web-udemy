@@ -1,8 +1,8 @@
 @extends('layouts.backend')
 @section('content')
     <form action="{{ route('admin.courses.update', $course->id) }}" method="post">
-        @csrf
         @method('PUT')
+        @csrf
         <div class="row">
             <div class="col-6">
                 <div class="mb-3">
@@ -43,7 +43,7 @@
                                     {{ old('teacher_id') == $item->id ? 'selected' : false }}>{{ $item->name }}</option>
                             @endforeach
                         @endif --}}
-                        <option @selected($course?->teacher_id == 1) value="1">Phan Kao</option>
+                        <option value="1">Phan Kao</option>
                     </select>
                     @error('teacher_id')
                         <div class="invalid-feedback">
@@ -82,7 +82,8 @@
                     <label for="">Giá khuyến mãi</label>
                     <input type="number" name="sale_price"
                         class="form-control {{ $errors->has('sale_price') ? 'is-invalid' : '' }}"
-                        placeholder="Giá khuyến mãi..." id="" value="{{ old('sale_price', $course?->sale_price) }}">
+                        placeholder="Giá khuyến mãi..." id=""
+                        value="{{ old('sale_price', $course?->sale_price) }}">
                     @error('sale_price')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -95,8 +96,8 @@
                     <label for="">Tài liệu đính kèm</label>
                     <select name="is_document" id=""
                         class="form-select {{ $errors->has('is_document') ? 'is-invalid' : '' }}">
-                        <option value="0" @selected(old('is_document', $course?->is_document) == 0)>Không</option>
-                        <option value="1" @selected(old('is_document', $course?->is_document) == 1)>Có</option>
+                        <option value="0" @selected(old('is_document', $course?->sale_price) == 0)>Không</option>
+                        <option value="1" @selected(old('is_document', $course?->sale_price) == 1)>Có</option>
                     </select>
                     @error('is_document')
                         <div class="invalid-feedback">
@@ -126,7 +127,7 @@
                 <div class="mb-3">
                     <label for="">Hỗ trợ</label>
                     <textarea name="supports" class="form-control {{ $errors->has('supports') ? 'is-invalid' : '' }}"
-                        placeholder="Hỗ trợ...">{{ old('supports', $course?->supports) }}</textarea>
+                        placeholder="Hỗ trợ...">{{ old('supports', $course?->status) }}</textarea>
                     @error('supports')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -152,7 +153,7 @@
                 <div class="mb-3">
                     <label for="">Chuyên mục</label>
                     <div class="list-categories">
-                        {{-- {{ getCategoriesCheckbox($categories, old('categories')) }} --}}
+                        {{ getCategoriesCheckbox($categories, old('categories',$categoryIds)) }}
                     </div>
                     @error('categories')
                         <div class="invalid-feedback d-block">
@@ -169,7 +170,7 @@
                             <label for="">Ảnh đại diện</label>
                             <input type="text" name="thumbnail"
                                 class="form-control {{ $errors->has('thumbnail') ? 'is-invalid' : '' }}"
-                                placeholder="Ảnh đại diện..." id="thumbnail" value="{{ old('thumbnail', $course?->thumbnail) }}">
+                                placeholder="Ảnh đại diện..." id="thumbnail" value="{{ old('thumbnail',$course?->thumbnail) }}">
                             @error('thumbnail')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -184,8 +185,8 @@
                         </div>
                         <div class="col-3">
                             <div id="holder">
-                                @if (old('thumbnail', $course?->thumbnail))
-                                    <img src="{{ old('thumbnail', $course?->thumbnail) }}" />
+                                @if (old('thumbnail') || $course->thumbnail)
+                                    <img style="height: 5rem;" src="{{ old('thumbnail') ?? $course->thumbnail }}" />
                                 @endif
                             </div>
                         </div>
@@ -219,4 +220,3 @@
         }
     </style>
 @endsection
-

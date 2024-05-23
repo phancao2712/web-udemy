@@ -86,14 +86,16 @@ class CourseController extends Controller
         $course = $this->courseRepository->create($data);
 
         $categories = [];
-
         foreach ($request->categories as $category) {
             $categories[$category] = [
                 'created_at' => Carbon::now()->format('Y-m-d H:m:i'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:m:i'),
             ];
         }
+
         $courseCategories = $this->courseRepository->createCourseCategories($course, $request->categories);
+
+
         return to_route('admin.courses.index')->with('success', __('courses::message.create.success'));
     }
 
@@ -101,11 +103,15 @@ class CourseController extends Controller
     {
         $titlePage = 'Cập nhật Khóa học';
         $course = $this->courseRepository->find($id);
+        $categories = $this->categoryRepository->getAll(['id','name', 'parent_id']);
+        $categoryIds = $this->courseRepository->getCategoriesIds($course);
 
         if ($course) {
             return view('courses::edit', compact(
                 'titlePage',
-                'course'
+                'course',
+                'categories',
+                'categoryIds'
             ));
         } else {
             abort(404);
@@ -114,7 +120,7 @@ class CourseController extends Controller
 
     public function update(courseStoreRequest $request, string $id)
     {
-        $data = $request->except(['_token','_method']);
+        $data = $request->except(['_token','_method', 'categories']);
         if (!$data['price']) {
             $data['price'] = 0;
         }
@@ -122,7 +128,10 @@ class CourseController extends Controller
         if (!$data['sale_price']) {
             $data['sale_price'] = 0;
         }
-        $status = $this->courseRepository->update($id, $data);
+        $this->courseRepository->update($id, $data);
+        $course = $this->courseRepository->find($id);
+        $this->courseRepository->updateCourseCategories($course, $request->categories);
+
         return redirect()->back()->with('success', __('courses::message.update.success'));
     }
 
