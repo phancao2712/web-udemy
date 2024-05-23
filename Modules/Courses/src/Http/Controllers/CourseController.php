@@ -145,8 +145,11 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         $course = $this->courseRepository->find($id);
-        // $this->courseRepository->deleteCourseCategories($course);
-        // $status = $this->courseRepository->delete($id);
+        $status = $this->courseRepository->delete($id);
+
+        if($status){
+            deleteFileStorage($course->thumbnail);
+        }
         return response(['message' =>  __('courses::message.delete.success'), 500]);
     }
 }
