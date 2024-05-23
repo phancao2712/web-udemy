@@ -3,6 +3,7 @@
 return [
     'required' => ':attribute bắt buộc phải nhập',
     'min' => ':attribute phải từ :min ký tự',
+    'unique' => ':attribute đã tồn tại',
     'max' => ':attribute không được quá :max ký tự',
     'integer' => ':attribute phải là số',
     'select' => ':attribute bắt buộc phải chọn',
