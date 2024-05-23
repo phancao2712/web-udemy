@@ -16,7 +16,7 @@ Route::group([
         Route::get('/', 'UserController@index')->name('index');
 
         Route::get('/create', 'UserController@create')->name('create');
-        Route::post('/create', 'UserController@data')->name('store');
+        Route::post('/create', 'UserController@store')->name('store');
 
         Route::get('/data', 'UserController@data')->name('data');
 

@@ -47,7 +47,10 @@ class TeacherController extends Controller
                 return Carbon::parse($teacher->created_at)->format('d/m/Y H:i:s');
             })
             ->editColumn('image', function ($teacher) {
-                return 'ảnh';
+                return '<image style="width:70px; height: 70px; object-fit:cover;" src="'.$teacher->image.'"/>';
+            })
+            ->editColumn('exp', function ($teacher) {
+                return $teacher->exp.' năm';
             })
             ->rawColumns(['edit', 'delete', 'image'])
             ->toJson();
@@ -55,20 +58,14 @@ class TeacherController extends Controller
 
     public function store(TeacherStoreRequest $request)
     {
-        $status = $this->teacherRepository->create(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'group_id' => $request->group_id,
-                'password' => $request->password,
-            ]
-        );
+        $data = $request->except(['_token']);
+        $status = $this->teacherRepository->create($data);
         return to_route('admin.teachers.index')->with('success', __('teacher::message.create.success'));
     }
 
     public function edit(string $id)
     {
-        $titlePage = 'Cập nhật Người dùng';;
+        $titlePage = 'Cập nhật Giảng Viên';
         $teacher = $this->teacherRepository->find($id);
 
         if ($teacher) {
@@ -83,10 +80,8 @@ class TeacherController extends Controller
 
     public function update(teacherStoreRequest $request, string $id)
     {
-        $data = $request->except(['_token', 'password', '_method']);
-        if ($request->password) {
-            $data['password'] = bcrypt($request->password);
-        }
+        $data = $request->except(['_token', '_method']);
+
         $status = $this->teacherRepository->update($id, $data);
 
         return to_route('admin.teachers.index')->with('success', __('teacher::message.update.success'));

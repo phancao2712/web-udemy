@@ -43,6 +43,6 @@ class TeacherStoreRequest extends FormRequest
 
     public function attributes()
     {
-        return [__('teacher::validation.attributes')];
+        return __('teacher::validation.attributes');
     }
 }

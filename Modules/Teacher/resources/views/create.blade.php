@@ -1,63 +1,114 @@
 @extends('layouts.backend')
 @section('content')
-    <form action="{{ route('admin.users.store') }}" method="POST">
+    <form action="{{ route('admin.teachers.store') }}" method="post">
+        @csrf
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-6">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Tên</label>
-                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name"
-                        placeholder="Tên..." value="{{ old('name') }}">
+                    <label for="">Tên</label>
+                    <input type="text" name="name"
+                        class="form-control title {{ $errors->has('name') ? 'is-invalid' : '' }}" placeholder="Tên..."
+                        value="{{ old('name') }}">
                     @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
+
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Email</label>
-                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                        name="email" placeholder="Email..." value="{{ old('email') }}">
-                    @error('email')
+                    <label for="">Slug</label>
+                    <input type="text" name="slug"
+                        class="form-control slug {{ $errors->has('slug') ? 'is-invalid' : '' }}" placeholder="Slug..."
+                        value="{{ old('slug') }}">
+                    @error('slug')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="">Số năm kinh nghiệm</label>
+                    <input type="text" name="exp" class="form-control {{ $errors->has('exp') ? 'is-invalid' : '' }}"
+                        placeholder="Số năm kinh nghiệm..." id="" value="{{ old('exp') }}">
+                    @error('exp')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="">Mô tả</label>
+                    <textarea name="description" id="" class="form-control ckeditor  {{ $errors->has('description') ? 'is-invalid' : '' }}"
+                        placeholder="Nội dung...">{{ old('description') }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <div class="row {{ $errors->has('image') ? 'align-items-center' : 'align-items-end' }}">
+                        <div class="col-7">
+                            <label for="">Ảnh đại diện</label>
+                            <input type="text" name="image"
+                                class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}"
+                                placeholder="Ảnh đại diện..." id="image" value="{{ old('image') }}">
+                            @error('image')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-2 d-grid">
+                            <button type="button" class="btn btn-primary" id="lfm" data-input="image"
+                                data-preview="holder">
+                                Chọn ảnh
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <div id="holder">
+                                @if (old('image'))
+                                    <img style="height: 5rem" src="{{ old('image') }}" />
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Lưu lại</button>
+                <a href="{{ route('admin.courses.index') }}" class="btn btn-danger">Hủy</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nhóm</label>
-                    <select name="group_id" id=""
-                        class="form-control {{ $errors->has('group_id') ? 'is-invalid' : '' }}">
-                        <option value="">Chọn nhóm</option>
-                        <option value="1">Admin</option>
-                    </select>
-                    @error('group_id')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                        name="password" placeholder="Mật khẩu...">
-                    @error('password')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('admin.users.index') }}" class="btn btn-danger">Hủy</a>
-        @csrf
+
     </form>
 @endsection
+
+@section('style')
+    <style>
+        img {
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        #holder img {
+            width: 100% !important;
+        }
+
+        .list-categories {
+            max-height: 250px;
+            overflow: auto;
+        }
+    </style>
+@endsection
+

@@ -184,9 +184,8 @@
                         <div class="col-3">
                             <div id="holder">
                                 @if (old('thumbnail'))
-                                    <img src="{{ old('thumbnail') }}" />
+                                    <img style="height: 5rem" src="{{ old('thumbnail') }}" />
                                 @endif
-
                             </div>
                         </div>
                     </div>

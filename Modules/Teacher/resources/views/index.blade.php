@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('content')
-    <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary">Thêm</a></p>
+    <p><a href="{{ route('admin.teachers.create') }}" class="btn btn-primary">Thêm</a></p>
     <table id="datatable" class="display" style="width:100%">
         <thead>
             <tr>

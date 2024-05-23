@@ -16,7 +16,7 @@ Route::group([
         Route::get('/', 'TeacherController@index')->name('index');
 
         Route::get('/create', 'TeacherController@create')->name('create');
-        Route::post('/create', 'TeacherController@data')->name('store');
+        Route::post('/create', 'TeacherController@store')->name('store');
 
         Route::get('/data', 'TeacherController@data')->name('data');
 
