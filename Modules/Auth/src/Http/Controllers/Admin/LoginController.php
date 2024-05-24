@@ -57,7 +57,7 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request)
     {
-        return redirect($this->redirectTo);
+        return redirect($this->redirectTo)->with('success', __('auth::message.logout.success'));
     }
 
 }
