@@ -3,7 +3,10 @@
 namespace Modules\Auth\src\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = RouteServiceProvider::ADMIN;
 
     /**
      * Create a new controller instance.
@@ -35,12 +38,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
     }
 
     public function showLoginForm()
     {
-        return view('auth::admin.login');
+        $pageTitle = 'Đăng nhập hệ thống';
+        return view('auth::admin.login', compact(
+            'pageTitle'
+        ));
+    }
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            $this->username() => [__('auth::message.login.fail')],
+        ]);
+    }
+
+    protected function loggedOut(Request $request)
+    {
+        return redirect($this->redirectTo);
     }
 
 }

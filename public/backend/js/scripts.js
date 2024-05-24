@@ -139,4 +139,15 @@ $(document).ready(function () {
         isChangeSlug = true;
     });
 
+
+
+
+    $('.logout-btn').on('click', function(e) {
+        e.preventDefault();
+        const action = $(this).attr("href");
+        const form = $('.form-logout');
+        form.attr('action', action)
+        form.submit();
+    })
+
 });
