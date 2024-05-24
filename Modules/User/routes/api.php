@@ -1,4 +1,7 @@
-<?php 
+<?php
+
 Route::prefix('user')->name('user.')->group(function () {
-   //Route here
+   Route::get('/', function (){
+    return 'API user';
+   });
 });
