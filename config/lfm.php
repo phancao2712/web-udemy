@@ -96,7 +96,7 @@ return [
 
     'disk'                     => 'public',
 
-    'rename_file'              => false,
+    'rename_file'              => true,
 
     'rename_duplicates'        => false,
 
@@ -104,7 +104,7 @@ return [
 
     'alphanumeric_directory'   => false,
 
-    'should_validate_size'     => false,
+    'should_validate_size'     => true,
 
     'should_validate_mime'     => true,
 
@@ -138,6 +138,7 @@ return [
         'image/jpeg',
         'image/pjpeg',
         'image/png',
+        'image/jpg',
     ],
 
     'thumb_img_width'          => 500, // px
