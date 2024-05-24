@@ -4,6 +4,8 @@ namespace Modules;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Modules\Auth\src\Repositories\AuthRepository;
+use Modules\Auth\src\Repositories\AuthRepositoryInterface;
 use Modules\Categories\src\Repositories\CategoriesRepository;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 use Modules\Courses\src\Repositories\CoursesRepository;
@@ -49,6 +51,12 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             TeacherRepositoryInterface::class,
             TeacherRepository::class
+        );
+
+        //Auth Repository
+        $this->app->singleton(
+            AuthRepositoryInterface::class,
+            AuthRepository::class
         );
     }
 
