@@ -3,16 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Courses\src\Http\Controllers\CourseController;
 
+
 Route::group([
-    'namespace' => 'Modules\Courses\src\Http\Controllers',
     'prefix' => 'admin',
     'as' => 'admin.',
-    'middleware' => 'web'
 ], function () {
     Route::group([
         'prefix' => 'courses',
         'as' => 'courses.'
-    ], function () {
+    ], function (){
         Route::get('/', 'CourseController@index')->name('index');
 
         Route::get('/create', 'CourseController@create')->name('create');
@@ -27,6 +26,7 @@ Route::group([
     });
 });
 
-Route::group(['prefix' => 'filemanager', 'middleware' => ['web']], function () {
+
+Route::group(['prefix' => 'filemanager'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

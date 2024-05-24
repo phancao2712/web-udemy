@@ -4,11 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Modules\User\src\Http\Controllers\UserController;
 
 Route::group([
-    'namespace' => 'Modules\User\src\Http\Controllers',
     'prefix' => 'admin',
     'as' => 'admin.',
-    'middleware' => 'web'
-], function () {
+], function(){
     Route::group([
         'prefix' => 'users',
         'as' => 'users.'
@@ -24,7 +22,6 @@ Route::group([
         Route::put('/update/{id}', 'UserController@update')->name('update');
 
         Route::delete('/destroy/{id}', 'UserController@destroy')->name('destroy');
-
-
     });
 });
+

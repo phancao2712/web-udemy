@@ -18,7 +18,7 @@
 
             @include('components.backend.menu_item', [
                 'title' => 'Giảng viên',
-                'name' => 'teacher',
+                'name' => 'teachers',
             ])
 
             @include('components.backend.menu_item', [

@@ -4,10 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Modules\Categories\src\Http\Controllers\CategoryController;
 
 Route::group([
-    'namespace' => 'Modules\Categories\src\Http\Controllers',
     'prefix' => 'admin',
     'as' => 'admin.',
-    'middleware' => 'web'
 ], function () {
     Route::group([
         'prefix' => 'categories',
@@ -24,7 +22,5 @@ Route::group([
         Route::put('/update/{id}', 'CategoryController@update')->name('update');
 
         Route::delete('/destroy/{id}', 'CategoryController@destroy')->name('destroy');
-
-
     });
 });

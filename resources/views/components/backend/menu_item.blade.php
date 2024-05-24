@@ -5,7 +5,7 @@
 </a>
 <div class="collapse {{ request()->routeIs('admin.'.$name.'*') ? 'show' : '' }}" id="collapse{{ $name }}" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav">
-        <a class="nav-link" href="{{ route('admin.categories.index') }}">Danh sách {{ $title }}</a>
-        <a class="nav-link" href="{{ route('admin.categories.index') }}">Thêm {{ $title }}</a>
+        <a class="nav-link" href="{{ route('admin.' . $name . '.index') }}">Danh sách {{ $title }}</a>
+        <a class="nav-link" href="{{ route('admin.' . $name . '.index') }}">Thêm {{ $title }}</a>
     </nav>
 </div>

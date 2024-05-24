@@ -4,11 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Modules\Teacher\src\Http\Controllers\TeacherController;
 
 Route::group([
-    'namespace' => 'Modules\Teacher\src\Http\Controllers',
     'prefix' => 'admin',
     'as' => 'admin.',
-    'middleware' => 'web'
-], function () {
+],function () {
     Route::group([
         'prefix' => 'teachers',
         'as' => 'teachers.'
@@ -26,3 +24,4 @@ Route::group([
         Route::delete('/destroy/{id}', 'TeacherController@destroy')->name('destroy');
     });
 });
+

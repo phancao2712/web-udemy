@@ -4,6 +4,7 @@ namespace Modules;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
 use Modules\Auth\src\Repositories\AuthRepository;
 use Modules\Auth\src\Repositories\AuthRepositoryInterface;
 use Modules\Categories\src\Repositories\CategoriesRepository;
@@ -18,13 +19,9 @@ use Modules\User\src\Repositories\UserRepositoryInterface;
 class ModuleServiceProvider extends ServiceProvider
 {
 
-    private $middlewares = [
+    private $middlewares = [];
 
-    ];
-
-    private $commands = [
-
-    ];
+    private $commands = [];
 
     public function bindingRepository()
     {
@@ -75,9 +72,14 @@ class ModuleServiceProvider extends ServiceProvider
         $modulePath = __DIR__ . "/{$module}/";
 
         // Khai báo routes
-        if (File::exists($modulePath . "routes/web.php")) {
-            $this->loadRoutesFrom($modulePath . "routes/web.php");
-        }
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => "Modules\\{$module}\src\Http\Controllers",
+        ], function () use ($modulePath) {
+            if (File::exists($modulePath . "routes/web.php")) {
+                $this->loadRoutesFrom($modulePath . "routes/web.php");
+            }
+        });
 
         // Khai báo migration
         if (File::exists($modulePath . "migrations")) {
