@@ -83,7 +83,8 @@ class ModuleServiceProvider extends ServiceProvider
 
         Route::group([
             'namespace' => "Modules\\{$module}\src\Http\Controllers",
-            'middleware' => 'api', 'prefix' => 'api'
+            'middleware' => 'api',
+            'prefix' => 'api'
         ], function () use ($modulePath) {
             if (File::exists($modulePath . '/routes/api.php')) {
                 $this->loadRoutesFrom($modulePath . '/routes/api.php');
