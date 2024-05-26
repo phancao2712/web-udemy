@@ -62,6 +62,9 @@ class CourseController extends Controller
             ->editColumn('created_at', function ($course) {
                 return Carbon::parse($course->created_at)->format('d/m/Y H:i:s');
             })
+            ->addColumn('lessons', function ($course) {
+                return '<a href="' . route('admin.lessons.index', $course->id) . '" class="btn btn-primary">Xem</a>';
+            })
             ->editColumn('price', function ($course) {
                 if ($course->price) {
                     if ($course->sale_price) {
@@ -74,7 +77,7 @@ class CourseController extends Controller
                 };
                 return $price;
             })
-            ->rawColumns(['edit', 'delete', 'status'])
+            ->rawColumns(['edit', 'delete', 'status','lessons'])
             ->toJson();
     }
 

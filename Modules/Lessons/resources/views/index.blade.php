@@ -1,14 +1,17 @@
 @extends('layouts.backend')
 @section('content')
-    <p><a href="{{ route('admin.courses.create') }}" class="btn btn-primary">Thêm</a></p>
+    <p>
+        <a href="{{ route('admin.lessons.create') }}" class="btn btn-primary">Thêm</a>
+        <a href="{{ route('admin.courses.index') }}" class="btn btn-info text-white">Quay lại khóa học</a>
+    </p>
     <table id="datatable" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Tên khóa học</th>
-                <th>Giá</th>
-                <th>Trạng thái</th>
+                <th>Tên </th>
+                <th>Học thử</th>
+                <th>Lượt xem</th>
+                <th>Thứ tự</th>
                 <th>Thời gian</th>
-                <th>Bài giảng</th>  
                 <th>Sửa</th>
                 <th>Xóa</th>
             </tr>
@@ -16,11 +19,11 @@
 
         <tfoot>
             <tr>
-                <th>Tên khóa học</th>
-                <th>Giá</th>
-                <th>Trạng thái</th>
+                <th>Tên </th>
+                <th>Học thử</th>
+                <th>Lượt xem</th>
+                <th>Thứ tự</th>
                 <th>Thời gian</th>
-                <th>Bài giảng</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
             </tr>
@@ -28,7 +31,7 @@
     </table>
 @endsection
 
-@section('scripts')
+{{-- @section('scripts')
 <script>
     $(document).ready(function () {
     $("#datatable").DataTable({
@@ -62,4 +65,4 @@
     });
 });
 </script>
-@endsection
+@endsection --}}
