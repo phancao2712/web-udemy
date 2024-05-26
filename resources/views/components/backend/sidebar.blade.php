@@ -6,17 +6,21 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
-            @include('components.backend.menu_item', [
+            {{-- @include('components.backend.menu_item', [
                 'title' => 'Chuyên mục',
                 'name' => 'categories',
-            ])
+            ]) --}}
 
             @include('components.backend.menu_item', [
                 'title' => 'Khóa học',
                 'name' => 'courses',
+                'sidebar' => [
+                    "admin.courses.*",
+                    "admin.lessons.*",
+                ],
             ])
 
-            @include('components.backend.menu_item', [
+            {{-- @include('components.backend.menu_item', [
                 'title' => 'Giảng viên',
                 'name' => 'teachers',
             ])
@@ -24,7 +28,7 @@
             @include('components.backend.menu_item', [
                 'title' => 'Người dùng',
                 'name' => 'users',
-            ])
+            ]) --}}
         </div>
     </div>
     <div class="sb-sidenav-footer">
