@@ -10,6 +10,6 @@ Route::group([
         'as' => 'lessons.'
     ], function () {
         Route::get('/{id}', [LessonController::class, 'index'])->name('index');
-        Route::get('/create', [LessonController::class, 'create'])->name('create');
+        Route::get('/{id}/create', [LessonController::class, 'create'])->name('create');
     });
 });

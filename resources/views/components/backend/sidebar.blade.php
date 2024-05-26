@@ -6,10 +6,13 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
-            {{-- @include('components.backend.menu_item', [
+            @include('components.backend.menu_item', [
                 'title' => 'Chuyên mục',
                 'name' => 'categories',
-            ]) --}}
+                'sidebar' => [
+                    "admin.categories.*",
+                ],
+            ])
 
             @include('components.backend.menu_item', [
                 'title' => 'Khóa học',
@@ -20,15 +23,21 @@
                 ],
             ])
 
-            {{-- @include('components.backend.menu_item', [
+            @include('components.backend.menu_item', [
                 'title' => 'Giảng viên',
                 'name' => 'teachers',
+                'sidebar' => [
+                    "admin.teachers.*",
+                ],
             ])
 
             @include('components.backend.menu_item', [
                 'title' => 'Người dùng',
                 'name' => 'users',
-            ]) --}}
+                'sidebar' => [
+                    "admin.users.*",
+                ],
+            ])
         </div>
     </div>
     <div class="sb-sidenav-footer">

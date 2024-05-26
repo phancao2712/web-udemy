@@ -26,7 +26,13 @@ class LessonController extends Controller
         );
     }
 
-    public function create() {
+    public function create(string $id) {
 
+        $titlePage = "Thêm bài giảng";
+
+        return view('lessons::create', compact(
+            'titlePage',
+            'id'
+        ));
     }
 }
