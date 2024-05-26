@@ -43,6 +43,8 @@
     <script src="{{ asset('backend/js/scripts.js') }}"></script>
     <script>
         $('#lfm').filemanager('image');
+        $('#lfm-video').filemanager('video');
+        $('#lfm-document').filemanager('document');
     </script>
     @yield('scripts')
 </body>
