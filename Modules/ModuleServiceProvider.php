@@ -11,10 +11,14 @@ use Modules\Categories\src\Repositories\CategoriesRepository;
 use Modules\Categories\src\Repositories\CategoriesRepositoryInterface;
 use Modules\Courses\src\Repositories\CoursesRepository;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
+use Modules\Lessons\src\Repositories\LessonsRepository;
+use Modules\Lessons\src\Repositories\LessonsRepositoryInterface;
 use Modules\Teacher\src\Repositories\TeacherRepository;
 use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 use Modules\User\src\Repositories\UserRepository;
 use Modules\User\src\Repositories\UserRepositoryInterface;
+use Modules\Video\src\Repositories\VideoRepository;
+use Modules\Video\src\Repositories\VideoRepositoryInterface;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -54,6 +58,18 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->singleton(
             AuthRepositoryInterface::class,
             AuthRepository::class
+        );
+
+        //Video Repository
+        $this->app->singleton(
+            VideoRepositoryInterface::class,
+            VideoRepository::class
+        );
+
+        //Lesson Repository
+        $this->app->singleton(
+            LessonsRepositoryInterface::class,
+            LessonsRepository::class
         );
     }
 

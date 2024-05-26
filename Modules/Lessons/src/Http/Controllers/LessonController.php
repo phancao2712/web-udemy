@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 use Modules\Lessons\src\Http\Requests\LessonRequest;
+use Modules\Video\src\Repositories\VideoRepositoryInterface;
 
 class LessonController extends Controller
 {
     protected $coursesRepository;
+    protected $videoRepository;
 
     public function __construct(
         CoursesRepositoryInterface $courseRepository,
+        VideoRepositoryInterface $videoRepository,
     ) {
         $this->courseRepository = $courseRepository;
+        $this->videoRepository = $videoRepository;
     }
 
     public function index(string $id)
@@ -39,6 +43,7 @@ class LessonController extends Controller
     }
 
     public function store(LessonRequest $request){
-        dd($request->all());
+        $video = $request->video;
+        $this->videoRepository->createVideo(['url' => $video]);
     }
 }
