@@ -3,7 +3,9 @@
 namespace Modules\Lessons\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
+use Modules\Lessons\src\Http\Requests\LessonRequest;
 
 class LessonController extends Controller
 {
@@ -34,5 +36,9 @@ class LessonController extends Controller
             'titlePage',
             'id'
         ));
+    }
+
+    public function store(LessonRequest $request){
+        dd($request->all());
     }
 }

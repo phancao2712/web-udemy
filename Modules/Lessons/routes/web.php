@@ -11,5 +11,6 @@ Route::group([
     ], function () {
         Route::get('/{id}', [LessonController::class, 'index'])->name('index');
         Route::get('/{id}/create', [LessonController::class, 'create'])->name('create');
+        Route::post('/{id}/create', [LessonController::class, 'store'])->name('store');
     });
 });

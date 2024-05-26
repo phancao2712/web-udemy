@@ -27,6 +27,6 @@ Route::group([
 });
 
 
-Route::group(['prefix' => 'filemanager'], function () {
+Route::group(['prefix' => 'laravel-filemanager'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

@@ -53,9 +53,9 @@ class Request extends Command
                     if (!File::exists($requestsFolder . '/' . $name . '.php')) {
                         File::put($requestsFolder . '/' . $name . '.php', $requestContent);
 
-                        return $this->info('Controller created successfully!');
+                        return $this->info('Request created successfully!');
                     } else {
-                        return $this->error('Controller already exists!');
+                        return $this->error('Request already exists!');
                     }
 
                 }
