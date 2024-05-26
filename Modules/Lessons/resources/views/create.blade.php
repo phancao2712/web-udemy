@@ -50,9 +50,9 @@
                 <div class="mb-3">
                     <label for="">Học thử</label>
                     <select name="is_trial" class="form-select {{ $errors->has('is_trial') ? 'is-invalid' : '' }}">
-                        <option value="0" {{ old('is_trial') == 0 ? 'selected' : '' }}>Không
+                        <option value="0" @selected(old('is_trial') == 0)>Không
                         </option>
-                        <option value="1" {{ old('is_trial') == 1 ? 'selected' : '' }}>Có
+                        <option value="1" @selected(old('is_trial') == 1)>Có
                         </option>
                     </select>
                     @error('is_trial')
@@ -129,7 +129,7 @@
                 <div class="mb-3">
                     <label>Trạng thái</label>
                     <label class="d-block">
-                        <input type="checkbox" name="status" value="1" {{ old('status') ? 'checked' : '' }}> Kích hoạt
+                        <input type="checkbox" name="status" value="1" @checked(old('status'))> Kích hoạt
                     </label>
                     @error('status')
                         <div class="invalid-feedback">
