@@ -107,28 +107,52 @@ class LessonController extends Controller
             'position' => $position,
             'description' => $description,
             'course_id' => $id,
-            'duration' =>  $duration
+            'duration' => $duration
         ]);
 
         return to_route('admin.lessons.index', $id)->with('success', __('lessons::message.create.success'));
     }
 
-    public function data(string $id){
-        $lessons = $this->lessonRepository->getLesson($id);
-        return DataTables::of($lessons)
-            ->addColumn('edit', function ($lesson) {
-                return '<a href="" class="btn btn-warning">Sửa</a>';
-            })
-            ->addColumn('delete', function ($lesson) {
-                return '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
-            })
-            ->editColumn('created_at', function ($lesson) {
-                return Carbon::parse($lesson->created_at)->format('d/m/Y H:i:s');
-            })
-            ->editColumn('is_trial', function ($lesson) {
-                return $lesson->is_trial == 1 ? 'Có' : 'Không';
-            })
-            ->rawColumns(['edit', 'delete',])
-            ->toJson();
+    public function data(string $id)
+    {
+        $lessons = $this->lessonRepository->getLessons($id);
+
+        $lessons = DataTables::of($lessons)->toArray();
+        $lessons['data'] = $this->getDataTable($lessons['data']);
+        return $lessons;
+    }
+
+    public function getDataTable($lessons, $char = '', &$result = [])
+    {
+        if ($lessons) {
+            foreach ($lessons as $key => $lesson) {
+                $row = $lesson;
+
+                $row['name'] = $char . $row['name'];
+                if ($row['parent_id'] == null) {
+                    $row['is_trial'] = '';
+                    $row['duration'] = '';
+                    $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
+                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
+                    $row['created_at'] = Carbon::parse($lesson['created_at'])->format('d/m/Y H:i:s');
+                } else {
+                    $row['is_trial'] = $lesson['is_trial'] ? 'Có' : 'Không';
+                    $row['duration'] = $lesson['duration'] . ' giây';
+                    $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
+                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
+                    $row['created_at'] = Carbon::parse($lesson['created_at'])->format('d/m/Y H:i:s');
+                }
+                unset($row['sub_lessons']);
+                unset($row['updated_at']);
+                unset($row['course_id']);
+                $result[] = $row;
+
+                if (!empty($lesson['sub_lessons'])) {
+                     $this->getDataTable($lesson['sub_lessons'], $char . '|-- ', $result);
+                }
+            }
+        }
+
+        return $result;
     }
 }

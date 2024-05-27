@@ -8,7 +8,7 @@ interface LessonsRepositoryInterface extends RepositoryInterface
 {
     public function getPosition($id);
 
-    public function getLesson($id);
+    public function getLessons($id);
 
     public function getAllLesson();
 }

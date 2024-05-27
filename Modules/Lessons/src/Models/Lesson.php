@@ -22,4 +22,14 @@ class Lesson extends Model
         'description',
         'course_id'
     ];
+
+    public function children()
+    {
+        return $this->hasMany(Lesson::class, 'parent_id');
+    }
+
+    public function subLessons()
+    {
+        return $this->children()->with('subLessons');
+    }
 }

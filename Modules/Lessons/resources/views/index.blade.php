@@ -10,7 +10,7 @@
                 <th>Tên </th>
                 <th>Học thử</th>
                 <th>Lượt xem</th>
-                <th>Thứ tự</th>
+                <th>Thời lượng</th>
                 <th>Thời gian</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
@@ -21,8 +21,7 @@
             <tr>
                 <th>Tên </th>
                 <th>Học thử</th>
-                <th>Lượt xem</th>
-                <th>Thứ tự</th>
+                <th>Thời lượng</th>
                 <th>Thời gian</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
@@ -50,7 +49,7 @@
                 data: 'view',
             },
             {
-                data: 'position',
+                data: 'duration',
             },
             {
                 data: 'created_at',

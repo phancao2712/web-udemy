@@ -18,8 +18,11 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
         return $position + 1;
     }
 
-    public function getLesson($id){
-        return $this->model->where('course_id', $id)->get();
+    public function getLessons($id){
+        return $this->model->with('subLessons')
+                            ->whereCourseId($id)
+                            ->whereNull('parent_id')
+                            ->orderBy('position', 'asc')->get();
     }
 
     public function getAllLesson(){
