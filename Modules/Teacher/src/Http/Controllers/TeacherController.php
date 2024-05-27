@@ -39,10 +39,10 @@ class TeacherController extends Controller
         $listTeacher = $this->teacherRepository->getAllLatest(['id', 'name', 'exp', 'image', 'created_at']);
         return DataTables::of($listTeacher)
             ->addColumn('edit', function ($teacher) {
-                return '<a href="' . route('admin.teachers.edit', $teacher->id) . '" class="btn btn-warning">Sửa</a>';
+                return '<a href="' . route('admin.teachers.edit', $teacher->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
             })
             ->addColumn('delete', function ($teacher) {
-                return '<a href="' . route('admin.teachers.destroy', $teacher->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
+                return '<a href="' . route('admin.teachers.destroy', $teacher->id) . '" class="btn btn-sm btn-danger delete-btn">Xóa</a>';
             })
             ->editColumn('created_at', function ($teacher) {
                 return Carbon::parse($teacher->created_at)->format('d/m/Y H:i:s');

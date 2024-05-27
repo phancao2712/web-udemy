@@ -51,10 +51,10 @@ class CourseController extends Controller
         $listCourse = $this->courseRepository->getAllLatest(['id', 'name', 'price', 'sale_price', 'status', 'created_at']);
         return DataTables::of($listCourse)
             ->addColumn('edit', function ($course) {
-                return '<a href="' . route('admin.courses.edit', $course->id) . '" class="btn btn-warning">Sửa</a>';
+                return '<a href="' . route('admin.courses.edit', $course->id) . '" class="btn btn-warning btn-sm">Sửa</a>';
             })
             ->addColumn('delete', function ($course) {
-                return '<a href="' . route('admin.courses.destroy', $course->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
+                return '<a href="' . route('admin.courses.destroy', $course->id) . '" class="btn btn-danger btn-sm delete-btn">Xóa</a>';
             })
             ->addColumn('status', function ($course) {
                 return $course->status == 1 ? '<div class="badge bg-success">Đã ra mắt</div>' : '<div class="badge bg-warning">Chưa ra mắt</div>';
@@ -63,7 +63,7 @@ class CourseController extends Controller
                 return Carbon::parse($course->created_at)->format('d/m/Y H:i:s');
             })
             ->addColumn('lessons', function ($course) {
-                return '<a href="' . route('admin.lessons.index', $course->id) . '" class="btn btn-primary">Xem</a>';
+                return '<a href="' . route('admin.lessons.index', $course->id) . '" class="btn btn-primary btn-sm">Xem</a>';
             })
             ->editColumn('price', function ($course) {
                 if ($course->price) {

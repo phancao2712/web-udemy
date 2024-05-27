@@ -131,15 +131,15 @@ class LessonController extends Controller
                 if ($row['parent_id'] == null) {
                     $row['is_trial'] = '';
                     $row['duration'] = '';
-                    $row['add'] = '<a href="' . route('admin.lessons.create', $row['course_id']) . '?module=' . $row['id'] . '" class="btn btn-primary">Thêm</a>';
-                    $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
-                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
+                    $row['add'] = '<a href="' . route('admin.lessons.create', $row['course_id']) . '?module=' . $row['id'] . '" class="btn btn-primary btn-sm">Thêm</a>';
+                    $row['edit'] = '<a href="" class="btn btn-warning btn-sm">Sửa</a>';
+                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn btn-sm">Xóa</a>';
                 } else {
                     $row['is_trial'] = $lesson['is_trial'] ? 'Có' : 'Không';
                     $row['duration'] = $lesson['duration'] . ' giây';
                     $row['add'] = '';
-                    $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
-                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
+                    $row['edit'] = '<a href="" class="btn btn-warning btn-sm btn-sm">Sửa</a>';
+                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn btn-sm">Xóa</a>';
                 }
                 unset($row['sub_lessons']);
                 unset($row['course_id']);

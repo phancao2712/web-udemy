@@ -38,10 +38,10 @@ class UserController extends Controller
         $listUser = $this->userRepository->getAllLatest(['id', 'name', 'email', 'group_id', 'created_at']);
         return DataTables::of($listUser)
             ->addColumn('edit', function ($user) {
-                return '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-warning">Sửa</a>';
+                return '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
             })
             ->addColumn('delete', function ($user) {
-                return '<a href="' . route('admin.users.destroy', $user->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
+                return '<a href="' . route('admin.users.destroy', $user->id) . '" class="btn btn-sm btn-danger delete-btn">Xóa</a>';
             })
             ->editColumn('created_at', function ($user) {
                 return Carbon::parse($user->created_at)->format('d/m/Y H:i:s');
