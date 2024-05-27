@@ -33,25 +33,32 @@ class LessonController extends Controller
     public function index(string $id)
     {
         $course = $this->courseRepository->find($id);
-        $titlePage = "Bài Học: ". $course->name;
-        return view('lessons::index', compact(
-            'course',
-            'titlePage'
-        )
+        $titlePage = "Bài Học: " . $course->name;
+        return view(
+            'lessons::index',
+            compact(
+                'course',
+                'titlePage'
+            )
         );
     }
 
-    public function create(string $id) {
-
+    public function create(string $id)
+    {
         $titlePage = "Thêm bài giảng";
-
-        return view('lessons::create', compact(
-            'titlePage',
-            'id'
-        ));
+        $position = $this->lessonRepository->getPosition($id);
+        return view(
+            'lessons::create',
+            compact(
+                'titlePage',
+                'id',
+                'position'
+            )
+        );
     }
 
-    public function store(LessonRequest $request, string $id){
+    public function store(LessonRequest $request, string $id)
+    {
         $name = $request->name;
         $slug = $request->slug;
         $parent_id = $request->parent_id == 0 ? null : $request->parent_id;
@@ -59,11 +66,12 @@ class LessonController extends Controller
         $position = $request->position;
         $video_id = null;
         $document_id = null;
+        $duration = 0;
         $description = $request->description;
         $video = $request->video;
         $document = $request->document;
 
-        if($document){
+        if ($document) {
             $infoDocument = getInfoFile($document);
             $document = $this->documentRepository->createDocument([
                 'name' => $infoDocument['name'],
@@ -73,13 +81,16 @@ class LessonController extends Controller
             $document_id = $document->id;
         }
 
-        $infoVideo = getInfoVideo($video);
-        $video = $this->videoRepository->createVideo([
-            'url' => $video,
-            'name' => $infoVideo['filename'],
-            'size' => $infoVideo['playtime_seconds'],
-        ], $video);
-        $video_id = $video->id;
+        if ($video) {
+            $infoVideo = getInfoVideo($video);
+            $video = $this->videoRepository->createVideo([
+                'url' => $video,
+                'name' => $infoVideo['filename'],
+                'size' => $infoVideo['playtime_seconds'],
+            ], $video);
+            $video_id = $video->id;
+            $duration = $infoVideo['playtime_seconds'];
+        }
 
         $this->lessonRepository->create([
             'name' => $name,
@@ -90,9 +101,14 @@ class LessonController extends Controller
             'is_trial' => $is_trial,
             'position' => $position,
             'description' => $description,
-            'duration' => $infoVideo['playtime_seconds']
+            'course_id' => $id,
+            'duration' =>  $duration
         ]);
 
         return to_route('admin.lessons.index', $id)->with('success', __('lessons::message.create.success'));
+    }
+
+    public function data(string $id){
+        
     }
 }

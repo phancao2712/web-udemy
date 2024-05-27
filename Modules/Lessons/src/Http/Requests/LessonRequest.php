@@ -31,6 +31,10 @@ class LessonRequest extends FormRequest
             'position' => 'required|integer',
         ];
 
+        if($this->parent_id != 0){
+            $rules['video'] = 'required';
+        }
+
         return $rules;
     }
 

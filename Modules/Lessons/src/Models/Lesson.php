@@ -20,5 +20,6 @@ class Lesson extends Model
         'position',
         'duration',
         'description',
+        'course_id'
     ];
 }

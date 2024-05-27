@@ -12,13 +12,14 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('lessons', function(Blueprint $table) {
+        Schema::create('lessons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
             $table->integer('video_id')->unsigned()->nullable();
             $table->integer('document_id')->unsigned()->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
+            $table->integer('course_id')->unsigned()->nullable();
             $table->boolean('is_trial')->default(false);
             $table->integer('view')->default(0);
             $table->integer('position')->default(0);
@@ -31,6 +32,7 @@ return new class () extends Migration {
             $table->foreign('video_id')->references('id')->on('videos')->onNullDelete();
             $table->foreign('document_id')->references('id')->on('documents')->onNullDelete();
             $table->foreign('parent_id')->references('id')->on('lessons')->onNullDelete();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

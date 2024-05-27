@@ -12,4 +12,13 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
     {
         return Lesson::class;
     }
+
+    public function getPosition($id){
+        $position = $this->model->where('course_id', $id)->count();
+        return $position + 1;
+    }
+
+    public function getLesson($id){
+        return $this->model->where('course_id', $id)->get();
+    }
 }

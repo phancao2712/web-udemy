@@ -67,7 +67,7 @@
                 <div class="mb-3">
                     <label for="">Sắp xếp</label>
                     <input type="number" class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}"
-                        name="position" placeholder="Thứ tự..." value="{{ old('position') }}" />
+                        name="position" placeholder="Thứ tự..." value="{{ old('position', $position) }}" />
                     @error('position')
                         <div class="invalid-feedback">
                             {{ $message }}
