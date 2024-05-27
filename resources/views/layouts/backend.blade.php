@@ -40,6 +40,7 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="{{ asset('backend/plugins/ckeditor/ckeditor.js') }}"></script>
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('backend/js/scripts.js') }}"></script>
     <script>
         $('#lfm').filemanager('image');

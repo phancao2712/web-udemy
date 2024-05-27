@@ -9,6 +9,8 @@ use Modules\Document\src\Repositories\DocumentRepositoryInterface;
 use Modules\Lessons\src\Http\Requests\LessonRequest;
 use Modules\Lessons\src\Repositories\LessonsRepositoryInterface;
 use Modules\Video\src\Repositories\VideoRepositoryInterface;
+use Yajra\DataTables\Facades\DataTables;
+use Carbon\Carbon;
 use File;
 
 class LessonController extends Controller
@@ -38,7 +40,8 @@ class LessonController extends Controller
             'lessons::index',
             compact(
                 'course',
-                'titlePage'
+                'titlePage',
+                'id'
             )
         );
     }
@@ -47,12 +50,14 @@ class LessonController extends Controller
     {
         $titlePage = "Thêm bài giảng";
         $position = $this->lessonRepository->getPosition($id);
+        $lessons = $this->lessonRepository->getAll();
         return view(
             'lessons::create',
             compact(
                 'titlePage',
                 'id',
-                'position'
+                'position',
+                'lessons'
             )
         );
     }
@@ -109,6 +114,21 @@ class LessonController extends Controller
     }
 
     public function data(string $id){
-        
+        $lessons = $this->lessonRepository->getLesson($id);
+        return DataTables::of($lessons)
+            ->addColumn('edit', function ($lesson) {
+                return '<a href="" class="btn btn-warning">Sửa</a>';
+            })
+            ->addColumn('delete', function ($lesson) {
+                return '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
+            })
+            ->editColumn('created_at', function ($lesson) {
+                return Carbon::parse($lesson->created_at)->format('d/m/Y H:i:s');
+            })
+            ->editColumn('is_trial', function ($lesson) {
+                return $lesson->is_trial == 1 ? 'Có' : 'Không';
+            })
+            ->rawColumns(['edit', 'delete',])
+            ->toJson();
     }
 }

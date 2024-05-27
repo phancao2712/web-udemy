@@ -31,29 +31,29 @@
     </table>
 @endsection
 
-{{-- @section('scripts')
+@section('scripts')
 <script>
     $(document).ready(function () {
     $("#datatable").DataTable({
         autoWidth: false,
         processing: true,
         serverSide: true,
-        ajax: "{{route('admin.courses.data')}}",
+        ajax: "{{ route('admin.lessons.data', $id) }}",
         columns: [
             {
                 data: 'name',
             },
             {
-                data: 'price',
+                data: 'is_trial',
             },
             {
-                data: 'status',
+                data: 'view',
+            },
+            {
+                data: 'position',
             },
             {
                 data: 'created_at',
-            },
-            {
-                data: 'lessons',
             },
             {
                 data: 'edit',
@@ -65,4 +65,4 @@
     });
 });
 </script>
-@endsection --}}
+@endsection

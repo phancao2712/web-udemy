@@ -21,4 +21,8 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
     public function getLesson($id){
         return $this->model->where('course_id', $id)->get();
     }
+
+    public function getAllLesson(){
+        return $this->getAll();
+    }
 }

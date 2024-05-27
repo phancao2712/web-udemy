@@ -12,7 +12,6 @@ Route::group([
         Route::get('/{id}', [LessonController::class, 'index'])->name('index');
         Route::get('/{id}/create', [LessonController::class, 'create'])->name('create');
         Route::post('/{id}/create', [LessonController::class, 'store'])->name('store');
-        Route::post('/{id}/data', [LessonController::class, 'data'])->name('data');
-
+        Route::get('/{id}/data', [LessonController::class, 'data'])->name('data');
     });
 });

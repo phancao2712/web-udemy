@@ -40,6 +40,8 @@ $(document).ready(function () {
     "use strict";
 
 
+    $('.select2').select2();
+
     $("#datatable").on("click", ".delete-btn", function(e) {
         e.preventDefault();
 
