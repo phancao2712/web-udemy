@@ -13,5 +13,10 @@ Route::group([
         Route::get('/{id}/create', [LessonController::class, 'create'])->name('create');
         Route::post('/{id}/create', [LessonController::class, 'store'])->name('store');
         Route::get('/{id}/data', [LessonController::class, 'data'])->name('data');
+
+        Route::get('/edit/{lessonId}', [LessonController::class, 'edit'])->name('edit');
+        Route::put('/edit/{lessonId}', [LessonController::class, 'update'])->name('update');
+
+        Route::delete('/destroy/{lessonId}', [LessonController::class, 'destroy'])->name('destroy');
     });
 });

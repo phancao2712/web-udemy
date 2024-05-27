@@ -115,7 +115,7 @@ class LessonController extends Controller
 
     public function data(string $id)
     {
-        $lessons = $this->lessonRepository->getLessons($id, ['id','view','name','parent_id','is_trial','duration', 'course_id']);
+        $lessons = $this->lessonRepository->getLessons($id, ['id', 'view', 'name', 'parent_id', 'is_trial', 'duration', 'course_id']);
 
         $lessons = DataTables::of($lessons)->toArray();
         $lessons['data'] = $this->getDataTable($lessons['data']);
@@ -128,20 +128,20 @@ class LessonController extends Controller
             foreach ($lessons as $key => $lesson) {
                 $row = $lesson;
                 $row['name'] = $char . $row['name'];
+                $row['edit'] = '<a href="' . route('admin.lessons.edit', $row['id']) . '" class="btn btn-warning btn-sm">Sửa</a>';
+                $row['delete'] = '<a href="' . route('admin.lessons.destroy', $row['id']) . '" class="btn btn-danger delete-btn btn-sm">Xóa</a>';
                 if ($row['parent_id'] == null) {
                     $row['is_trial'] = '';
                     $row['duration'] = '';
                     $row['add'] = '<a href="' . route('admin.lessons.create', $row['course_id']) . '?module=' . $row['id'] . '" class="btn btn-primary btn-sm">Thêm</a>';
-                    $row['edit'] = '<a href="" class="btn btn-warning btn-sm">Sửa</a>';
-                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn btn-sm">Xóa</a>';
                 } else {
                     $row['is_trial'] = $lesson['is_trial'] ? 'Có' : 'Không';
                     $row['duration'] = $lesson['duration'] . ' giây';
                     $row['add'] = '';
-                    $row['edit'] = '<a href="" class="btn btn-warning btn-sm btn-sm">Sửa</a>';
-                    $row['delete'] = '<a href="" class="btn btn-danger delete-btn btn-sm">Xóa</a>';
                 }
                 unset($row['sub_lessons']);
+                unset($row['created_at']);
+                unset($row['updated_at']);
                 unset($row['course_id']);
                 $result[] = $row;
 
@@ -152,5 +152,80 @@ class LessonController extends Controller
         }
 
         return $result;
+    }
+
+    public function edit(string $lessonId)
+    {
+        $titlePage = "Sửa bài giảng";
+        $lesson = $this->lessonRepository->find($lessonId);
+        $lessons = $this->lessonRepository->getAll();
+        $video = $lesson->video?->url;
+        $document = $lesson->document?->url;
+        return view(
+            'lessons::edit',
+            compact(
+                'titlePage',
+                'lessons',
+                'lesson',
+                'video',
+                'document'
+            )
+        );
+    }
+
+    public function update(LessonRequest $request, string $lessonId)
+    {
+        $name = $request->name;
+        $slug = $request->slug;
+        $parent_id = $request->parent_id == 0 ? null : $request->parent_id;
+        $is_trial = $request->is_trial;
+        $position = $request->position;
+        $video_id = null;
+        $document_id = null;
+        $duration = 0;
+        $description = $request->description;
+        $video = $request->video;
+        $document = $request->document;
+
+        if ($document) {
+            $infoDocument = getInfoFile($document);
+            $document = $this->documentRepository->createDocument([
+                'name' => $infoDocument['name'],
+                'size' => $infoDocument['size'],
+                'url' => $document,
+            ], $document);
+            $document_id = $document->id;
+        }
+
+        if ($video) {
+            $infoVideo = getInfoVideo($video);
+            $video = $this->videoRepository->createVideo([
+                'url' => $video,
+                'name' => $infoVideo['filename'],
+                'size' => $infoVideo['playtime_seconds'],
+            ], $video);
+            $video_id = $video->id;
+            $duration = $infoVideo['playtime_seconds'];
+        }
+
+        $this->lessonRepository->update($lessonId, [
+            'name' => $name,
+            'slug' => $slug,
+            'video_id' => $video_id,
+            'document_id' => $document_id,
+            'parent_id' => $parent_id,
+            'is_trial' => $is_trial,
+            'position' => $position,
+            'description' => $description,
+            'duration' => $duration
+        ]);
+
+        return to_route('admin.lessons.edit', $lessonId)->with('success', __('lessons::message.update.success'));
+    }
+
+    public function destroy(string $id){
+        $lesson = $this->lessonRepository->find($id);
+        $this->lessonRepository->delete($id);
+        return response(['message' =>  __('lessons::message.delete.success'), 500]);
     }
 }

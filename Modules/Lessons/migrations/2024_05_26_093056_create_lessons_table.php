@@ -31,7 +31,7 @@ return new class () extends Migration {
         Schema::table('lessons', function (Blueprint $table) {
             $table->foreign('video_id')->references('id')->on('videos')->onNullDelete();
             $table->foreign('document_id')->references('id')->on('documents')->onNullDelete();
-            $table->foreign('parent_id')->references('id')->on('lessons')->onNullDelete();
+            $table->foreign('parent_id')->references('id')->on('lessons')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
