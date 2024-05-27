@@ -4,7 +4,6 @@ namespace Modules\Lessons\src\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 use Modules\Document\src\Repositories\DocumentRepositoryInterface;
 use Modules\Lessons\src\Http\Requests\LessonRequest;
@@ -49,19 +48,22 @@ class LessonController extends Controller
     }
 
     public function store(LessonRequest $request){
-        // $video = $request->video;
-        // $this->videoRepository->createVideo(['url' => $video]);
+        $video = $request->video;
+        $document = $request->document;
+        $infoVideo = getInfoVideo($video);
+        $infoDocument = getInfoFile($document);
 
-        $path = Storage::disk('public')->path(str_replace('storage','',$request->document));
-        $size = File::size($path);
+         $result= $this->videoRepository->createVideo([
+            'url' => $video,
+            'name' => $infoVideo['filename'],
+            'size' => $infoVideo['playtime_seconds'],
+        ], $video);
 
-        $name = basename($path);
-        $result = $this->documentRepository->createDocument([
-            'name' => $name,
-            'size' => $size,
-            'url' => $request->document,
-        ]);
-
-        dd($result);
+        $this->documentRepository->createDocument([
+            'name' => $infoDocument['name'],
+            'size' => $infoDocument['size'],
+            'url' => $document,
+        ], $document);
+        return 132;
     }
 }
