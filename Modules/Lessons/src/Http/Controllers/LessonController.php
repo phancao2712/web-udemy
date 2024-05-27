@@ -224,7 +224,6 @@ class LessonController extends Controller
     }
 
     public function destroy(string $id){
-        $lesson = $this->lessonRepository->find($id);
         $this->lessonRepository->delete($id);
         return response(['message' =>  __('lessons::message.delete.success'), 500]);
     }
