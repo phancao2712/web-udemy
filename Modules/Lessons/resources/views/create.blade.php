@@ -36,7 +36,7 @@
                     <select name="parent_id" style="height: 100%"
                         class="form-select select2 {{ $errors->has('parent_id') ? 'is-invalid' : '' }}">
                         <option value="0">Trống</option>
-                        {{getLessons($lessons, old('parent_id'))}}
+                        {{getLessons($lessons, old('parent_id', request()->module))}}
                     </select>
                     @error('parent_id')
                         <div class="invalid-feedback">

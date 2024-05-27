@@ -57,7 +57,7 @@ class CourseController extends Controller
                 return '<a href="' . route('admin.courses.destroy', $course->id) . '" class="btn btn-danger delete-btn">Xóa</a>';
             })
             ->addColumn('status', function ($course) {
-                return $course->status == 1 ? '<button class="btn btn-success">Đã ra mắt</button>' : '<button class="btn btn-warning">Chưa ra mắt</button>';
+                return $course->status == 1 ? '<div class="badge bg-success">Đã ra mắt</div>' : '<div class="badge bg-warning">Chưa ra mắt</div>';
             })
             ->editColumn('created_at', function ($course) {
                 return Carbon::parse($course->created_at)->format('d/m/Y H:i:s');

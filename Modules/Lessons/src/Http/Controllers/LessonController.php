@@ -115,7 +115,7 @@ class LessonController extends Controller
 
     public function data(string $id)
     {
-        $lessons = $this->lessonRepository->getLessons($id);
+        $lessons = $this->lessonRepository->getLessons($id, ['id','view','name','parent_id','is_trial','duration', 'course_id']);
 
         $lessons = DataTables::of($lessons)->toArray();
         $lessons['data'] = $this->getDataTable($lessons['data']);
@@ -127,28 +127,26 @@ class LessonController extends Controller
         if ($lessons) {
             foreach ($lessons as $key => $lesson) {
                 $row = $lesson;
-
                 $row['name'] = $char . $row['name'];
                 if ($row['parent_id'] == null) {
                     $row['is_trial'] = '';
                     $row['duration'] = '';
+                    $row['add'] = '<a href="' . route('admin.lessons.create', $row['course_id']) . '?module=' . $row['id'] . '" class="btn btn-primary">Thêm</a>';
                     $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
                     $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
-                    $row['created_at'] = Carbon::parse($lesson['created_at'])->format('d/m/Y H:i:s');
                 } else {
                     $row['is_trial'] = $lesson['is_trial'] ? 'Có' : 'Không';
                     $row['duration'] = $lesson['duration'] . ' giây';
+                    $row['add'] = '';
                     $row['edit'] = '<a href="" class="btn btn-warning">Sửa</a>';
                     $row['delete'] = '<a href="" class="btn btn-danger delete-btn">Xóa</a>';
-                    $row['created_at'] = Carbon::parse($lesson['created_at'])->format('d/m/Y H:i:s');
                 }
                 unset($row['sub_lessons']);
-                unset($row['updated_at']);
                 unset($row['course_id']);
                 $result[] = $row;
 
                 if (!empty($lesson['sub_lessons'])) {
-                     $this->getDataTable($lesson['sub_lessons'], $char . '|-- ', $result);
+                    $this->getDataTable($lesson['sub_lessons'], $char . '|-- ', $result);
                 }
             }
         }

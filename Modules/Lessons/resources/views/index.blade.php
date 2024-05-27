@@ -11,7 +11,7 @@
                 <th>Học thử</th>
                 <th>Lượt xem</th>
                 <th>Thời lượng</th>
-                <th>Thời gian</th>
+                <th>Thêm</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
             </tr>
@@ -21,8 +21,9 @@
             <tr>
                 <th>Tên </th>
                 <th>Học thử</th>
+                <th>Lượt xem</th>
                 <th>Thời lượng</th>
-                <th>Thời gian</th>
+                <th>Thêm</th>
                 <th>Sửa</th>
                 <th>Xóa</th>
             </tr>
@@ -52,7 +53,7 @@
                 data: 'duration',
             },
             {
-                data: 'created_at',
+                data: 'add',
             },
             {
                 data: 'edit',
