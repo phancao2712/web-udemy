@@ -136,7 +136,7 @@ class LessonController extends Controller
                     $row['add'] = '<a href="' . route('admin.lessons.create', $row['course_id']) . '?module=' . $row['id'] . '" class="btn btn-primary btn-sm">Thêm</a>';
                 } else {
                     $row['is_trial'] = $lesson['is_trial'] ? 'Có' : 'Không';
-                    $row['duration'] = $lesson['duration'] . ' giây';
+                    $row['duration'] = getTime($lesson['duration']) . ' giây';
                     $row['add'] = '';
                 }
                 unset($row['sub_lessons']);
