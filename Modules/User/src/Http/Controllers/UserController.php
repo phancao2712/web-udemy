@@ -41,7 +41,7 @@ class UserController extends Controller
                 return '<a href="' . route('admin.users.edit', $user->id) . '" class="btn btn-sm btn-warning">Sửa</a>';
             })
             ->addColumn('delete', function ($user) {
-                return '<a href="' . route('admin.users.destroy', $user->id) . '" class="btn btn-sm btn-danger delete-btn">Xóa</a>';
+                return '<a href="' . route('admin.users.destroy', $user->id) . '" class="btn  btn-danger delete-btn">Xóa</a>';
             })
             ->editColumn('created_at', function ($user) {
                 return Carbon::parse($user->created_at)->format('d/m/Y H:i:s');
@@ -57,7 +57,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'group_id' => $request->group_id,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
             ]
         );
         return to_route('admin.users.index')->with('success', __('user::message.create.success'));

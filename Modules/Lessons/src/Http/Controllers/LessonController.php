@@ -158,6 +158,11 @@ class LessonController extends Controller
     {
         $titlePage = "Sửa bài giảng";
         $lesson = $this->lessonRepository->find($lessonId);
+
+        if(!$lesson){
+            abort(404);
+        }
+
         $lessons = $this->lessonRepository->getAll();
         $video = $lesson->video?->url;
         $document = $lesson->document?->url;

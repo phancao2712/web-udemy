@@ -1,15 +1,17 @@
 <?php
 
-namespace Modules\User\src\Http\Requests;
+namespace Modules\Students\src\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class StudentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
+     *
+     * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -17,7 +19,7 @@ class UserStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -25,13 +27,10 @@ class UserStoreRequest extends FormRequest
 
         $rules = [
             'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'group_id' => ['required', 'integer', function ($attribute, $value, $fail) {
-                if ($value === 0) {
-                    $fail(__('user::validation.select'));
-                }
-            }],
-            'password' => ['required', 'min:6']
+            'email' => ['required', 'email', 'unique:students,email'],
+            'password' => ['required', 'min:6'],
+            'address' => ['max:200'],
+            'phone' => ['max:20'],
         ];
 
         if ($id) {
@@ -61,6 +60,7 @@ class UserStoreRequest extends FormRequest
 
     public function attributes()
     {
-        return __('users::validation.attributes');
+        return __('students::validation.attributes');
     }
+
 }
