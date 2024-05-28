@@ -23,7 +23,7 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
                             ->select($column)
                             ->whereCourseId($id)
                             ->whereNull('parent_id')
-                            ->orderBy('position', 'asc')->get();
+                            ->orderBy('position', 'asc');
     }
 
     public function getAllLesson(){

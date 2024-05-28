@@ -115,7 +115,7 @@ class LessonController extends Controller
 
     public function data(string $id)
     {
-        $lessons = $this->lessonRepository->getLessons($id, ['id', 'view', 'name', 'parent_id', 'is_trial', 'duration', 'course_id']);
+        $lessons = $this->lessonRepository->getLessons($id, ['id', 'view', 'name', 'parent_id', 'is_trial', 'duration', 'course_id'])->get();
 
         $lessons = DataTables::of($lessons)->toArray();
         $lessons['data'] = $this->getDataTable($lessons['data']);
@@ -226,5 +226,23 @@ class LessonController extends Controller
     public function destroy(string $id){
         $this->lessonRepository->delete($id);
         return response(['message' =>  __('lessons::message.delete.success'), 500]);
+    }
+
+    public function sort(string $id){
+        $modules = $this->lessonRepository->getLessons($id,['id','name','position', 'parent_id'])->with('children')->get();
+        $titlePage = "Sắp xếp bài giảng";
+
+        return view('lessons::sort',compact( 'id', 'titlePage','modules'));
+    }
+
+    public function handleSort(Request $request, string $id){
+        $lessons = $request->lesson;
+
+        foreach ($lessons as $index => $lesson) {
+            $this->lessonRepository->update($lesson, [
+                'position' => $index
+            ]);
+        }
+        return redirect()->back()->with('success', __('lessons::message.update.success'));
     }
 }

@@ -14,6 +14,9 @@ Route::group([
         Route::post('/{id}/create', [LessonController::class, 'store'])->name('store');
         Route::get('/{id}/data', [LessonController::class, 'data'])->name('data');
 
+        Route::get('/{id}/sort', [LessonController::class, 'sort'])->name('sort');
+        Route::post('/{id}/sort', [LessonController::class, 'handleSort'])->name('handleSort');
+
         Route::get('/edit/{lessonId}', [LessonController::class, 'edit'])->name('edit');
         Route::put('/edit/{lessonId}', [LessonController::class, 'update'])->name('update');
 
