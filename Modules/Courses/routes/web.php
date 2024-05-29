@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Courses\src\Http\Controllers\CourseController;
+use Modules\Courses\src\Http\Controllers\clients\CourseController;
 
 
 Route::group([
@@ -27,6 +27,8 @@ Route::group([
 });
 
 
-Route::group(['prefix' => 'laravel-filemanager'], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
+Route::group([
+    'as' => 'client.'
+], function() {
+    Route::get('/khoa-hoc', [CourseController::class, 'index'])->name('index');
 });

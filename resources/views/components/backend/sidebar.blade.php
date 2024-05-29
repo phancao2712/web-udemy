@@ -42,6 +42,6 @@
     </div>
     <div class="sb-sidenav-footer">
         <div class="small">Đăng nhập:</div>
-        {{ auth()->user()->name }}
+        {{ auth()->user()?->name }}
     </div>
 </nav>
