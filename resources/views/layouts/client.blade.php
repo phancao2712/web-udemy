@@ -15,6 +15,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <!-- Stylesheets -->
+    <script src="https://kit.fontawesome.com/c9111ed195.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('client/css/vendors.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
 

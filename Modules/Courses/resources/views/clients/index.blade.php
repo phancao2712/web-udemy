@@ -1219,7 +1219,7 @@
                       <div class="text-13 lh-1 ml-10">(1991)</div>
                     </div>
 
-                    <div class="text-17 lh-15 text-dark-1 mt-10 fw-600">{{ $course->name }}</div>
+                    <div class="text-20 lh-15 text-dark-1 mt-10 fw-600">{{ $course->name }}</div>
 
                     <div class="d-flex x-gap-10 items-center pt-10">
 
@@ -1239,9 +1239,9 @@
 
                       <div class="d-flex items-center">
                         <div class="mr-8">
-                          <img src="{{ asset('client/img/coursesCards/icons/3.svg') }}" alt="icon">
+                            <i class="fa-regular fa-eye"></i>
                         </div>
-                        <div class="text-14 lh-1">Beginner</div>
+                        <div class="text-14 lh-1">{{ $course->view ? format_number($course->view) : 0 }}</div>
                       </div>
 
                     </div>
@@ -1252,10 +1252,16 @@
                         <div>{{ $course->teacher->name }}</div>
                       </div>
 
+                      @if ($course->sale_price > 0 && $course->price > $course->sale_price)
                       <div class="coursesCard-footer__price">
-                        <div>{{ number_format($course->price) }}đ</div>
-                        <div>{{ number_format($course->sale_price) }}đ</div>
+                        <div>{{ money($course->price) }}</div>
+                        <div>{{ money($course->sale_price) }}</div>
                       </div>
+                      @else
+                      <div>{{ money($course->price) }}</div>
+                      @endif
+
+
                     </div>
                   </div>
                 </a>
@@ -1264,10 +1270,6 @@
             @empty
               <h3>Không có khóa học nào!</h3>
             @endforelse
-
-
-
-
           </div>
 
           <div class="row justify-center pt-90 lg:pt-50">

@@ -30,3 +30,7 @@ function setMenuActive(array $routes): ?string
     }
     return null;
 }
+
+function money($value, $currency = 'đ') {
+    return !empty($value) ? number_format($value) . $currency : 'Miễn phí';
+}
