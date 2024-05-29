@@ -16,10 +16,11 @@ class CourseController extends Controller
 
     public function index()
     {
-        $pageTitle = 'Danh sách khóa học';
+        $titlePage = 'Danh sách khóa học';
         $courses = $this->courseRepository->paginator(['*'], 10);
 
-        return view("courses::clients.index", compact('pageTitle', 'courses'));
+
+        return view("courses::clients.index", compact('titlePage', 'courses'));
     }
 }
 

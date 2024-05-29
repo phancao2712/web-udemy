@@ -1,72 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.png">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Lora:wght@400;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Nunito:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('client/css/vendors.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
 
-    <!-- Libs CSS -->
-    <link rel="stylesheet" href="{{ asset('client/fonts/fontawesome/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/%40fancyapps/fancybox/dist/jquery.fancybox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/aos/dist/aos.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/choices.js/public/assets/styles/choices.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/flickity-fade/flickity-fade.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/flickity/dist/flickity.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/highlightjs/styles/vs2015.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/jarallax/dist/jarallax.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/libs/quill/dist/quill.core.css') }}" />
-
-    <!-- Theme CSS -->
-    <link rel="stylesheet" href="{{ asset('client/css/theme.min.css') }}">
-
-    <title>{{ $pageTitle }} - {{ env('APP_NAME') }}</title>
-
+    <title>{{ $titlePage }} - Educrat</title>
 </head>
-<body>
 
-    @include('components.client.header')
+<body class="preloader-visible" data-barba="wrapper">
+    <!-- preloader start -->
+    <div class="preloader js-preloader">
+        <div class="preloader__bg"></div>
+    </div>
+    <!-- preloader end -->
 
-   @yield('content')
-
-    <!-- FOOTER
-    ================================================== -->
-    @include('components.client.footer')
-
-    <!-- Libs JS -->
-    <script src="{{ asset('client/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('client/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('client/libs/%40fancyapps/fancybox/dist/jquery.fancybox.min.j') }}s"></script>
-    <script src="{{ asset('client/libs/aos/dist/aos.js') }}"></script>
-    <script src="{{ asset('client/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
-    <script src="{{ asset('client/libs/countup.js/dist/countUp.min.js') }}"></script>
-    <script src="{{ asset('client/libs/dropzone/dist/min/dropzone.min.j') }}s"></script>
-    <script src="{{ asset('client/libs/flickity/dist/flickity.pkgd.min.js') }}"></script>
-    <script src="{{ asset('client/libs/flickity-fade/flickity-fade.js') }}"></script>
-    <script src="{{ asset('client/libs/highlightjs/highlight.pack.min.js') }}"></script>
-    <script src="{{ asset('client/libs/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('client/libs/isotope-layout/dist/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('client/libs/jarallax/dist/jarallax.min.js') }}"></script>
-    <script src="{{ asset('client/libs/jarallax/dist/jarallax-video.min.js') }}"></script>
-    <script src="{{ asset('client/libs/jarallax/dist/jarallax-element.min.js') }}"></script>
-    <script src="{{ asset('client/libs/parallax-js/dist/parallax.min.js') }}"></script>
-    <script src="{{ asset('client/libs/quill/dist/quill.min.js') }}"></script>
-    <script src="{{ asset('client/libs/smooth-scroll/dist/smooth-scroll.min.js') }}"></script>
-    <script src="{{ asset('client/libs/typed.js/lib/typed.min.js') }}"></script>
-
-    <!-- Theme JS -->
-    <script src="{{ asset('client/js/theme.min.js') }}"></script>
+    <!-- barba container start -->
+    <div class="barba-container" data-barba="container">
+        <main class="main-content">
+            @include('components.client.header')
 
 
+            <div class="content-wrapper js-content-wrapper">
+                <div class="dashboard -home-9 px-0 js-dashboard-home-9">
+                    @include('components.client.menu')
+                    <div class="dashboard__main mt-0">
+                        <div class="dashboard__content pt-0 px-15 pb-0">
+                        @yield('content')
+                    </div>
+                        @include('components.client.footer')
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        @include('components.client.sidebar')
+    </div>
+    <!-- barba container end -->
+
+    <!-- JavaScript -->
+    <script src="{{ asset('client/js/vendors.js') }}"></script>
+    <script src="{{ asset('client/js/main.js') }}"></script>
 </body>
 
-<!-- Mirrored from transvelo.github.io/skola-html/5.1/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 28 May 2024 10:49:18 GMT -->
 </html>

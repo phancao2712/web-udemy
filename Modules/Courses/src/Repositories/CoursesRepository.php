@@ -2,6 +2,7 @@
 
 namespace Modules\Courses\src\Repositories;
 
+use App\Models\Scopes\ActiveScope;
 use App\Repositories\BaseRepository;
 use Modules\Courses\src\Models\Course;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
@@ -27,5 +28,28 @@ class CoursesRepository extends BaseRepository implements CoursesRepositoryInter
 
     public function deleteCourseCategories($course){
         return $course->categories()->detach();
+    }
+
+    public function getAllCourses(){
+        return $this->model->withoutGlobalScope(ActiveScope::class)->select(['id', 'name', 'price', 'status', 'sale_price', 'created_at'])->latest();
+    }
+
+    public function getCourse(string $id){
+        return $this->model->withoutGlobalScope(ActiveScope::class)->find($id);
+    }
+
+    public function updateCourse(string $id, $data = []){
+        $course = $this->model->withoutGlobalScope(ActiveScope::class)->find($id);
+        if($course){
+            $course->update($data);
+        }
+        return false;
+    }
+
+    public function deleteCourse(string $id){
+        $course = $this->model->withoutGlobalScope(ActiveScope::class)->find($id);
+        if($course){
+            $course->delete($id);
+        }
     }
 }

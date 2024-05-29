@@ -48,7 +48,7 @@ class CourseController extends Controller
 
     public function data()
     {
-        $listCourse = $this->courseRepository->getAllLatest(['id', 'name', 'price', 'sale_price', 'status', 'created_at']);
+        $listCourse = $this->courseRepository->getAllCourses();
         return DataTables::of($listCourse)
             ->addColumn('edit', function ($course) {
                 return '<a href="' . route('admin.courses.edit', $course->id) . '" class="btn btn-warning btn-sm">Sửa</a>';
@@ -110,7 +110,7 @@ class CourseController extends Controller
     public function edit(string $id)
     {
         $titlePage = 'Cập nhật Khóa học';
-        $course = $this->courseRepository->find($id);
+        $course = $this->courseRepository->getCourse($id);
         $categories = $this->categoryRepository->getAll(['id','name','parent_id']);
         $categoryIds = $this->courseRepository->getCategoriesIds($course);
         $teachers = $this->teacherRepository->getAll();
@@ -138,8 +138,8 @@ class CourseController extends Controller
         if (!$data['sale_price']) {
             $data['sale_price'] = 0;
         }
-        $this->courseRepository->update($id, $data);
-        $course = $this->courseRepository->find($id);
+        $this->courseRepository->updateCourse($id, $data);
+        $course = $this->courseRepository->getCourse($id);
         $this->courseRepository->updateCourseCategories($course, $request->categories);
 
         return redirect()->back()->with('success', __('courses::message.update.success'));
@@ -147,8 +147,8 @@ class CourseController extends Controller
 
     public function destroy(string $id)
     {
-        $course = $this->courseRepository->find($id);
-        $status = $this->courseRepository->delete($id);
+        $course = $this->courseRepository->getCourse($id);
+        $status = $this->courseRepository->deleteCourse($id);
 
         if($status){
             deleteFileStorage($course->thumbnail);

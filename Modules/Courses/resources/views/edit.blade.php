@@ -39,7 +39,7 @@
                         <option value="0">Chọn giảng viên</option>
                         @if ($teachers)
                             @foreach ($teachers as $teacher)
-                                <option value="{{ $teacher->id }}" @selected(old('teacher_id', $course->id) == $teacher->id)>{{ $teacher->name }}
+                                <option value="{{ $teacher->id }}" @selected(old('teacher_id', $course->teacher_id) == $teacher->id)>{{ $teacher->name }}
                                 </option>
                             @endforeach
                         @endif

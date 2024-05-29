@@ -21,12 +21,12 @@ class LessonController extends Controller
     protected $lessonRepository;
 
     public function __construct(
-        CoursesRepositoryInterface $courseRepository,
+        CoursesRepositoryInterface $coursesRepository,
         VideoRepositoryInterface $videoRepository,
         DocumentRepositoryInterface $documentRepository,
         LessonsRepositoryInterface $lessonRepository,
     ) {
-        $this->courseRepository = $courseRepository;
+        $this->coursesRepository = $coursesRepository;
         $this->videoRepository = $videoRepository;
         $this->documentRepository = $documentRepository;
         $this->lessonRepository = $lessonRepository;
@@ -34,7 +34,7 @@ class LessonController extends Controller
 
     public function index(string $id)
     {
-        $course = $this->courseRepository->find($id);
+        $course = $this->coursesRepository->getCourse($id);
         $titlePage = "Bài Học: " . $course->name;
         return view(
             'lessons::index',
