@@ -26,7 +26,7 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
                             ->orderBy('position', 'asc');
     }
 
-    public function getAllLesson(){
-        return $this->getAll();
+    public function getAllLesson($id){
+        return $this->model->where('course_id', $id)->get();
     }
 }

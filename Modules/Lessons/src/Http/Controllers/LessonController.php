@@ -110,6 +110,8 @@ class LessonController extends Controller
             'duration' => $duration
         ]);
 
+        $this->updateDuration($id);
+
         return to_route('admin.lessons.index', $id)->with('success', __('lessons::message.create.success'));
     }
 
@@ -159,7 +161,7 @@ class LessonController extends Controller
         $titlePage = "Sửa bài giảng";
         $lesson = $this->lessonRepository->find($lessonId);
 
-        if(!$lesson){
+        if (!$lesson) {
             abort(404);
         }
 
@@ -213,7 +215,7 @@ class LessonController extends Controller
             $duration = $infoVideo['playtime_seconds'];
         }
 
-        $this->lessonRepository->update($lessonId, [
+        $lesson = $this->lessonRepository->update($lessonId, [
             'name' => $name,
             'slug' => $slug,
             'video_id' => $video_id,
@@ -225,22 +227,30 @@ class LessonController extends Controller
             'duration' => $duration
         ]);
 
+        $lesson = $this->lessonRepository->find($lessonId);
+        $this->updateDuration($lesson->course_id);
+
         return to_route('admin.lessons.edit', $lessonId)->with('success', __('lessons::message.update.success'));
     }
 
-    public function destroy(string $id){
+    public function destroy(string $id)
+    {
+        $lesson = $this->lessonRepository->find($id);
         $this->lessonRepository->delete($id);
-        return response(['message' =>  __('lessons::message.delete.success'), 500]);
+        $this->updateDuration($lesson->course_id);
+        return response(['message' => __('lessons::message.delete.success'), 500]);
     }
 
-    public function sort(string $id){
-        $modules = $this->lessonRepository->getLessons($id,['id','name','position', 'parent_id'])->with('children')->get();
+    public function sort(string $id)
+    {
+        $modules = $this->lessonRepository->getLessons($id, ['id', 'name', 'position', 'parent_id'])->with('children')->get();
         $titlePage = "Sắp xếp bài giảng";
 
-        return view('lessons::sort',compact( 'id', 'titlePage','modules'));
+        return view('lessons::sort', compact('id', 'titlePage', 'modules'));
     }
 
-    public function handleSort(Request $request, string $id){
+    public function handleSort(Request $request, string $id)
+    {
         $lessons = $request->lesson;
 
         foreach ($lessons as $index => $lesson) {
@@ -249,5 +259,19 @@ class LessonController extends Controller
             ]);
         }
         return redirect()->back()->with('success', __('lessons::message.update.success'));
+    }
+
+    private function updateDuration($courseId)
+    {
+        $lesson = $this->lessonRepository->getAllLesson($courseId);
+
+        $duration = $lesson->reduce(function ($carry, $item) {
+            return $carry + $item->duration;
+        });
+
+        $course = $this->coursesRepository->updateCourse($courseId, [
+            'durations' => $duration
+        ]);
+        
     }
 }

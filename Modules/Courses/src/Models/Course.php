@@ -24,7 +24,8 @@ class Course extends Model
         'supports',
         'detail',
         'thumbnail',
-        'categories'
+        'categories',
+        'durations'
     ];
 
     protected static function booted(): void

@@ -48,6 +48,7 @@ class CoursesRepository extends BaseRepository implements CoursesRepositoryInter
 
     public function deleteCourse(string $id){
         $course = $this->model->withoutGlobalScope(ActiveScope::class)->find($id);
+
         if($course){
             $course->delete($id);
         }

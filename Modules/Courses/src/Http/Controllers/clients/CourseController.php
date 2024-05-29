@@ -19,7 +19,6 @@ class CourseController extends Controller
         $titlePage = 'Danh sách khóa học';
         $courses = $this->courseRepository->paginator(['*'], 10);
 
-
         return view("courses::clients.index", compact('titlePage', 'courses'));
     }
 }
