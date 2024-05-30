@@ -32,4 +32,11 @@ Route::group([
 ], function() {
     Route::get('/khoa-hoc', [CourseController::class, 'index'])->name('index');
     Route::get('/khoa-hoc/{slug}', [CourseController::class, 'detail'])->name('detail');
+
+    Route::group([
+        'prefix' => 'data',
+        'as' => 'data.',
+    ], function(){
+        Route::get('/trial/{id}', [CourseController::class, 'getTrial'])->name('trial');
+    });
 });

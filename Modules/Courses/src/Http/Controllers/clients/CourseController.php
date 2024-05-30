@@ -3,15 +3,19 @@ namespace Modules\Courses\src\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
+use Modules\Lessons\src\Repositories\LessonsRepositoryInterface;
 
 
 class CourseController extends Controller
 {
     protected $courseRepository;
+    protected $lessonRepository;
     public function __construct(
-        CoursesRepositoryInterface $courseRepository
+        CoursesRepositoryInterface $courseRepository,
+        LessonsRepositoryInterface $lessonRepository
     ) {
         $this->courseRepository = $courseRepository;
+        $this->lessonRepository = $lessonRepository;
     }
 
     public function index()
@@ -35,6 +39,14 @@ class CourseController extends Controller
             'titlePage',
             'course'
         ));
+    }
+
+    public function getTrial(string $id) {
+        $lesson = $this->lessonRepository->find($id);
+        if(!$lesson){
+            return ['success' => false,'message' => 'Không tìm thấy khóa học'];
+        }
+        return ['success' => true,'lesson' => $lesson];
     }
 }
 

@@ -16,8 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <!-- Stylesheets -->
     <script src="https://kit.fontawesome.com/c9111ed195.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('client/css/vendors.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
     @yield('style')
 
     <title>{{ $titlePage }} - Educrat</title>
@@ -28,6 +32,7 @@
     <div class="preloader js-preloader">
         <div class="preloader__bg"></div>
     </div>
+    <div id="fui-toast"></div>
     <!-- preloader end -->
 
     <!-- barba container start -->
@@ -41,8 +46,8 @@
                     @include('components.client.menu')
                     <div class="dashboard__main mt-0">
                         <div class="dashboard__content pt-0 px-15 pb-0">
-                        @yield('content')
-                    </div>
+                            @yield('content')
+                        </div>
                         @include('components.client.footer')
                     </div>
                 </div>
@@ -54,8 +59,17 @@
     <!-- barba container end -->
 
     <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
     <script src="{{ asset('client/js/vendors.js') }}"></script>
     <script src="{{ asset('client/js/main.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>
