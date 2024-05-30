@@ -44,12 +44,12 @@
 
                                         <div class="d-flex x-gap-20 items-center">
                                             @if ($lesson->is_trial)
-                                                <a href="#" data-id="{{ $lesson->id }}" class="btn_trial">
+                                                <button data-id="{{ $lesson->id }}" class="btn_trial">
                                                     <div class="px-12 rounded-200 bg-red-2">
                                                         <span class="text-11 lh-1 fw-600 text-orange-1 ">Học
                                                             thử</span>
                                                     </div>
-                                                </a>
+                                                </button>
                                             @endif
                                             <div class="px-12 rounded-200 bg-purple-2">
                                                 <span
@@ -88,8 +88,10 @@
         $(document).ready(function() {
             $('.btn_trial').on('click', function(e) {
                 e.preventDefault();
-                const spanElemet = $(this).find('span');
-                spanElemet.text('Đang mở...')
+                const buttonElement = $(this).find('span');
+                buttonElement.text('Đang mở...')
+                $(this).prop('disabled', false);
+
                 const id = $(this).data('id');
                 const modalEl = $('#modal');
                 const modal = new bootstrap.Modal(modalEl);
@@ -116,7 +118,8 @@
                     $('.modal-body').html('<iframe width="100%" height="315" src="' + video +
                         '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
                     );
-                    spanElemet.text('Học thử')
+                    buttonElement.text('Học thử')
+                    $(this).prop('disabled', true);
                 });
             })
 
