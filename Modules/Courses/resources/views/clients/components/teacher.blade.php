@@ -1,3 +1,5 @@
+
+@if ($course->teacher)
 <div class="tabs__pane -tab-item-3">
     <h2 class="text-20 fw-500">Giảng viên</h2>
 
@@ -46,3 +48,4 @@
         </div>
     </div>
 </div>
+@endif

@@ -2,7 +2,7 @@
     <div class="blogPost -comments">
         <div class="blogPost__content">
             <h2 class="text-20 fw-500">
-                Reviews
+                Học viên đánh giá
             </h2>
 
             <ul class="comments__list mt-30">
@@ -10,7 +10,7 @@
                     <div class="comments__item-inner md:direction-column">
                         <div class="comments__img mr-20">
                             <div class="bg-image rounded-full js-lazy"
-                                data-bg="img/avatars/1.png"></div>
+                                data-bg="{{ asset('client/img/avatars/1.png') }}"></div>
                         </div>
 
                         <div class="comments__body md:mt-15">
@@ -49,7 +49,7 @@
                     <div class="comments__item-inner md:direction-column">
                         <div class="comments__img mr-20">
                             <div class="bg-image rounded-full js-lazy"
-                                data-bg="img/avatars/1.png"></div>
+                                data-bg="{{ asset('client/img/avatars/1.png') }}"></div>
                         </div>
 
                         <div class="comments__body md:mt-15">
