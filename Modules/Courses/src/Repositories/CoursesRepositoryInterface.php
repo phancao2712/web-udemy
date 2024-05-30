@@ -13,4 +13,6 @@ interface CoursesRepositoryInterface extends RepositoryInterface
     public function updateCourse(string $id, $data = []);
     public function deleteCourse(string $id);
 
+    public function getCourseDetail(string $slug);
+
 }

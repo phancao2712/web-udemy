@@ -21,6 +21,21 @@ class CourseController extends Controller
 
         return view("courses::clients.index", compact('titlePage', 'courses'));
     }
+
+    public function detail(string $slug) {
+        $course = $this->courseRepository->getCourseDetail($slug);
+
+        if (!$course) {
+            abort(404);
+        }
+
+        $titlePage = $course->name;
+
+        return view('courses::clients.detail', compact(
+            'titlePage',
+            'course'
+        ));
+    }
 }
 
 ?>

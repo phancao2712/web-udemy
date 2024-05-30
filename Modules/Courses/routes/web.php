@@ -28,7 +28,8 @@ Route::group([
 
 
 Route::group([
-    'as' => 'client.'
+    'as' => 'courses.'
 ], function() {
     Route::get('/khoa-hoc', [CourseController::class, 'index'])->name('index');
+    Route::get('/khoa-hoc/{slug}', [CourseController::class, 'detail'])->name('detail');
 });

@@ -54,4 +54,8 @@ class CoursesRepository extends BaseRepository implements CoursesRepositoryInter
         }
     }
 
+    public function getCourseDetail($slug) {
+        return $this->model->whereSlug($slug)->firstOrFail();
+    }
+
 }

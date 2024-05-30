@@ -563,8 +563,7 @@
           <div class="row y-gap-30">
             @forelse ($courses as $course)
             <div data-anim-child="slide-up delay-{{ $course->id }}" class="col-lg-4 col-md-6">
-
-                <a href="courses-single-1.html" class="coursesCard -type-1 rounded-8 bg-white shadow-3">
+                <a href="{{ route('courses.detail', $course->slug) }}" class="coursesCard -type-1 rounded-8 bg-white shadow-3">
                   <div class="relative">
                     <div class="coursesCard__image overflow-hidden rounded-top-8">
                       <img class="w-1/1" src="{{ $course->thumbnail }}" alt="{{ $course->name }}" style="height: 210px; object-fit: cover;">
@@ -588,7 +587,9 @@
                       <div class="text-13 lh-1 ml-10">(1991)</div>
                     </div>
 
-                    <div class="text-20 lh-15 text-dark-1 mt-10 fw-600">{{ $course->name }}</div>
+                    <div class="text-20 lh-15 text-dark-1 mt-10 fw-600">
+                        {{ $course->name }}
+                    </div>
 
                     <div class="d-flex x-gap-10 items-center pt-10">
 
