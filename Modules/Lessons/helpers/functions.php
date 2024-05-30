@@ -32,3 +32,13 @@ function getCountLesson($course){
     $lessonsRepository = app(LessonsRepositoryInterface::class);
     return $lessonsRepository->getLessonCount($course);
 }
+
+function getPositionCourse($course){
+    $lessonsRepository = app(LessonsRepositoryInterface::class);
+    return $lessonsRepository->getCoursePosition($course);
+}
+
+function getPositionLesson($course, $moduleId) {
+    $lessonsRepository = app(LessonsRepositoryInterface::class);
+    return $lessonsRepository->getLessonPosition($course, $moduleId);
+}
