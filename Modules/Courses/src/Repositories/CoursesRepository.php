@@ -53,4 +53,5 @@ class CoursesRepository extends BaseRepository implements CoursesRepositoryInter
             $course->delete($id);
         }
     }
+
 }

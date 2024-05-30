@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('courses', function(Blueprint $table) {
-            $table->integer('view')->default(0)->after('status');
+            $table->integer('views')->default(0)->after('status');
         });
     }
 
@@ -25,7 +25,7 @@ return new class () extends Migration {
     public function down()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->dropColumn('view');
+            $table->dropColumn('views');
         });
     }
 };

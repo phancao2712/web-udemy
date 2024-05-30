@@ -34,3 +34,10 @@ function setMenuActive(array $routes): ?string
 function money($value, $currency = 'đ') {
     return !empty($value) ? number_format($value) . $currency : 'Miễn phí';
 }
+
+function getHour($value){
+    $hour = round($value / 3600, 1);
+    return $hour . ' giờ';
+}
+
+

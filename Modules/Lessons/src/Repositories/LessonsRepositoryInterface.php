@@ -11,4 +11,6 @@ interface LessonsRepositoryInterface extends RepositoryInterface
     public function getLessons($id, $column = '*');
 
     public function getAllLesson($id);
+
+    public function getLessonCount($course);
 }

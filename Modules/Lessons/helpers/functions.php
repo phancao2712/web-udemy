@@ -1,4 +1,5 @@
 <?php
+use Modules\Lessons\src\Repositories\LessonsRepositoryInterface;
 function getLessons($lessons, $old = '', $parentId = 0, $char = '')
 {
     $id = request()->route()->lessonId;
@@ -25,4 +26,9 @@ function getTime($seconds) {
     ($min < 10) ? $min = '0' . $min : $min;
     ($second < 10) ? $second = '0' . $second : $second;
     return $min . ':' . $second;
+}
+
+function getCountLesson($course){
+    $lessonsRepository = app(LessonsRepositoryInterface::class);
+    return $lessonsRepository->getLessonCount($course);
 }

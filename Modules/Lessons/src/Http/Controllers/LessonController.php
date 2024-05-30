@@ -272,6 +272,5 @@ class LessonController extends Controller
         $course = $this->coursesRepository->updateCourse($courseId, [
             'durations' => $duration
         ]);
-        
     }
 }
