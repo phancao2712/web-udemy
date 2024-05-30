@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/c9111ed195.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('client/css/vendors.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
+    @yield('style')
 
     <title>{{ $titlePage }} - Educrat</title>
 </head>

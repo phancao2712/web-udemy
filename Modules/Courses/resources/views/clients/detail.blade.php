@@ -91,7 +91,7 @@
                                 <button class="button -md -outline-dark-1 text-dark-1 w-1/1 mt-10">Mua ngay</button>
 
                                 <div class="mt-25">
-                                    <div class="d-flex justify-between py-8 border-top-light">
+                                    <div class="d-flex justify-between py-8">
                                         <div class="d-flex items-center text-dark-1">
                                             <div class="icon-badge"></div>
                                             <div class="ml-10">Mã khóa học</div>
@@ -100,7 +100,7 @@
                                             {{ $course->code }}
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-between py-8 ">
+                                    <div class="d-flex justify-between py-8 border-top-light">
                                         <div class="d-flex items-center text-dark-1">
                                             <div class="icon-video-file"></div>
                                             <div class="ml-10">Bài giảng</div>
@@ -140,12 +140,19 @@
 
                                     <div class="d-flex justify-between py-8 border-top-light">
                                         <div class="d-flex items-center text-dark-1">
+                                            <i class="fa-solid fa-headset"></i>
+                                            <div class="ml-10">Hỗ trợ</div>
+                                        </div>
+                                        <div>{!! $course->supports !!}</div>
+                                    </div>
+
+                                    <div class="d-flex justify-between py-8 border-top-light">
+                                        <div class="d-flex items-center text-dark-1">
                                             <div class="icon-infinity"></div>
                                             <div class="ml-10">Truy cập trọn đời</div>
                                         </div>
                                         <div>Có</div>
                                     </div>
-
                                 </div>
 
                                 <div class="d-flex justify-center pt-15">
