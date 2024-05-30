@@ -65,13 +65,7 @@
                             <div class="relative pt-40">
                                 <img class="w-1/1" style="border-radius: 10px;" src="{{ $course?->thumbnail }}"
                                     alt="image">
-                                <div class="absolute-full-center d-flex justify-center items-center">
-                                    <a href="https://www.youtube.com/watch?v=ANYfx4-jyqY"
-                                        class="d-flex justify-center items-center size-60 rounded-full bg-white js-gallery"
-                                        data-gallery="gallery1">
-                                        <div class="icon-play text-18"></div>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
 
@@ -80,8 +74,8 @@
                                 class="courses-single-info__content scroll-bar-1 bg-white shadow-2 rounded-8 border-light py-30 px-30">
                                 <div class="d-flex justify-between items-center mb-30">
                                     @if ($course->sale_price > 0 && $course->price > $course->sale_price)
-                                        <div class="text-24 lh-1 text-dark-1 fw-500">{{ money($course->price) }}</div>
-                                        <div class="lh-1 line-through">{{ money($course->sale_price) }}</div>
+                                    <div class="text-24 lh-1 text-dark-1 fw-600">{{ money($course->sale_price) }}</div>
+                                    <div class="lh-1 line-through">{{ money($course->price) }}</div>
                                     @else
                                         <div class="text-24 lh-1 text-dark-1 fw-500">{{ money($course->price) }}</div>
                                     @endif
@@ -210,8 +204,11 @@
                                 <div class="tabs__content pt-30 lg:pt-40 js-tabs-content">
 
                                     @include('courses::clients.components.info')
+
                                     @include('courses::clients.components.lesson')
+
                                     @include('courses::clients.components.teacher')
+
                                     @include('courses::clients.components.review')
                                 </div>
                             </div>

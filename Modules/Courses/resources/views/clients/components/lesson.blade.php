@@ -52,7 +52,8 @@
                                                 </a>
                                             @endif
                                             <div class="px-12 rounded-200 bg-purple-2">
-                                                <span class="text-11 lh-1 fw-600 text-purple-1 ">{{ getTime($lesson->duration) }}</span>
+                                                <span
+                                                    class="text-11 lh-1 fw-600 text-purple-1 ">{{ getTime($lesson->duration) }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -87,11 +88,14 @@
         $(document).ready(function() {
             $('.btn_trial').on('click', function(e) {
                 e.preventDefault();
+                const spanElemet = $(this).find('span');
+                spanElemet.text('Đang mở...')
                 const id = $(this).data('id');
                 const modalEl = $('#modal');
                 const modal = new bootstrap.Modal(modalEl);
                 const route = "{{ route('courses.data.trial', ':id') }}";
                 const url = route.replace(':id', id);
+
 
                 $.get(url, function(data) {
                     if (!data.success) {
@@ -112,10 +116,12 @@
                     $('.modal-body').html('<iframe width="100%" height="315" src="' + video +
                         '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
                     );
+                    spanElemet.text('Học thử')
                 });
-
-
             })
+
+            $('.modal-title').text('');
+            $('.modal-body').html('');
         });
     </script>
 @endsection
