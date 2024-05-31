@@ -74,8 +74,8 @@
                                 class="courses-single-info__content scroll-bar-1 bg-white shadow-2 rounded-8 border-light py-30 px-30">
                                 <div class="d-flex justify-between items-center mb-30">
                                     @if ($course->sale_price > 0 && $course->price > $course->sale_price)
-                                    <div class="text-24 lh-1 text-dark-1 fw-600">{{ money($course->sale_price) }}</div>
-                                    <div class="lh-1 line-through">{{ money($course->price) }}</div>
+                                        <div class="text-24 lh-1 text-dark-1 fw-600">{{ money($course->sale_price) }}</div>
+                                        <div class="lh-1 line-through">{{ money($course->price) }}</div>
                                     @else
                                         <div class="text-24 lh-1 text-dark-1 fw-500">{{ money($course->price) }}</div>
                                     @endif
@@ -313,7 +313,13 @@
                         </div>
 
                         <div data-anim-child="slide-up delay-2" class="swiper-slide">
-
+                            <video id="my-video" class="video-js" controls preload="auto" width="640"
+                                height="264" data-setup="{}">
+                                <source src="/data/stream?url=${video}" type="video/mp4" />
+                                <p class="vjs-no-js">
+                                    To view this video please enable JavaScript
+                                </p>
+                            </video>
                             <a href="courses-single-1.html" class="coursesCard -type-1 ">
                                 <div class="relative">
                                     <div class="coursesCard__image overflow-hidden rounded-8">

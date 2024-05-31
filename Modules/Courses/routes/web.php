@@ -38,5 +38,6 @@ Route::group([
         'as' => 'data.',
     ], function(){
         Route::get('/trial/{id}', [CourseController::class, 'getTrial'])->name('trial');
+        Route::get('/stream', [CourseController::class, 'stream'])->name('stream');
     });
 });

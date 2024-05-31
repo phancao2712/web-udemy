@@ -4,6 +4,7 @@ namespace Modules\Lessons\src\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Courses\src\Models\Course;
 use Modules\Document\src\Models\Document;
 use Modules\Video\src\Models\Video;
 
@@ -27,7 +28,7 @@ class Lesson extends Model
 
     protected $with = [
         'video',
-        'document'
+        'document',
     ];
 
     public function children()
@@ -47,4 +48,9 @@ class Lesson extends Model
     public function document(){
         return $this->belongsTo(Document::class,'document_id');
     }
+
+    public function course(){
+        return $this->belongsTo(Course::class,'course_id');
+    }
+
 }

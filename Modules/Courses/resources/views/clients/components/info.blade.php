@@ -23,5 +23,9 @@
             margin-bottom: 30px !important;
             font-size: var(--text-20) !important;
         }
+        #my-video {
+           width: 100% !important;
+           height: 500px;
+       }
     </style>
 @endsection

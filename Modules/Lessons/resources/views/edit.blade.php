@@ -22,7 +22,7 @@
                     <label for="">Slug</label>
                     <input type="text" name="slug"
                         class="form-control slug {{ $errors->has('slug') ? 'is-invalid' : '' }}" placeholder="Slug..."
-                        value="{{ old('slug', $lesson->name) }}">
+                        value="{{ old('slug', $lesson->slug) }}">
                     @error('slug')
                         <div class="invalid-feedback">
                             {{ $message }}

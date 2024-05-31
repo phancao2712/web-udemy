@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Courses\src\Http\Controllers\clients;
+namespace Modules\Lessons\src\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Modules\Courses\src\Repositories\CoursesRepositoryInterface;
 use Modules\Lessons\src\Repositories\LessonsRepositoryInterface;
 
 
-class CourseController extends Controller
+class LessonController extends Controller
 {
     protected $courseRepository;
     protected $lessonRepository;
@@ -20,26 +20,42 @@ class CourseController extends Controller
         $this->lessonRepository = $lessonRepository;
     }
 
-    public function index()
-    {
-        $titlePage = 'Danh sách khóa học';
-        $courses = $this->courseRepository->paginator(['*'], 10);
-
-        return view("courses::clients.index", compact('titlePage', 'courses'));
-    }
-
     public function detail(string $slug) {
-        $course = $this->courseRepository->getCourseDetail($slug);
-
-        if (!$course) {
+        $lesson = $this->lessonRepository->getLessonDetail($slug);
+        $video = $lesson->video->url;
+        if (!$lesson) {
             abort(404);
         }
+        $index = 0;
+        $course = $lesson->course;
+        $lessons = $this->lessonRepository->getLessonPosition($course);
+        $currentIndex = 0;
+        foreach ($lessons as $key => $item) {
+            if($item->id == $lesson->id ){
+                $currentIndex = $key;
+                break;
+            }
+        }
+        $prevIndex = null;
+        $nextIndex = null;
+        if(isset($lessons[$currentIndex + 1])){
+            $nextIndex = $lessons[$currentIndex + 1];
+        }
 
-        $titlePage = $course->name;
+        if(isset($lessons[$currentIndex - 1])){
+            $prevIndex = $lessons[$currentIndex - 1];
+        }
 
-        return view('courses::clients.detail', compact(
+        $titlePage = $lesson->name;
+
+        return view('lessons::clients.detail', compact(
             'titlePage',
-            'course'
+            'lesson',
+            'video',
+            'course',
+            'index',
+            'nextIndex',
+            'prevIndex'
         ));
     }
 

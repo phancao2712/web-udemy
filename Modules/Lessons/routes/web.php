@@ -1,5 +1,6 @@
 <?php
 use Modules\Lessons\src\Http\Controllers\LessonController;
+use Modules\Lessons\src\Http\Controllers\clients\LessonController as ClientLessonController;
 
 Route::group([
     'prefix' => 'admin',
@@ -21,5 +22,18 @@ Route::group([
         Route::put('/edit/{lessonId}', [LessonController::class, 'update'])->name('update');
 
         Route::delete('/destroy/{lessonId}', [LessonController::class, 'destroy'])->name('destroy');
+    });
+});
+
+Route::group([
+    'as' => 'lessons.'
+], function() {
+    Route::get('/bai-hoc/{slug}', [ClientLessonController::class, 'detail'])->name('detail');
+
+    Route::group([
+        'prefix' => 'data',
+        'as' => 'data.',
+    ], function(){
+        Route::get('/stream', [ClientLessonController::class, 'stream'])->name('stream');
     });
 });

@@ -46,8 +46,18 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
         return $course->lessons()->whereNull('parent_id')->orderBy('position', 'asc')->get();
     }
 
-    public function getLessonPosition($course, $moduleId)
-    {
-        return $course->lessons()->whereParentId($moduleId)->orderBy('position', 'asc')->get();
+    public function getLessonPosition($course, $moduleId = null)
+    {   $lesson = $course->lessons();
+
+        if($moduleId){
+            $lesson->where('parent_id', $moduleId);
+        } else {
+            $lesson->whereNotNull('parent_id');
+        }
+        return $lesson->orderBy('position', 'asc')->get();
+    }
+
+    public function getLessonDetail($slug) {
+        return $this->model->whereSlug($slug)->firstOrFail();
     }
 }

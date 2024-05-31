@@ -18,12 +18,12 @@
     <script src="https://kit.fontawesome.com/c9111ed195.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('client/css/vendors.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
     @yield('style')
-
     <title>{{ $titlePage }} - Educrat</title>
 </head>
 
@@ -67,9 +67,10 @@
     </script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
-    <script src="{{ asset('client/js/vendors.js') }}"></script>
-    <script src="{{ asset('client/js/main.js') }}"></script>
+        <script src="{{ asset('client/js/vendors.js') }}"></script>
+        <script src="{{ asset('client/js/main.js') }}"></script>
+        <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
     @yield('script')
-</body>
+</body>,
 
 </html>

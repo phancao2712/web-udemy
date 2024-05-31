@@ -1,4 +1,4 @@
-<div class="dashboard__sidebar -base scroll-bar-1 border-right-light lg:px-30">
+<div id="menu" class="dashboard__sidebar -base scroll-bar-1 border-right-light lg:px-30 ">
 
     <div class="sidebar -base-sidebar">
       <div class="sidebar__inner">

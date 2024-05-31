@@ -38,7 +38,7 @@
                                                 class="d-flex justify-center items-center size-30 rounded-full bg-purple-3 mr-10">
                                                 <div class="icon-play text-9"></div>
                                             </div>
-                                            <div>Bài {{ ++$index }}: {{ $lesson->name }}
+                                            <div><a href="{{ route('lessons.detail', $lesson->slug) }}">Bài {{ ++$index }}: {{ $lesson->name }}</a>
                                             </div>
                                         </div>
 
@@ -66,7 +66,7 @@
 
             <div class="modal fade" id="modal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px !important;">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
@@ -83,6 +83,7 @@
         </div>
     </div>
 </div>
+
 @section('script')
     <script>
         $(document).ready(function() {
@@ -115,11 +116,26 @@
 
                     modalEl.modal('show');
                     $('.modal-title').text(title);
-                    $('.modal-body').html('<iframe width="100%" height="315" src="' + video +
-                        '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
-                    );
-                    buttonElement.text('Học thử')
+                    $('.modal-body').html(`<video
+                    id="my-video"
+                    class="video-js"
+                    controls
+                    preload="auto"
+                    width="640"
+                    height="264"
+                    data-setup="{}"
+                    >
+                    <source src="/data/stream?url=${video}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                    To view this video please enable JavaScript
+                    </p>
+                    </video>`);
+
+                    buttonElement.text('Học thử');
                     $(this).prop('disabled', true);
+                    videojs(modalEl.find('.modal-body').find('#my-video').get(0), {
+                        controls: true,
+                    });
                 });
             })
 

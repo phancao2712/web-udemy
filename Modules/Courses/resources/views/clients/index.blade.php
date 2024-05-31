@@ -562,8 +562,8 @@
 
           <div class="row y-gap-30">
             @forelse ($courses as $course)
-            <div data-anim-child="slide-up delay-{{ $course->id }}" class="col-lg-4 col-md-6">
-                <a href="{{ route('courses.detail', $course->id) }}" class="coursesCard -type-1 rounded-8 bg-white shadow-3">
+            <div data-anim-child="slide-up delay-{{ $course->slug }}" class="col-lg-4 col-md-6">
+                <a href="{{ route('courses.detail', $course->slug) }}" class="coursesCard -type-1 rounded-8 bg-white shadow-3">
                   <div class="relative">
                     <div class="coursesCard__image overflow-hidden rounded-top-8">
                       <img class="w-1/1" src="{{ $course->thumbnail }}" alt="{{ $course->name }}" style="height: 210px; object-fit: cover;">
