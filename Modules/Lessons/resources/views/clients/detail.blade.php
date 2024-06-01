@@ -37,6 +37,13 @@
             width: 100% !important;
             height: 500px !important;
         }
+        .border_bottom {
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .border_bottom:last-child{
+            border-bottom: none;
+        }
     </style>
 
     <title>{{ $titlePage }} - Educrat</title>
@@ -75,7 +82,7 @@
                     <div class="col-auto">
                         <div class="header-right d-flex items-center">
                             <div class="header-right__buttons">
-                                <a href="#" class="button -sm -rounded -white text-dark-1">Trở về khóa học</a>
+                                <a href="{{ route('courses.detail', $course->slug) }}" class="button -sm -rounded -white text-dark-1">Trở về khóa học</a>
                             </div>
                         </div>
                     </div>

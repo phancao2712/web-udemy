@@ -40,4 +40,14 @@ function getHour($value){
     return $hour . ' giờ';
 }
 
+function getSize($value, $type = 'MB'){
+    if($type == 'MB'){
+        $result = round($value / 1024 / 1024, 2);
+    }
+    if($type == 'KB'){
+        $result = round($value / 1024, 2);
+    }
+    return $result . ' ' . $type;
+}
+
 
