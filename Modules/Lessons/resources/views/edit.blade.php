@@ -129,7 +129,7 @@
                 <div class="mb-3">
                     <label>Trạng thái</label>
                     <label class="d-block">
-                        <input type="checkbox" name="status" value="1" @checked(old('status'))> Kích hoạt
+                        <input type="checkbox" name="status" value="1" @checked(old('status', $lesson->status))> Kích hoạt
                     </label>
                     @error('status')
                         <div class="invalid-feedback">

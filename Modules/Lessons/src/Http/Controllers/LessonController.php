@@ -75,6 +75,7 @@ class LessonController extends Controller
         $description = $request->description;
         $video = $request->video;
         $document = $request->document;
+        $status = $request->status ?? 0;
 
         if ($document) {
             $infoDocument = getInfoFile($document);
@@ -107,7 +108,8 @@ class LessonController extends Controller
             'position' => $position,
             'description' => $description,
             'course_id' => $id,
-            'duration' => $duration
+            'duration' => $duration,
+            'status' => $status
         ]);
 
         $this->updateDuration($id);
@@ -193,6 +195,7 @@ class LessonController extends Controller
         $description = $request->description;
         $video = $request->video;
         $document = $request->document;
+        $status = $request->status ?? 0;
 
         if ($document) {
             $infoDocument = getInfoFile($document);
@@ -224,7 +227,8 @@ class LessonController extends Controller
             'is_trial' => $is_trial,
             'position' => $position,
             'description' => $description,
-            'duration' => $duration
+            'duration' => $duration,
+            'status' => $status
         ]);
 
         $lesson = $this->lessonRepository->find($lessonId);

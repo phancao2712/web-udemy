@@ -8,7 +8,7 @@
         </form>
 
         <div class="accordion -block-2 text-left js-accordion mt-30">
-            @foreach (getPositionCourse($course) as $key => $module)
+            @foreach (getPositionModule($course) as $key => $module)
                 <div class="accordion__item  {{ $module->id == $lesson->parent_id ? 'is-active' : '' }}">
                     <div class="accordion__button py-20 px-30 bg-light-4">
                         <div class="d-flex items-center">
@@ -54,7 +54,7 @@
                                                     <i class="fa-regular fa-file-lines" style="font-size: 12px; {{ $item->id == $lesson->id ? 'color: #E8543E;' : '' }}"></i>
                                                 </div>
                                                 <div><a href="{{ $item->document->url }}" target="_blank">
-                                                        Document</a>
+                                                        Tài liệu</a>
                                                 </div>
                                             </div>
 

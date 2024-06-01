@@ -12,7 +12,7 @@
             @php
                 $index = 0;
             @endphp
-            @foreach (getPositionCourse($course) as $key => $module)
+            @foreach (getPositionModule($course) as $key => $module)
                 <div class="accordion__item {{ $key == 0 ? 'is-active' : '' }}">
                     <div class="accordion__button py-20 px-30 bg-light-4">
                         <div class="d-flex items-center">

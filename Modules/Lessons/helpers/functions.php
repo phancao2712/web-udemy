@@ -33,12 +33,12 @@ function getCountLesson($course){
     return $lessonsRepository->getLessonCount($course);
 }
 
-function getPositionCourse($course){
+function getPositionModule($course){
     $lessonsRepository = app(LessonsRepositoryInterface::class);
-    return $lessonsRepository->getCoursePosition($course);
+    return $lessonsRepository->getModulePosition($course);
 }
 
-function getPositionLesson($course, $moduleId) {
+function getPositionLesson($course, $moduleId = null) {
     $lessonsRepository = app(LessonsRepositoryInterface::class);
     return $lessonsRepository->getLessonPosition($course, $moduleId);
 }
