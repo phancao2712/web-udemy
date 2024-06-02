@@ -23,7 +23,10 @@
     <link rel="stylesheet" href="{{ asset('client/css/main.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
+    @vite(['resources/sass/app.scss'])
+
     @yield('style')
+
     <title>{{ $titlePage }} - Educrat</title>
 </head>
 
@@ -67,9 +70,10 @@
     </script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
-        <script src="{{ asset('client/js/vendors.js') }}"></script>
-        <script src="{{ asset('client/js/main.js') }}"></script>
-        <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="{{ asset('client/js/vendors.js') }}"></script>
+    <script src="{{ asset('client/js/main.js') }}"></script>
+    @vite(['resources/js/app.js'])
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
     @yield('script')
 </body>,
 
