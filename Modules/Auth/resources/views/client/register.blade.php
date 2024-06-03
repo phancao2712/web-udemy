@@ -12,7 +12,7 @@
 
                         <form class="contact-form respondForm__form row y-gap-20 pt-30" action="" method="post">
                             @csrf
-                            
+
                             <div class="col-lg-12">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Họ và tên *</label>
                                 <input type="text" name="name" placeholder="Nguyễn Văn A">
@@ -36,14 +36,14 @@
                             </div>
                             <div class="col-lg-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Mật khẩu *</label>
-                                <input type="text" name="password" placeholder="*******">
+                                <input type="password" name="password" placeholder="*******">
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Nhập lại mật *</label>
-                                <input type="text" name="confirm_password" placeholder="*******">
+                                <input type="password" name="confirm_password" placeholder="*******">
                                 @error('confirm_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

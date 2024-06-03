@@ -43,9 +43,10 @@ class RegisterController extends Controller
         if (!$user) {
             return back()->with('msg', __('auth::message.register.fail'));
         }
+        
         event(new Registered($user));
         Auth::guard('students')->login($user);
-        // return redirect()->route('verification.notice');
-        return redirect()->route('home')->with('success', __('auth::message.register.success'));
+
+        return redirect()->route('verification.notice');
     }
 }
