@@ -252,8 +252,8 @@
                     </div>
 
                     <div class="sidebar__item ">
-                        <a href="#" class="d-flex items-center text-17 lh-1 fw-500 ">
-                        <i class="text-20 icon-power mr-15"></i>
+                        <a href="{{ route('client.logout') }}" class="d-flex items-center text-17 lh-1 fw-500 ">
+                        <i class="text-20 icon-powwer mr-15"></i>
                         Logout
                         </a>
                     </div>

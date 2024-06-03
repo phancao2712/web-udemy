@@ -15677,3 +15677,8 @@ table.table td {
   border-radius: 100%;
   background: white;
 }
+
+.text-danger {
+    color: red;
+    font-size: 13px;
+}

@@ -4,9 +4,10 @@ namespace Modules\Auth\src\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
+use Flasher\Laravel\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Modules\Auth\src\Http\Requests\LoginClientRequest;
 
 class LoginController extends Controller
 {
@@ -37,35 +38,40 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:students')->except('logout');
     }
 
     public function showLoginForm()
     {
         $titlePage = 'Đăng nhập';
-        return view('auth::client.login', compact(
-            'titlePage'
-        ));
+        return view(
+            'auth::client.login',
+            compact(
+                'titlePage'
+            )
+        );
     }
 
-    public function showRegisterForm()
+    public function login(LoginClientRequest $request)
     {
-        $titlePage = 'Đăng kí';
-        return view('auth::client.register', compact(
-            'titlePage'
-        ));
+        $user = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        if (Auth::guard('students')->attempt($user)) {
+            return redirect()->route('home')->with('success', 'Đăng nhập thành công');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email hoặc mật khẩu không đúng',
+        ])->onlyInput('email');
     }
 
-    // protected function sendFailedLoginResponse(Request $request)
-    // {
-    //     throw ValidationException::withMessages([
-    //         $this->username() => [__('auth::message.login.fail')],
-    //     ]);
-    // }
+    public function logout(Request $request){
+        Auth::logout();
 
-    // protected function loggedOut(Request $request)
-    // {
-    //     return redirect($this->redirectTo)->with('success', __('auth::message.logout.success'));
-    // }
+        return redirect()->route('home')->with('success','Đăng xuất thành công');
+    }
 
 }
