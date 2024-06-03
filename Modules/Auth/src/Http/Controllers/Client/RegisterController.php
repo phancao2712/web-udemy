@@ -20,7 +20,7 @@ class RegisterController extends Controller
     )
     {
         $this->studentRepository = $studentRepository;
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest');
     }
 
     public function showRegisterForm()

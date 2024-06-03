@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Auth\src\Http\Controllers\Client\BlockController;
 use Modules\Auth\src\Http\Controllers\Client\LoginController;
 use Modules\Auth\src\Http\Controllers\Admin\LoginController as AdminLoginController;
 use Modules\Auth\src\Http\Controllers\Client\RegisterController;
@@ -18,4 +19,6 @@ Route::group(['as'=> 'client.'], function () {
     Route::post('dang-ki',[RegisterController::class,'register']);
 
     Route::get('dang-xuat', [LoginController::class,'logout'])->name('logout');
+
+    Route::get('/block', [BlockController::class, 'index'])->name('block.index');
 });

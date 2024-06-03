@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Mirrored from creativelayers.net/themes/educrat-html/lesson-single-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 May 2024 03:29:13 GMT -->
-
 <head>
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -114,9 +111,9 @@
                                             class="button -icon -purple-3 text-purple-1 text-15">
                                             <i class="fa-solid fa-backward text-14 mr-10"></i> Bài trước
                                         </a>
-                    
+
                                     @endif
-                                    
+
                                 </div>
                                 <div>
                                     @if ($nextIndex)
@@ -125,7 +122,7 @@
                                             Bài tiếp theo
                                             <i class="fa-solid fa-forward text-14 ml-10"></i>
                                         </a>
-                        
+
                                     @endif
 
                                 </div>
@@ -278,8 +275,5 @@
         });
     </script>
 </body>
-
-
-<!-- Mirrored from creativelayers.net/themes/educrat-html/lesson-single-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 May 2024 03:29:13 GMT -->
 
 </html>

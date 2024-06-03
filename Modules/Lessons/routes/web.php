@@ -27,7 +27,7 @@ Route::group([
 
 Route::group([
     'as' => 'lessons.',
-    'middleware' => ['auth:students']
+    'middleware' => ['auth:students', 'block.students']
 ], function () {
     Route::get('/bai-hoc/{slug}', [ClientLessonController::class, 'detail'])->name('detail');
 

@@ -37,7 +37,8 @@ class RegisterClientRequest extends FormRequest
         return [
             'required' => __('auth::validation.required'),
             'email' => __('auth::validation.email'),
-            'unique' => __('auth::validation.email'),
+            'unique' => __('auth::validation.unique'),
+            'same' => __('auth::validation.same')
         ];
     }
 

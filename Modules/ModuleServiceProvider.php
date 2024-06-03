@@ -5,6 +5,7 @@ namespace Modules;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use Modules\Auth\src\Http\Middlewares\BlockStudentMiddleware;
 use Modules\Auth\src\Repositories\AuthRepository;
 use Modules\Auth\src\Repositories\AuthRepositoryInterface;
 use Modules\Categories\src\Repositories\CategoriesRepository;
@@ -27,7 +28,9 @@ use Modules\Video\src\Repositories\VideoRepositoryInterface;
 class ModuleServiceProvider extends ServiceProvider
 {
 
-    private $middlewares = [];
+    private $middlewares = [
+        'block.students' => BlockStudentMiddleware::class
+    ];
 
     private $commands = [];
 
