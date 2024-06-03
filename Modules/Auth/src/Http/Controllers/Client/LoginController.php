@@ -58,8 +58,9 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
+        $remember = $request->remember == 1 ? true : false;
 
-        if (Auth::guard('students')->attempt($user)) {
+        if (Auth::guard('students')->attempt($user, $remember)) {
             return redirect()->route('home')->with('success', 'Đăng nhập thành công');
         }
 

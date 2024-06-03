@@ -17,5 +17,5 @@ Route::group(['as'=> 'client.'], function () {
     Route::get('dang-ki',[RegisterController::class,'showRegisterForm'])->name('register');
     Route::post('dang-ki',[RegisterController::class,'register']);
 
-    Route::get('logout', [LoginController::class,'logout'])->name('logout');
+    Route::get('dang-xuat', [LoginController::class,'logout'])->name('logout');
 });

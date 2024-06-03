@@ -26,9 +26,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input" name="remember" type="checkbox" value="1" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Ghi nhớ tài khoản
+                                </label>
+                            </div>
                             <div class="col-12">
-                                <button type="submit" id="submit"
-                                    class="button -md -green-1 text-white fw-600 w-1/1">
+                                <button type="submit" id="submit" class="button -md -green-1 text-white fw-600 w-1/1">
                                     Đăng nhập
                                 </button>
                             </div>

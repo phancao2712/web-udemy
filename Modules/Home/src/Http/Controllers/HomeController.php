@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $titlePage = "Trang chủ";
+        // dd(auth()->user());
         return view('home::index', compact(
             'titlePage'
         )
