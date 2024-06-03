@@ -216,7 +216,7 @@
                     </div>
 
 
-                    @auth
+                    @if(auth('students')->check())
                     <div class="relative d-flex items-center ml-10">
                         <a href="#" data-el-toggle=".js-profile-toggle">
                             <img class="size-50" src="{{ asset('client/img/misc/user-profile.png') }}"
@@ -230,66 +230,18 @@
 
                                     <div class="sidebar -dashboard">
 
-                                        <div class="sidebar__item -is-active -dark-bg-dark-2">
+                                        <div class="sidebar__item -dark-bg-dark-2">
                                             <a href="dashboard.html"
                                                 class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                 <i class="text-20 icon-discovery mr-15"></i>
-                                                Dashboard
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-courses.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-play-button mr-15"></i>
-                                                My Courses
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-bookmarks.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-bookmark mr-15"></i>
-                                                Bookmarks
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-messages.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-message mr-15"></i>
-                                                Messages
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-listing.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-list mr-15"></i>
-                                                Create Course
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-reviews.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-comment mr-15"></i>
-                                                Reviews
-                                            </a>
-                                        </div>
-
-                                        <div class="sidebar__item ">
-                                            <a href="dshb-settings.html"
-                                                class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-setting mr-15"></i>
-                                                Settings
+                                                Tài khoản
                                             </a>
                                         </div>
 
                                         <div class="sidebar__item ">
                                             <a href="{{ route('client.logout') }}"
                                                 class="d-flex items-center text-17 lh-1 fw-500 ">
-                                                <i class="text-20 icon-powwer mr-15"></i>
+                                                <i class="text-20 icon-power mr-15"></i>
                                                 Logout
                                             </a>
                                         </div>
@@ -301,12 +253,10 @@
                         </div>
 
                     </div>
-                    @endauth
-                    @guest
+                    @else
                     <a href="{{ route('client.login') }}" class="button -sm -rounded -dark-1 text-white">Đăng
                         nhập</a>
-                    @endguest
-
+                    @endif
                 </div>
             </div>
         </div>

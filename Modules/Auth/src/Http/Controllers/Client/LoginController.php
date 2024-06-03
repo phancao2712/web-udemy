@@ -70,7 +70,7 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
-        Auth::logout();
+        Auth::guard('students')->logout();
 
         return redirect()->route('home')->with('success','Đăng xuất thành công');
     }
