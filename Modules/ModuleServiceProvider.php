@@ -97,6 +97,12 @@ class ModuleServiceProvider extends ServiceProvider
                 $this->registerModule($module);
             }
         }
+
+        $request = request();
+        if ($request->is('admin') || $request->is('admin/*')) { {
+                $this->app['router']->pushMiddlewareToGroup('web', 'auth');
+            }
+        }
     }
 
     private function registerModule($module)

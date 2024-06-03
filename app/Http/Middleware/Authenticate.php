@@ -13,15 +13,15 @@ class Authenticate extends Middleware
      */
      protected function unauthenticated($request, array $guards)
     {
-        if($request->is('admin') || $request->is('admin/*')){
             throw new AuthenticationException(
-                'Unauthenticated.', $guards, $this->redirectTo($request)
+                'Unauthenticated.', $guards, $this->redirectTo($request, !in_array('students', $guards))
             );
-        }
-
     }
-    protected function redirectTo(Request $request): ?string
+    protected function redirectTo(Request $request, $isAdmin = true): ?string
     {
+        if(!$isAdmin){
+        return $request->expectsJson() ? null : route('client.login');
+        }
         return $request->expectsJson() ? null : route('login');
     }
 }

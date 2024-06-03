@@ -26,14 +26,15 @@ Route::group([
 });
 
 Route::group([
-    'as' => 'lessons.'
-], function() {
+    'as' => 'lessons.',
+    'middleware' => ['auth:students']
+], function () {
     Route::get('/bai-hoc/{slug}', [ClientLessonController::class, 'detail'])->name('detail');
 
     Route::group([
         'prefix' => 'data',
         'as' => 'data.',
-    ], function(){
+    ], function () {
         Route::get('/stream', [ClientLessonController::class, 'stream'])->name('stream');
     });
 });
