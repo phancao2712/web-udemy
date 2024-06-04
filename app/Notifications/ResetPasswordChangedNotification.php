@@ -35,11 +35,12 @@ class ResetPasswordChangedNotification extends Notification implements ShouldQue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->greeting('Xin chào!')
-                    ->line('Đặt lại mật khẩu thành công.')
-                    ->action('Đăng nhập', url('/dang-nhap'))
-                    ->line('Nếu không phải bạn thực hiện')
-                    ->line('Hãy liên hệ với chúng tôi!');
+            ->subject('[Educrat] Thay đổi mật khẩu thành công')
+            ->greeting('Xin chào!')
+            ->line('Đặt lại mật khẩu thành công.')
+            ->action('Đăng nhập', url('/dang-nhap'))
+            ->line('Nếu không phải bạn thực hiện')
+            ->line('Hãy liên hệ với chúng tôi!');
     }
 
     /**

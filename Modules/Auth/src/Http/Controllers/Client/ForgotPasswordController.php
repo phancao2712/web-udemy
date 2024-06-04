@@ -63,9 +63,6 @@ class ForgotPasswordController extends Controller
             'confirm_password' => 'required|same:password',
         ]);
 
-
-
-
         $status = Password::broker('students')->reset(
             $request->only('email', 'password', 'confirm_password', 'token'),
             function (Student $student, string $password) {
