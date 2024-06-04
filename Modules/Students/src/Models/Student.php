@@ -3,6 +3,7 @@
 namespace Modules\Students\src\Models;
 
 use App\Notifications\EmailVerifyQueued;
+use App\Notifications\ResetPasswordQueued;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,5 +30,9 @@ class Student extends Authenticatable implements MustVerifyEmail,CanResetPasswor
     public function sendEmailVerificationNotification()
     {
         $this->notify(new EmailVerifyQueued);
+    }
+
+    public function sendPasswordResetNotification($token){
+        $this->notify(new ResetPasswordQueued($token));
     }
 }

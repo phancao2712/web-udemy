@@ -9,5 +9,6 @@ return [
     'passwords.user' => 'Email không tồn tại! Vui lòng thử lại',
     'passwords.reset.success' => 'Đặt lại mật khẩu thành công',
     'passwords.reset.fail' => 'Đã xảy ra lỗi! Vui lòng thử lại',
+    'passwords.reset.throttle' => 'Đã xảy ra lỗi! Vui lòng thử lại',
 ];
 ?>
