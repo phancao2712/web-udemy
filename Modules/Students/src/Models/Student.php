@@ -22,10 +22,11 @@ class Student extends Authenticatable implements MustVerifyEmail
         'address',
         'password',
         'phone',
-        'email_verified_at',
+        'email_verified_at'
     ];
 
-    public function sendEmailVerificationNotification(){
+    public function sendEmailVerificationNotification()
+    {
         $this->notify(new EmailVerifyQueued);
     }
 }

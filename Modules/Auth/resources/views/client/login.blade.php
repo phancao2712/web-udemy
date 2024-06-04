@@ -14,7 +14,7 @@
                             @csrf
                             <div class="col-12">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email</label>
-                                <input type="text" name="email" placeholder="abc@gmail.com">
+                                <input type="text" name="email" placeholder="abc@gmail.com" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

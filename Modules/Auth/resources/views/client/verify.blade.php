@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.auth-client')
 @section('content')
 <section class="no-page layout-pt-lg layout-pb-lg bg-beige-1">
     <div class="container">
@@ -13,7 +13,10 @@
           <div class="no-page__content">
             <h2 class="text-35 lh-12 mt-5">{{ $titlePage }}.</h2>
             <div class="mt-10">Kiểm tra email để xác thực tài khoản.</div>
-            <a href="{{ url('/') }}" class="button -md -purple-1 text-white mt-20">Gửi email lại</a>
+            <form action="{{ route('verification.send') }}" method="post">
+                @csrf
+                <button type="submit" class="button -md -purple-1 text-white mt-20">Gửi email lại</button>
+            </form>
           </div>
         </div>
       </div>

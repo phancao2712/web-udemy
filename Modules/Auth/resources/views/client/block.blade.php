@@ -1,4 +1,4 @@
-@extends('layouts.client')
+@extends('layouts.auth-client')
 @section('content')
 <section class="no-page layout-pt-lg layout-pb-lg bg-beige-1">
     <div class="container">

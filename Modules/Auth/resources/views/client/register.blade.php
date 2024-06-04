@@ -15,21 +15,21 @@
 
                             <div class="col-lg-12">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Họ và tên *</label>
-                                <input type="text" name="name" placeholder="Nguyễn Văn A">
+                                <input type="text" name="name" placeholder="Nguyễn Văn A" value="{{ old('name') }}">
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Số điện thoại *</label>
-                                <input type="text" name="phone" placeholder="(+84)">
+                                <input type="text" name="phone" placeholder="(+84)" value="{{ old('phone') }}">
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-lg-6">
                                 <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Email *</label>
-                                <input type="text" name="email" placeholder="abc@gmai.com">
+                                <input type="text" name="email" placeholder="abc@gmai.com" value="{{ old('email') }}">
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
