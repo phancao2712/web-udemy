@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\src\Http\Controllers\Client\BlockController;
+use Modules\Auth\src\Http\Controllers\Client\ForgotPasswordController;
 use Modules\Auth\src\Http\Controllers\Client\LoginController;
 use Modules\Auth\src\Http\Controllers\Admin\LoginController as AdminLoginController;
 use Modules\Auth\src\Http\Controllers\Client\RegisterController;
@@ -34,4 +35,16 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth:students', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', [VerifyController::class, 'resend'])
-->middleware(['auth:students', 'throttle:6,1'])->name('verification.send');
+    ->middleware(['auth:students', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/quen-mat-khau', [ForgotPasswordController::class, 'showFormForgotPassword'])
+    ->middleware('guest:students')->name('password.request');
+
+Route::post('/quen-mat-khau', [ForgotPasswordController::class, 'handleSendForgotLink'])
+    ->middleware('guest:students')->name('password.email');
+
+Route::get('/dat-lai-mat-khau/{token}', [ForgotPasswordController::class, 'showFormResetPassword'])
+    ->middleware('guest:students')->name('password.reset');
+
+Route::post('/dat-lai-mat-khau', [ForgotPasswordController::class, 'resetPassword'])
+->middleware('guest:students')->name('password.update');

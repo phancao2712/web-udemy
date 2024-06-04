@@ -26,11 +26,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-check">
+                            <div class="form-check col-6">
                                 <input class="form-check-input" name="remember" type="checkbox" value="1" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Ghi nhớ tài khoản
                                 </label>
+                            </div>
+                            <div class="col-6" style="text-align: end;">
+                                <a href="{{ route('password.request') }}" >Quên mật khẩu?</a>
                             </div>
                             <div class="col-12">
                                 <button type="submit" id="submit" class="button -md -green-1 text-white fw-600 w-1/1">

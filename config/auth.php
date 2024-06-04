@@ -110,7 +110,7 @@ return [
         ],
         'students' => [
             'provider' => 'students',
-            'table' => 'password_reset_tokens',
+            'table' => 'students_password_reset',
             'expire' => 60,
             'throttle' => 60,
         ]
