@@ -13,7 +13,7 @@ class VerifyController extends Controller
     {
         $user = Auth::user();
         $status = $user->hasVerifiedEmail();
-        if ($status) {
+        if ($user->hasVerifiedEmail()) {
             return to_route('home');
         }
         $titlePage = "Hãy kích hoạt tài khoản";

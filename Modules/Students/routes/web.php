@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Students\src\Http\Controllers\Clients\AccountController as ClientAccountController;
 
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
-], function(){
+], function () {
     Route::group([
         'prefix' => 'students',
         'as' => 'students.'
@@ -21,6 +22,20 @@ Route::group([
         Route::put('/update/{id}', 'StudentController@update')->name('update');
 
         Route::delete('/destroy/{id}', 'StudentController@destroy')->name('destroy');
+    });
+});
+
+Route::group(['as' => 'students.',], function () {
+    Route::group([
+        'prefix' => 'tai-khoan',
+        'as' => 'accounts.',
+        'middleware' => ['auth:students', 'block.students', 'verified']
+    ], function () {
+        Route::get('', [ClientAccountController::class, 'index'])->name('index');
+        Route::get('/thong-tin', [ClientAccountController::class, 'account'])->name('account');
+        Route::get('/khoa-hoc', [ClientAccountController::class, 'course'])->name('course');
+        Route::get('/don-hang', [ClientAccountController::class, 'order'])->name('order');
+        Route::get('/doi-mat-khau', [ClientAccountController::class, 'changePassword'])->name('changePassword');
     });
 });
 

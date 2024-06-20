@@ -231,7 +231,7 @@
                                     <div class="sidebar -dashboard">
 
                                         <div class="sidebar__item -dark-bg-dark-2">
-                                            <a href="dashboard.html"
+                                            <a href="{{ route('students.accounts.index') }}"
                                                 class="d-flex items-center text-17 lh-1 fw-500 -dark-text-white">
                                                 <i class="text-20 icon-discovery mr-15"></i>
                                                 Tài khoản

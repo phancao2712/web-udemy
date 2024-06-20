@@ -1,8 +1,6 @@
 @extends('layouts.client')
 
 @section('content')
-
-
     <section data-anim-wrap class="masthead -type-7 js-mouse-move-container">
         <div class="masthead__bg bg-purple-1 rounded-16">
             <img src="{{ asset('client/img/home-9/hero/bg.png') }}" alt="image">
