@@ -33,6 +33,7 @@ Route::group(['as' => 'students.',], function () {
     ], function () {
         Route::get('', [ClientAccountController::class, 'index'])->name('index');
         Route::get('/thong-tin', [ClientAccountController::class, 'account'])->name('account');
+        Route::post('/thong-tin', [ClientAccountController::class, 'updateAccount']);
         Route::get('/khoa-hoc', [ClientAccountController::class, 'course'])->name('course');
         Route::get('/don-hang', [ClientAccountController::class, 'order'])->name('order');
         Route::get('/doi-mat-khau', [ClientAccountController::class, 'changePassword'])->name('changePassword');

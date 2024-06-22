@@ -10,7 +10,7 @@
                 [
                     'icon' => 'icon-play-button',
                     'route' => 'students.accounts.account',
-                    'label' => 'Thông tin',
+                    'label' => 'Thông tin tài khoản',
                 ],
                 [
                     'icon' => 'icon-play-button',
@@ -38,8 +38,5 @@
                 </a>
             </div>
         @endforeach
-
-
-
     </div>
 </div>

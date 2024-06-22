@@ -6,6 +6,7 @@ return [
     'min' => ':attribute nhiều nhất :min kí tự',
     'max' => ':attribute ít hơn :min kí tự',
     'integer' => ':attribute bắt buộc là số',
+    'phone-invalid' => 'Số điện thoại sai định dạng',
     'attributes' => [
         'name' => 'Tên',
         'email' => 'Email',
