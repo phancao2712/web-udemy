@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Students\src\Http\Requests\UpdateAccountStudentRequest;
+use Modules\Students\src\Http\Requests\UpdatePasswordStudentRequest;
 use Modules\Students\src\Repositories\StudentsRepositoryInterface;
 
 class AccountController extends Controller
@@ -73,5 +74,15 @@ class AccountController extends Controller
         return view('students::clients.changePassword', compact(
             'titlePage'
         ));
+    }
+
+    public function updatePassword(UpdatePasswordStudentRequest $request){
+        $id = Auth::guard('students')->user()->id;
+        $status = $this->studentRepository->setPassword($request->password, $id);
+        if($status){
+            return redirect()->back()->with('success', __('students::message.update.success'));
+        } else {
+            return redirect()->back()->with('error', __('students::message.update.fail'));
+        }
     }
 }

@@ -30,7 +30,6 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->model->select($column)->get();
     }
 
-
     public function paginator($column = ['*'], $limit = 10) {
         return $this->model->select($column)->paginate($limit);
     }
