@@ -28,7 +28,7 @@ class UpdateAccountStudentRequest extends FormRequest
             'name'=> 'required|max:255',
             'email' => 'required|email|unique:students,email,'.$id,
             'phone' => 'required|regex:/(0)[0-9]{9}/',
-            'address' => 'nullable'
+            'address' => 'required'
         ];
         return $rules;
     }
@@ -49,7 +49,8 @@ class UpdateAccountStudentRequest extends FormRequest
         return [
             'name' => __('students::validation.attributes.name'),
             'email' => __('students::validation.attributes.email'),
-            'phone' => __('students::validation.attributes.phone')
+            'phone' => __('students::validation.attributes.phone'),
+            'address' => __('students::validation.attributes.address')
         ];
     }
 
