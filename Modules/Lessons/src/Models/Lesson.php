@@ -43,21 +43,29 @@ class Lesson extends Model
         return $this->children()->orderBy('position', 'asc')->with('subLessons');
     }
 
-    public function video(){
-        return $this->belongsTo(Video::class,'video_id');
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id');
     }
 
-    public function document(){
-        return $this->belongsTo(Document::class,'document_id');
+    public function document()
+    {
+        return $this->belongsTo(Document::class, 'document_id');
     }
 
-    public function course(){
-        return $this->belongsTo(Course::class,'course_id');
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('status', 1);
+        queryActive($query);
+    }
+
+    public function scopePosition(Builder $query): void
+    {
+        queryPosition($query);
     }
 
 }

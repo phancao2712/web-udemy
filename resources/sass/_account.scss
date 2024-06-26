@@ -1,0 +1,17 @@
+span.select2.select2-container.select2-container--default {
+    padding: 12px 22px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+span.select2-container.select2-container--default.select2-container--open {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+li.select2-results__option.select2-results__option--selectable {
+    padding: 5px 6px;
+    border-bottom: 1px solid #e8e7e7;
+}

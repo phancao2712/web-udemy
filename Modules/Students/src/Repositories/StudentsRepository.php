@@ -18,4 +18,20 @@ class StudentsRepository extends BaseRepository implements StudentsRepositoryInt
     {
         return $this->update($id, ['password' => Hash::make($password)]);
     }
+
+    public function getCourse($studentId, $filters = [])
+    {
+        extract($filters);
+        $query = $this->find($studentId)->courses();
+        if (!empty($teacher_id)) {
+            $query->where('teacher_id', $teacher_id);
+        }
+        if (!empty($keyword)) {
+            $query->where(function ($builder) use ($keyword) {
+                $builder->where('name', 'like', '%' . $keyword . '%')
+                    ->orWhere('detail', 'like', '%' . $keyword . '%');
+            });
+        }
+        return $query->paginate(1);
+    }
 }

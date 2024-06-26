@@ -25,7 +25,7 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
             ->select($column)
             ->whereCourseId($id)
             ->whereNull('parent_id')
-            ->orderBy('position', 'asc');
+            ->position();
     }
 
     public function getAllLesson($id)
@@ -43,7 +43,7 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
 
     public function getModulePosition($course)
     {
-        return $course->lessons()->whereNull('parent_id')->orderBy('position', 'asc')->get();
+        return $course->lessons()->whereNull('parent_id')->position()->get();
     }
 
     public function getLessonPosition($course, $moduleId = null)
@@ -55,7 +55,7 @@ class LessonsRepository extends BaseRepository implements LessonsRepositoryInter
         } else {
             $lesson->whereNotNull('parent_id');
         }
-        return $lesson->orderBy('position', 'asc')->get();
+        return $lesson->position()->get();
     }
 
     public function getLessonDetail($slug)

@@ -11,6 +11,6 @@ class TeacherRepository extends BaseRepository implements TeacherRepositoryInter
     public function getModel()
     {
         return Teacher::class;
+    }
 
-   }
 }

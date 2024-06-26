@@ -8,15 +8,21 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Students\src\Http\Requests\UpdateAccountStudentRequest;
 use Modules\Students\src\Http\Requests\UpdatePasswordStudentRequest;
 use Modules\Students\src\Repositories\StudentsRepositoryInterface;
+use Modules\Teacher\src\Repositories\TeacherRepositoryInterface;
 
 class AccountController extends Controller
 {
 
     protected $studentRepository;
+    protected $teacherRepository;
 
-    public function __construct(StudentsRepositoryInterface $studentRepository)
+    public function __construct(
+        StudentsRepositoryInterface $studentRepository,
+        TeacherRepositoryInterface $teacherRepository,
+        )
     {
         $this->studentRepository = $studentRepository;
+        $this->teacherRepository = $teacherRepository;
     }
 
     public function index()
@@ -24,7 +30,8 @@ class AccountController extends Controller
         $titlePage = "Tổng quan";
         return view('students::clients.index', compact(
             'titlePage'
-        ));
+        )
+        );
     }
     public function account()
     {
@@ -33,53 +40,72 @@ class AccountController extends Controller
         return view('students::clients.account', compact(
             'titlePage',
             'student'
-        ));
+        )
+        );
     }
 
-    public function updateAccount(UpdateAccountStudentRequest $request){
+    public function updateAccount(UpdateAccountStudentRequest $request)
+    {
         $id = Auth::guard('students')->user()->id;
         $name = $request->name;
         $email = $request->email;
         $phone = $request->phone;
         $address = $request->address;
         $status = $this->studentRepository->update($id, [
-            'name'=> $name,
-            'email'=> $email,
-            'phone'=> $phone,
-            'address'=> $address,
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
         ]);
-        if($status){
-            return response()->json(['status'=> 'success']);
+        if ($status) {
+            return response()->json(['status' => 'success']);
         } else {
-            return response()->json(['status'=> 'error']);
+            return response()->json(['status' => 'error']);
         }
     }
-    public function course()
+    public function course(Request $request)
     {
+        $studentId = Auth::guard('students')->user()->id;
         $titlePage = "Khóa học của tôi";
+        $filters = [];
+        if($request->teacher_id){
+            $filters['teacher_id'] = $request->teacher_id;
+        }
+        if($request->keyword){
+            $filters['keyword'] = $request->keyword;
+        }
+        $courses = $this->studentRepository->getCourse($studentId, $filters);
+        $teachers = $this->teacherRepository->getAll(['id','name']);
+
         return view('students::clients.course', compact(
-            'titlePage'
-        ));
+            'titlePage',
+            'courses',
+            'teachers'
+        )
+        );
     }
     public function order()
     {
         $titlePage = "Đơn hàng";
         return view('students::clients.order', compact(
             'titlePage'
-        ));
+        )
+        );
     }
     public function changePassword()
     {
         $titlePage = "Đổi mật khẩu";
         return view('students::clients.changePassword', compact(
             'titlePage'
-        ));
+        )
+        );
     }
 
-    public function updatePassword(UpdatePasswordStudentRequest $request){
+    public function updatePassword(UpdatePasswordStudentRequest $request)
+    {
         $id = Auth::guard('students')->user()->id;
         $status = $this->studentRepository->setPassword($request->password, $id);
-        if($status){
+        if ($status) {
             return redirect()->back()->with('success', __('students::message.update.success'));
         } else {
             return redirect()->back()->with('error', __('students::message.update.fail'));

@@ -1,2 +1,1 @@
-import './vendors.js';
-import './main.js';
+import './account.js';

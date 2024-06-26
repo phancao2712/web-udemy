@@ -17,416 +17,76 @@
                                 <div class="tabs -active-purple-2 js-tabs pt-0">
                                     <div class="tabs__content py-30 px-30 js-tabs-content">
                                         <div class="tabs__pane -tab-item-1 is-active">
-                                            <div class="row y-gap-20 x-gap-20 items-center">
-                                                <div class="col-auto">
-                                                    <img class="size-100" src="img/dashboard/edit/1.png" alt="image">
-                                                </div>
-
-                                                <div class="col-auto">
-                                                    <div class="text-16 fw-500 text-dark-1">Your avatar</div>
-                                                    <div class="text-14 lh-1 mt-10">PNG or JPG no bigger than 800px wide and
-                                                        tall.</div>
-
-                                                    <div class="d-flex x-gap-10 y-gap-10 flex-wrap pt-15">
-                                                        <div>
-                                                            <div
-                                                                class="d-flex justify-center items-center size-40 rounded-8 bg-light-3">
-                                                                <div class="icon-cloud text-16"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div
-                                                                class="d-flex justify-center items-center size-40 rounded-8 bg-light-3">
-                                                                <div class="icon-bin text-16"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="border-top-light pt-30 mt-30">
-                                                <form action="#" class="contact-form row y-gap-30">
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">First
-                                                            Name</label>
-
-                                                        <input type="text" placeholder="First Name">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Last
-                                                            Name</label>
-
-                                                        <input type="text" placeholder="Last Name">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Phone</label>
-
-                                                        <input type="text" placeholder="Phone">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label
-                                                            class="text-16 lh-1 fw-500 text-dark-1 mb-10">Birthday</label>
-
-                                                        <input type="text" placeholder="Birthday">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address Line
-                                                            1</label>
-
-                                                        <input type="text" placeholder="Address Line 1">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Address Line
-                                                            2</label>
-
-                                                        <input type="text" placeholder="Address Line 2">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">State</label>
-
-                                                        <input type="text" placeholder="State">
-                                                    </div>
-
-
-                                                    <div class="col-md-6">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Country</label>
-
-                                                        <input type="text" placeholder="Country">
-                                                    </div>
-
-
-                                                    <div class="col-12">
-
-                                                        <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Personal
-                                                            info</label>
-
-                                                        <textarea placeholder="Text..." rows="7"></textarea>
-                                                    </div>
-
-
-                                                    <div class="col-12">
-                                                        <button class="button -md -purple-1 text-white">Update
-                                                            Profile</button>
-                                                    </div>
+                                            <div class="row y-gap-10 justify-between">
+                                                <form class="contact-form d-flex" action="">
+                                                    <select class="setup-select2 bg-white h-50" style="width: 20%; display:none;" name="teacher_id"
+                                                        id="">
+                                                        <option value="">Tất cả giảng viên</option>
+                                                        @foreach ($teachers as $teacher)
+                                                            <option @selected(request('teacher_id') == $teacher->id)
+                                                                value="{{ $teacher->id }}">{{ $teacher->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    <input class="w-50 h-50 ml-10" type="text"
+                                                        placeholder="Tìm kiếm khóa học..." name="keyword"
+                                                        value="{{ request('keyword') }}">
+                                                    <button type="submit"
+                                                        class="button h-50 -md -purple-1 text-white ml-10">Tìm
+                                                        kiếm</button>
                                                 </form>
                                             </div>
-                                        </div>
-
-                                        <div class="tabs__pane -tab-item-2">
-                                            <form action="#" class="contact-form row y-gap-30">
-
-                                                <div class="col-md-7">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Current
-                                                        password</label>
-
-                                                    <input type="text" placeholder="Current password">
-                                                </div>
-
-
-                                                <div class="col-md-7">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">New
-                                                        password</label>
-
-                                                    <input type="text" placeholder="New password">
-                                                </div>
-
-
-                                                <div class="col-md-7">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Confirm New
-                                                        Password</label>
-
-                                                    <input type="text" placeholder="Confirm New Password">
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <button class="button -md -purple-1 text-white">Save Password</button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="tabs__pane -tab-item-3">
-                                            <form action="#" class="contact-form row y-gap-30">
-
-                                                <div class="col-md-6">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Twitter</label>
-
-                                                    <input type="text" placeholder="Twitter Profile">
-                                                </div>
-
-
-                                                <div class="col-md-6">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Facebook</label>
-
-                                                    <input type="text" placeholder="Facebook Profile">
-                                                </div>
-
-
-                                                <div class="col-md-6">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Instagram</label>
-
-                                                    <input type="text" placeholder="Instagram Profile">
-                                                </div>
-
-
-                                                <div class="col-md-6">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">LinkedIn Profile
-                                                        URL</label>
-
-                                                    <input type="text" placeholder="LinkedIn Profile">
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <button class="button -md -purple-1 text-white">Save Social
-                                                        Profile</button>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="tabs__pane -tab-item-4">
-                                            <form action="#" class="contact-form">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="text-16 fw-500 text-dark-1">Notifications - Choose when
-                                                            and how to be notified</div>
-                                                        <p class="text-14 lh-13 mt-5">Select push and email notifications
-                                                            you'd like to receive</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="pt-60">
-                                                    <div class="row y-gap-20 justify-between">
-                                                        <div class="col-auto">
-                                                            <div class="text-16 fw-500 text-dark-1">Choose when and how to
-                                                                be notified</div>
+                                            <div class="row y-gap-30 pt-30">
+                                                @forelse ($courses as $course)
+                                                    <div class="w-1/4 xl:w-1/3 lg:w-1/2 sm:w-1/1">
+                                                        <div class="relative">
+                                                            <a href="{{ route('courses.detail', $course->slug) }}"><img
+                                                                    class="rounded-8 w-1/1"
+                                                                    src="{{ asset($course?->thumbnail) }}" alt="image"
+                                                                    style="height: 125px;"></a>
+                                                            @if ($course->pivot->status)
+                                                                <div class="absolute-button"><span
+                                                                        class="badge bg-success text-10 fw-500 px-10 py-5 rounded-8">Đang
+                                                                        hoạt động</span></div>
+                                                            @else
+                                                                <div class="absolute-button"> <span
+                                                                        class="badge bg-red-1 text-10 fw-500 px-10 py-5 rounded-8">Bị
+                                                                        khóa</span></div>
+                                                            @endif
                                                         </div>
-                                                    </div>
 
-
-                                                    <div class="pt-30">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Subscriptions</div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
+                                                        <div class="pt-15">
+                                                            <div class="d-flex y-gap-10 justify-between items-center">
+                                                                <div class="text-14 lh-1">{{ $course->teacher?->name }}
                                                                 </div>
+                                                            </div>
+
+                                                            <a href="{{ route('courses.detail', $course->slug) }}">
+                                                                <h3 class="text-16 fw-500 lh-15 mt-10">{{ $course->name }}
+                                                                </h3>
+                                                            </a>
+
+                                                            <div class="progress-bar mt-10">
+                                                                <div class="progress-bar__bg bg-light-3"></div>
+                                                                <div class="progress-bar__bar bg-purple-1 w-1/5"></div>
+                                                            </div>
+
+                                                            <div class="d-flex y-gap-10 justify-between items-center mt-10">
+                                                                <div class="text-dark-1">% 20 Completed</div>
+                                                                <div>25%</div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-                                                    <div class="border-top-light pt-20 mt-20">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Recommended Courses
-                                                                </div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="border-top-light pt-20 mt-20">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Replies to my
-                                                                    comments</div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="border-top-light pt-20 mt-20">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Activity on my
-                                                                    comments</div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="pt-60">
-                                                    <div class="row y-gap-20 justify-between">
-                                                        <div class="col-auto">
-                                                            <div class="text-16 fw-500 text-dark-1">Email notifications
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="pt-30">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Send me emails
-                                                                    about my Cursus activity and updates I requested</div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="border-top-light pt-20 mt-20">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Promotions, course
-                                                                    recommendations, and helpful resources from Cursus.
-                                                                </div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="border-top-light pt-20 mt-20">
-
-                                                        <div class="row y-gap-20 justify-between">
-                                                            <div class="col-auto">
-                                                                <div class="text-16 fw-500 text-dark-1">Announcements from
-                                                                    instructors whose course(s) I’m enrolled in.</div>
-                                                                <p class="text-14 lh-13 mt-5">Notify me about activity from
-                                                                    the profiles I'm subscribed to</p>
-                                                            </div>
-                                                            <div class="col-auto">
-                                                                <div class="form-switch">
-                                                                    <div class="switch" data-switch=".js-switch-content">
-                                                                        <input type="checkbox">
-                                                                        <span class="switch__slider"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row pt-30">
-                                                    <div class="col-12">
-                                                        <button class="button -md -purple-1 text-white">Save
-                                                            Changes</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-
-                                        <div class="tabs__pane -tab-item-5">
-                                            <form action="#" class="contact-form row y-gap-30">
-                                                <div class="col-12">
-                                                    <div class="text-16 fw-500 text-dark-1">Close account</div>
-                                                    <p class="mt-10">Warning: If you close your account, you will be
-                                                        unsubscribed from all your 5 courses, and will lose access forever.
-                                                    </p>
-                                                </div>
-
-
-                                                <div class="col-md-7">
-
-                                                    <label class="text-16 lh-1 fw-500 text-dark-1 mb-10">Enter
-                                                        Password</label>
-
-                                                    <input type="text" placeholder="Enter Password">
-                                                </div>
-
-
-                                                <div class="col-12">
-                                                    <button class="button -md -purple-1 text-white">Close Account</button>
-                                                </div>
-                                            </form>
+                                                @empty
+                                                    <div class="text-16 fw-500 text-center">Không có khóa học nào!</div>
+                                                @endforelse
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

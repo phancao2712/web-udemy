@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Modules\Courses\src\Models\Course;
 
 class Student extends Authenticatable implements MustVerifyEmail,CanResetPassword
 {
@@ -34,5 +35,9 @@ class Student extends Authenticatable implements MustVerifyEmail,CanResetPasswor
 
     public function sendPasswordResetNotification($token){
         $this->notify(new ResetPasswordQueued($token));
+    }
+
+    public function courses(){
+        return $this->belongsToMany(Course::class,'student_courses')->withPivot('status');
     }
 }

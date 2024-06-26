@@ -50,4 +50,13 @@ function getSize($value, $type = 'MB'){
     return $result . ' ' . $type;
 }
 
+function queryActive($query) {
+    $table = $query->getModel()->getTable();
+    return $query->where($table . '.status', 1);
+}
+
+function queryPosition($query){
+    $query->orderBy('position', 'asc');
+}
+
 
