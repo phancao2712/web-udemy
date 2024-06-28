@@ -7,5 +7,5 @@ use App\Repositories\RepositoryInterface;
 interface StudentsRepositoryInterface extends RepositoryInterface
 {
     public function setPassword($password, $id);
-    public function getCourse($studentId, $filters = []);
+    public function getCourse($studentId, $filters = [], $limit = 0);
 }

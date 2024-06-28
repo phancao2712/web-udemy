@@ -74,7 +74,7 @@ class AccountController extends Controller
         if($request->keyword){
             $filters['keyword'] = $request->keyword;
         }
-        $courses = $this->studentRepository->getCourse($studentId, $filters);
+        $courses = $this->studentRepository->getCourse($studentId, $filters, config('pagination.account_limit'));
         $teachers = $this->teacherRepository->getAll(['id','name']);
 
         return view('students::clients.course', compact(

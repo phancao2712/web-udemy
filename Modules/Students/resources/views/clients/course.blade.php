@@ -81,6 +81,8 @@
                                                     <div class="text-16 fw-500 text-center">Không có khóa học nào!</div>
                                                 @endforelse
                                             </div>
+
+                                            {{ $courses->links('students::clients.paginations.boostrap') }}
                                         </div>
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@ class StudentsRepository extends BaseRepository implements StudentsRepositoryInt
         return $this->update($id, ['password' => Hash::make($password)]);
     }
 
-    public function getCourse($studentId, $filters = [])
+    public function getCourse($studentId, $filters = [], $limit = 0)
     {
         extract($filters);
         $query = $this->find($studentId)->courses();
@@ -32,6 +32,6 @@ class StudentsRepository extends BaseRepository implements StudentsRepositoryInt
                     ->orWhere('detail', 'like', '%' . $keyword . '%');
             });
         }
-        return $query->paginate(1);
+        return $query->paginate($limit)->withQueryString();
     }
 }
