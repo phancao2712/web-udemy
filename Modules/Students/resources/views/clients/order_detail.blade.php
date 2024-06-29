@@ -20,19 +20,19 @@
                                         <table class="table w-1/1">
                                             <tbody>
                                                 <tr>
-                                                    <td >Mã đơn hàng</td>
+                                                    <td class="text-purple-1">Mã đơn hàng</td>
                                                     <td>{{ $order->id }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Tổng tiền</td>
+                                                    <td class="text-purple-1">Tổng tiền</td>
                                                     <td>{{ money($order->total) }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Thời gian đặt</td>
-                                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
+                                                    <td class="text-purple-1">Thời gian đặt</td>
+                                                    <td >{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
                                                 </tr>
                                                 <tr style="border-bottom: 0px;">
-                                                    <td style="border-bottom: 0px;">Trạng thái</td>
+                                                    <td style="border-bottom: 0px;" class="text-purple-1">Trạng thái</td>
                                                     <td style="border-bottom: 0px;"><span
                                                         class="badge bg-{{ $order->status->color }}">{{ $order->status->name }}</span></td>
                                                 </tr>
