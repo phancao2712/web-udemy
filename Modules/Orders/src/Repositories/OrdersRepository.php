@@ -37,4 +37,8 @@ class OrdersRepository extends BaseRepository implements OrdersRepositoryInterfa
         }
         return $query->paginate($limit)->withQueryString();
     }
+
+    public function getOrder($orderId){
+        return $this->model->with('detail')->find($orderId);
+    }
 }

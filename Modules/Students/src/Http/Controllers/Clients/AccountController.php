@@ -126,6 +126,18 @@ class AccountController extends Controller
             )
         );
     }
+    public function orderDetail($id){
+        $titlePage = "Chi tiết đơn hàng";
+        $order = $this->ordersRepository->getOrder($id);
+
+        return view(
+            'students::clients.order_detail',
+            compact(
+                'titlePage',
+                'order'
+            )
+        );
+    }
     public function changePassword()
     {
         $titlePage = "Đổi mật khẩu";

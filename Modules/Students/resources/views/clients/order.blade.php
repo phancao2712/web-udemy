@@ -57,7 +57,8 @@
                                                 @foreach ($orders as $key => $item)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-                                                        <td><a href="" class="text-purple-1">#{{ $item->id }}</a>
+                                                        <td><a href="{{ route('students.accounts.order.detail', $item->id) }}"
+                                                                class="text-purple-1">#{{ $item->id }}</a>
                                                         </td>
                                                         <td>{{ money($item->total) }}</td>
                                                         <td><span
