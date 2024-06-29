@@ -21,7 +21,7 @@
 
                 {{-- Array Of Links --}}
                 @if (is_array($element))
-                    <div class="pagination__count">
+                    <div class="pagination__count d-flex">
                         @foreach ($element as $page => $url)
                             @if ($page == $paginator->currentPage())
                                 <a class="-count-is-active" aria-current="page">{{ $page }}</a>

@@ -26,16 +26,20 @@
                                                 name="status_id" id="">
                                                 <option value="">Chọn trạng thái</option>
                                                 @foreach ($orderStatus as $item)
-                                                    <option @selected(request('status_id') == $item->id) value="{{ $item->id }}">{{ $item->name }}
+                                                    <option @selected(request('status_id') == $item->id) value="{{ $item->id }}">
+                                                        {{ $item->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                             <input style="width: 20%;" type="text" class="datepicker ml-10"
-                                                placeholder="Từ ngày..." name="start_date" value="{{ request('start_date') }}">
+                                                placeholder="Từ ngày..." name="start_date"
+                                                value="{{ request('start_date') }}">
                                             <input style="width: 20%;" type="text" class="datepicker ml-10"
                                                 placeholder="Đến ngày..." name="end_date" value="{{ request('end_date') }}">
-                                            <input style="width: 20%;" type="number" class="ml-10" name="total" value="{{ request('total') }}" placeholder="Tổng tiền...">
-                                            <button style="width: 20%;" type="submit" class="button h-50 -md -purple-1 text-white ml-10">Tìm
+                                            <input style="width: 20%;" type="number" class="ml-10" name="total"
+                                                value="{{ request('total') }}" placeholder="Tổng tiền...">
+                                            <button style="width: 20%;" type="submit"
+                                                class="button h-50 -md -purple-1 text-white ml-10">Tìm
                                                 kiếm</button>
                                         </form>
                                         <table class="table w-1/1">
@@ -56,7 +60,9 @@
                                                         <td><a href="" class="text-purple-1">#{{ $item->id }}</a>
                                                         </td>
                                                         <td>{{ money($item->total) }}</td>
-                                                        <td><span class="badge bg-{{ $item->status->color }}">{{ $item->status->name }}</span></td>
+                                                        <td><span
+                                                                class="badge bg-{{ $item->status->color }}">{{ $item->status->name }}</span>
+                                                        </td>
                                                         <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}
                                                         </td>
                                                         <td><button class="button -sm -outline-purple-1 text-purple-1">Chi
@@ -65,6 +71,7 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        {{ $orders->links('students::clients.paginations.boostrap') }}
                                     </div>
                                 </div>
                             </div>

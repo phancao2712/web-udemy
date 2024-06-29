@@ -13,7 +13,7 @@ class OrdersRepository extends BaseRepository implements OrdersRepositoryInterfa
         return Orders::class;
     }
 
-    public function getOrdersByStudent($studentId, $filters = [])
+    public function getOrdersByStudent($studentId, $filters = [], $limit = 0)
     {
         $query = $this->model->where("student_id", $studentId)->latest();
         @[
@@ -35,6 +35,6 @@ class OrdersRepository extends BaseRepository implements OrdersRepositoryInterfa
         if ($endDate) {
             $query->where('created_at', '<=', \Carbon\Carbon::parse($endDate)->format('Y-m-d H:i:s'));
         }
-        return $query->get();
+        return $query->paginate($limit)->withQueryString();
     }
 }
